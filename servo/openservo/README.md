@@ -1,5 +1,7 @@
 # OpenServo
 
+El CAD a utilizar en el desarrollo de este proyecto será [Eagle](http://www.cadsoftusa.com/download-eagle/).
+
 - Features: http://www.openservo.com/DocAboutOpenServo
 - Site: http://www.openservo.com/
 - Wiki: http://www.openservo.com/FrontPage
