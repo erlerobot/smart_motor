@@ -57,7 +57,7 @@ uint8_t eeprom_erase(void)
 // Erase the entire EEPROM.
 {
     uint16_t i;
-    uint8_t buffer[16];
+    uint8_t buffer[16];//128 bytes= page size.
 
     // XXX Disable PWM to servo motor while reading registers.
 

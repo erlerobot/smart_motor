@@ -88,7 +88,7 @@ inline static void delay_loop(int n)
     uint8_t i;
     for(i=0; i<n; i++)
     {
-        asm("nop");
+        asm("nop"); //asm inserts inline assembly, nop is an instruction which does nothing.
     }
 }
 
