@@ -1,0 +1,946 @@
+
+OSBootloader.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000416  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000003a2  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000008a  00800100  00800100  00000416  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000416  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000d0  00000000  00000000  00000448  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000682  00000000  00000000  00000518  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000037f  00000000  00000000  00000b9a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003cb  00000000  00000000  00000f19  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000100  00000000  00000000  000012e4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000358  00000000  00000000  000013e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000238  00000000  00000000  0000173c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000098  00000000  00000000  00001978  2**3
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+    .global __bad_interrupt
+    .func   __bad_interrupt
+__bad_interrupt:
+    .weak   __vector_default
+    .set    __vector_default, __vectors
+    XJMP    __vector_default
+   0:	0c 94 02 00 	jmp	0x4	; 0x4 <__boot_start>
+
+00000004 <__boot_start>:
+       should be set to the highest address available for malloc().  */
+    .weak   __heap_end
+    .set    __heap_end, 0
+
+    .section .init2,"ax",@progbits
+    clr __zero_reg__
+   4:	11 24       	eor	r1, r1
+    out _SFR_IO_ADDR(SREG), __zero_reg__
+   6:	1f be       	out	0x3f, r1	; 63
+    ldi r28,lo8(__stack)
+   8:	cf ef       	ldi	r28, 0xFF	; 255
+#ifdef SPH
+    ldi r29,hi8(__stack)
+   a:	d8 e0       	ldi	r29, 0x08	; 8
+    out _SFR_IO_ADDR(SPH), r29
+   c:	de bf       	out	0x3e, r29	; 62
+#endif
+    out _SFR_IO_ADDR(SPL), r28
+   e:	cd bf       	out	0x3d, r28	; 61
+
+00000010 <__do_clear_bss>:
+  10:	21 e0       	ldi	r18, 0x01	; 1
+  12:	a0 e0       	ldi	r26, 0x00	; 0
+  14:	b1 e0       	ldi	r27, 0x01	; 1
+  16:	01 c0       	rjmp	.+2      	; 0x1a <.do_clear_bss_start>
+
+00000018 <.do_clear_bss_loop>:
+  18:	1d 92       	st	X+, r1
+
+0000001a <.do_clear_bss_start>:
+  1a:	aa 38       	cpi	r26, 0x8A	; 138
+  1c:	b2 07       	cpc	r27, r18
+  1e:	e1 f7       	brne	.-8      	; 0x18 <.do_clear_bss_loop>
+
+    .set    __stack, RAMEND
+#endif /* !__AVR_ASM_ONLY__ */
+
+    .section .init9,"ax",@progbits
+    XJMP    main
+  20:	0c 94 12 00 	jmp	0x24	; 0x24 <main>
+
+00000024 <main>:
+
+#define TIMEOUT     128
+
+int main(void)
+// This is the main bootloader function.
+{
+  24:	1f 93       	push	r17
+  26:	cf 93       	push	r28
+  28:	df 93       	push	r29
+
+    // Set up function pointer to RESET vector.
+    void (*reset_vector)( void ) = 0x0000;
+
+    // Make sure interrupts are cleared.
+    cli();
+  2a:	f8 94       	cli
+
+    // Diable the watchdog timer in case we got here through applicaition reset
+
+    // Clear WDRF in MCUSR.
+    MCUSR &= ~(1<<WDRF);
+  2c:	84 b7       	in	r24, 0x34	; 52
+  2e:	87 7f       	andi	r24, 0xF7	; 247
+  30:	84 bf       	out	0x34, r24	; 52
+
+    // Write logical one to WDCE and WDE.
+    WDTCSR |= (1<<WDCE) | (1<<WDE);
+  32:	e0 e6       	ldi	r30, 0x60	; 96
+  34:	f0 e0       	ldi	r31, 0x00	; 0
+  36:	80 81       	ld	r24, Z
+  38:	88 61       	ori	r24, 0x18	; 24
+  3a:	80 83       	st	Z, r24
+
+    // Turn off WDT.
+    WDTCSR = 0x00;
+  3c:	10 82       	st	Z, r1
+
+    // Initialize the bootloader exit and active flags.
+    bootloader_exit = 0;
+  3e:	10 92 89 01 	sts	0x0189, r1
+    bootloader_active = 0;
+  42:	10 92 88 01 	sts	0x0188, r1
+
+    // Initialize programming module.
+    prog_init();
+  46:	0e 94 51 00 	call	0xa2	; 0xa2 <prog_init>
+
+    // Initialize TWI module.
+    twi_init();
+  4a:	0e 94 39 01 	call	0x272	; 0x272 <twi_init>
+#ifdef __AVR_ATmega328P__
+
+static inline void timer_init(void)
+{
+	// Configure the Timer Control Register A.
+	TCCR0A = (0<<COM0A1) | (0<<COM0A0) |        // OC0A disconnected.
+  4e:	14 bc       	out	0x24, r1	; 36
+	(0<<COM0B1) | (0<<COM0B0) |        // OC0B disconnected.
+	(0<<WGM01) | (0<<WGM00);           // Normal operation.
+
+	// Configure the Timer Control Register B.
+	TCCR0B = (0<<WGM02) |                       // Normal operation.
+  50:	85 e0       	ldi	r24, 0x05	; 5
+  52:	85 bd       	out	0x25, r24	; 37
+#define TIMEOUT     128
+
+int main(void)
+// This is the main bootloader function.
+{
+    uint16_t timer_count = 0;
+  54:	c0 e0       	ldi	r28, 0x00	; 0
+  56:	d0 e0       	ldi	r29, 0x00	; 0
+
+            // Have we exceeded the bootloader timeout (about three seconds)?
+            if (timer_count > TIMEOUT)
+            {
+                // Set the bootloader exit flag if the bootloader is not active.
+                if (!bootloader_active) bootloader_exit = 1;
+  58:	11 e0       	ldi	r17, 0x01	; 1
+  5a:	0f c0       	rjmp	.+30     	; 0x7a <__SREG__+0x3b>
+
+    // Loop until the bootloader exit flag is active.
+    while (!bootloader_exit)
+    {
+        // Check for TWI conditions that require handling.
+        twi_check_conditions();
+  5c:	0e 94 ca 01 	call	0x394	; 0x394 <twi_check_conditions>
+
+
+static inline uint8_t timer_check_elapsed(void)
+{
+	// Has the timer overflowed?
+	if (TIFR0 & (1<<TOV0))
+  60:	a8 9b       	sbis	0x15, 0	; 21
+  62:	0b c0       	rjmp	.+22     	; 0x7a <__SREG__+0x3b>
+	{
+		// Reset the overflow flag.
+		TIFR0 |= (1<<TOV0);
+  64:	a8 9a       	sbi	0x15, 0	; 21
+
+        // Check for timer elapsed.
+        if (timer_check_elapsed())
+        {
+            // Increment the time count.
+            ++timer_count ;
+  66:	21 96       	adiw	r28, 0x01	; 1
+
+            // Have we exceeded the bootloader timeout (about three seconds)?
+            if (timer_count > TIMEOUT)
+  68:	c1 38       	cpi	r28, 0x81	; 129
+  6a:	d1 05       	cpc	r29, r1
+  6c:	30 f0       	brcs	.+12     	; 0x7a <__SREG__+0x3b>
+            {
+                // Set the bootloader exit flag if the bootloader is not active.
+                if (!bootloader_active) bootloader_exit = 1;
+  6e:	80 91 88 01 	lds	r24, 0x0188
+  72:	81 11       	cpse	r24, r1
+  74:	02 c0       	rjmp	.+4      	; 0x7a <__SREG__+0x3b>
+  76:	10 93 89 01 	sts	0x0189, r17
+
+    // Initialize timer.
+    timer_init();
+
+    // Loop until the bootloader exit flag is active.
+    while (!bootloader_exit)
+  7a:	80 91 89 01 	lds	r24, 0x0189
+  7e:	88 23       	and	r24, r24
+  80:	69 f3       	breq	.-38     	; 0x5c <__SREG__+0x1d>
+
+
+static inline void timer_deinit(void)
+{
+	// Clear timer related registers.
+	TCCR0A = 0;
+  82:	14 bc       	out	0x24, r1	; 36
+	TCCR0B = 0;
+  84:	15 bc       	out	0x25, r1	; 37
+	TCNT0 = 0;
+  86:	16 bc       	out	0x26, r1	; 38
+	TIFR0 = (1<<OCF0B) | (1<<OCF0A) | (1<<TOV0);
+  88:	87 e0       	ldi	r24, 0x07	; 7
+  8a:	85 bb       	out	0x15, r24	; 21
+
+    // Restore timer to powerup defaults.
+    timer_deinit();
+
+    // Restore TWI interface to powerup defaults.
+    twi_deinit();
+  8c:	0e 94 49 01 	call	0x292	; 0x292 <twi_deinit>
+
+    // Call application RESET vector.
+    reset_vector();
+  90:	e0 e0       	ldi	r30, 0x00	; 0
+  92:	f0 e0       	ldi	r31, 0x00	; 0
+  94:	09 95       	icall
+
+    return 0;
+}
+  96:	80 e0       	ldi	r24, 0x00	; 0
+  98:	90 e0       	ldi	r25, 0x00	; 0
+  9a:	df 91       	pop	r29
+  9c:	cf 91       	pop	r28
+  9e:	1f 91       	pop	r17
+  a0:	08 95       	ret
+
+000000a2 <prog_init>:
+
+void prog_init(void)
+// Initialize programming.
+{
+    // Set the default program buffer address.
+    prog_page_address = 0;
+  a2:	10 92 83 01 	sts	0x0183, r1
+  a6:	10 92 82 01 	sts	0x0182, r1
+    prog_byte_address = 0;
+  aa:	10 92 81 01 	sts	0x0181, r1
+  ae:	10 92 80 01 	sts	0x0180, r1
+
+    // Reset programming state flags.
+    prog_update_flag = 0;
+  b2:	10 92 84 01 	sts	0x0184, r1
+  b6:	08 95       	ret
+
+000000b8 <prog_buffer_set_address>:
+// Set the address to be programmed.
+{
+    uint8_t i;
+
+    // Split the address into a page address and byte address.
+    prog_page_address = address & ~(PROG_PAGE_SIZE - 1);
+  b8:	ac 01       	movw	r20, r24
+  ba:	40 78       	andi	r20, 0x80	; 128
+  bc:	50 93 83 01 	sts	0x0183, r21
+  c0:	40 93 82 01 	sts	0x0182, r20
+    prog_byte_address = address & (PROG_PAGE_SIZE - 1);
+  c4:	8f 77       	andi	r24, 0x7F	; 127
+  c6:	99 27       	eor	r25, r25
+  c8:	90 93 81 01 	sts	0x0181, r25
+  cc:	80 93 80 01 	sts	0x0180, r24
+  d0:	e0 e0       	ldi	r30, 0x00	; 0
+  d2:	f1 e0       	ldi	r31, 0x01	; 1
+  d4:	80 e8       	ldi	r24, 0x80	; 128
+  d6:	91 e0       	ldi	r25, 0x01	; 1
+  d8:	df 01       	movw	r26, r30
+
+    // Initialize the programming buffer.
+    for (i = 0; i < PROG_PAGE_SIZE; ++i) prog_buffer[i] = 0xFF;
+  da:	2f ef       	ldi	r18, 0xFF	; 255
+  dc:	2d 93       	st	X+, r18
+  de:	a8 17       	cp	r26, r24
+  e0:	b9 07       	cpc	r27, r25
+  e2:	e1 f7       	brne	.-8      	; 0xdc <prog_buffer_set_address+0x24>
+
+    // Which part of Flash/EEPROM are we reading.
+    if (prog_page_address < PROG_FLASH_BOOTLOADER)
+  e4:	41 15       	cp	r20, r1
+  e6:	20 e7       	ldi	r18, 0x70	; 112
+  e8:	52 07       	cpc	r21, r18
+  ea:	d0 f4       	brcc	.+52     	; 0x120 <prog_buffer_set_address+0x68>
+    uint16_t dataaddr = address;
+
+    // No need to disable interrupts.
+
+    // Wait while the SPM instruction is busy.
+    boot_spm_busy_wait();
+  ec:	07 b6       	in	r0, 0x37	; 55
+  ee:	00 fc       	sbrc	r0, 0
+  f0:	fd cf       	rjmp	.-6      	; 0xec <prog_buffer_set_address+0x34>
+  f2:	a0 e0       	ldi	r26, 0x00	; 0
+  f4:	b1 e0       	ldi	r27, 0x01	; 1
+  f6:	4e 1b       	sub	r20, r30
+  f8:	5f 0b       	sbc	r21, r31
+    {
+        // Set the parameter.
+        param = 0x00;
+
+        // Read the Flash word from memory.
+        asm volatile
+  fa:	60 e0       	ldi	r22, 0x00	; 0
+  fc:	9a 01       	movw	r18, r20
+  fe:	2a 0f       	add	r18, r26
+ 100:	3b 1f       	adc	r19, r27
+ 102:	f9 01       	movw	r30, r18
+ 104:	60 fd       	sbrc	r22, 0
+ 106:	60 93 57 00 	sts	0x0057, r22
+ 10a:	c8 95       	lpm
+ 10c:	20 2d       	mov	r18, r0
+ 10e:	e3 95       	inc	r30
+ 110:	c8 95       	lpm
+ 112:	30 2d       	mov	r19, r0
+              "r" ((uint16_t) dataaddr)
+            : "r30", "r31", "r0"
+        );
+
+        // Write the dataword to the buffer.
+        *(uint16_t *)(prog_buffer + i) = dataword;
+ 114:	2d 93       	st	X+, r18
+ 116:	3d 93       	st	X+, r19
+
+    // Set the address to read from Flash.
+    dataaddr = address;
+
+    // Fill the programming buffer.
+    for (i = 0; i < PROG_PAGE_SIZE; i += 2)
+ 118:	8a 17       	cp	r24, r26
+ 11a:	9b 07       	cpc	r25, r27
+ 11c:	79 f7       	brne	.-34     	; 0xfc <prog_buffer_set_address+0x44>
+ 11e:	12 c0       	rjmp	.+36     	; 0x144 <prog_buffer_set_address+0x8c>
+#else
+        // Do nothing.  These pages are protected to prevent
+        // overwriting of the bootstrapper application.
+#endif
+    }
+    else if (prog_page_address < PROG_FLASH_END)
+ 120:	da 01       	movw	r26, r20
+ 122:	b0 58       	subi	r27, 0x80	; 128
+ 124:	a1 15       	cp	r26, r1
+ 126:	84 e0       	ldi	r24, 0x04	; 4
+ 128:	b8 07       	cpc	r27, r24
+ 12a:	60 f4       	brcc	.+24     	; 0x144 <prog_buffer_set_address+0x8c>
+
+static void prog_eeprom_page_read(uint16_t address)
+// Read the EEPROM data at the indicated address into the program buffer.
+{
+    // Use assembly to read from the EEPROM.
+    asm volatile (
+ 12c:	80 e8       	ldi	r24, 0x80	; 128
+ 12e:	18 2e       	mov	r1, r24
+ 130:	f9 99       	sbic	0x1f, 1	; 31
+ 132:	fe cf       	rjmp	.-4      	; 0x130 <prog_buffer_set_address+0x78>
+ 134:	b2 bd       	out	0x22, r27	; 34
+ 136:	a1 bd       	out	0x21, r26	; 33
+ 138:	f8 9a       	sbi	0x1f, 0	; 31
+ 13a:	11 96       	adiw	r26, 0x01	; 1
+ 13c:	00 b4       	in	r0, 0x20	; 32
+ 13e:	01 92       	st	Z+, r0
+ 140:	1a 94       	dec	r1
+ 142:	b1 f7       	brne	.-20     	; 0x130 <prog_buffer_set_address+0x78>
+        // Read the EEPROM page into the programming buffer.
+        prog_eeprom_page_read(prog_page_address - PROG_EEPROM_START);
+    }
+
+    // Reset the programming buffer update flag.
+    prog_update_flag = 0;
+ 144:	10 92 84 01 	sts	0x0184, r1
+ 148:	08 95       	ret
+
+0000014a <prog_buffer_get_byte>:
+// Get the byte at the current address.
+{
+    uint8_t databyte;
+
+    // Get the byte within the programming buffer.
+    databyte = prog_buffer[prog_byte_address];
+ 14a:	20 91 80 01 	lds	r18, 0x0180
+ 14e:	30 91 81 01 	lds	r19, 0x0181
+ 152:	f9 01       	movw	r30, r18
+ 154:	e0 50       	subi	r30, 0x00	; 0
+ 156:	ff 4f       	sbci	r31, 0xFF	; 255
+ 158:	80 81       	ld	r24, Z
+
+    // Increment the byte address within the page.
+    ++prog_byte_address;
+ 15a:	2f 5f       	subi	r18, 0xFF	; 255
+ 15c:	3f 4f       	sbci	r19, 0xFF	; 255
+
+    // Check the byte address for wrapping.
+    if (prog_byte_address > (PROG_PAGE_SIZE - 1)) prog_byte_address = 0;
+ 15e:	20 38       	cpi	r18, 0x80	; 128
+ 160:	31 05       	cpc	r19, r1
+ 162:	28 f4       	brcc	.+10     	; 0x16e <prog_buffer_get_byte+0x24>
+
+    // Get the byte within the programming buffer.
+    databyte = prog_buffer[prog_byte_address];
+
+    // Increment the byte address within the page.
+    ++prog_byte_address;
+ 164:	30 93 81 01 	sts	0x0181, r19
+ 168:	20 93 80 01 	sts	0x0180, r18
+ 16c:	08 95       	ret
+
+    // Check the byte address for wrapping.
+    if (prog_byte_address > (PROG_PAGE_SIZE - 1)) prog_byte_address = 0;
+ 16e:	10 92 81 01 	sts	0x0181, r1
+ 172:	10 92 80 01 	sts	0x0180, r1
+
+    return databyte;
+}
+ 176:	08 95       	ret
+
+00000178 <prog_buffer_set_byte>:
+
+void prog_buffer_set_byte(uint8_t databyte)
+// Set the byte at the current address.
+{
+    // Set the byte within the programming buffer.
+    prog_buffer[prog_byte_address] = databyte;
+ 178:	20 91 80 01 	lds	r18, 0x0180
+ 17c:	30 91 81 01 	lds	r19, 0x0181
+ 180:	f9 01       	movw	r30, r18
+ 182:	e0 50       	subi	r30, 0x00	; 0
+ 184:	ff 4f       	sbci	r31, 0xFF	; 255
+ 186:	80 83       	st	Z, r24
+
+    // Increment the byte address within the page.
+    ++prog_byte_address;
+ 188:	2f 5f       	subi	r18, 0xFF	; 255
+ 18a:	3f 4f       	sbci	r19, 0xFF	; 255
+
+    // Check the byte address for wrapping.
+    if (prog_byte_address > (PROG_PAGE_SIZE - 1)) prog_byte_address = 0;
+ 18c:	20 38       	cpi	r18, 0x80	; 128
+ 18e:	31 05       	cpc	r19, r1
+ 190:	28 f4       	brcc	.+10     	; 0x19c <prog_buffer_set_byte+0x24>
+{
+    // Set the byte within the programming buffer.
+    prog_buffer[prog_byte_address] = databyte;
+
+    // Increment the byte address within the page.
+    ++prog_byte_address;
+ 192:	30 93 81 01 	sts	0x0181, r19
+ 196:	20 93 80 01 	sts	0x0180, r18
+ 19a:	04 c0       	rjmp	.+8      	; 0x1a4 <prog_buffer_set_byte+0x2c>
+
+    // Check the byte address for wrapping.
+    if (prog_byte_address > (PROG_PAGE_SIZE - 1)) prog_byte_address = 0;
+ 19c:	10 92 81 01 	sts	0x0181, r1
+ 1a0:	10 92 80 01 	sts	0x0180, r1
+
+    // Set the programming update flag.  This indicates the programming
+    // buffer should be written to Flash.
+    prog_update_flag = 1;
+ 1a4:	81 e0       	ldi	r24, 0x01	; 1
+ 1a6:	80 93 84 01 	sts	0x0184, r24
+ 1aa:	08 95       	ret
+
+000001ac <prog_buffer_update>:
+}
+
+
+void prog_buffer_update(void)
+// If the programming buffer was updated it should now be written to Flash.
+{
+ 1ac:	0f 93       	push	r16
+ 1ae:	1f 93       	push	r17
+ 1b0:	cf 93       	push	r28
+ 1b2:	df 93       	push	r29
+    // Was the programming buffer updated?
+    if (prog_update_flag)
+ 1b4:	80 91 84 01 	lds	r24, 0x0184
+ 1b8:	88 23       	and	r24, r24
+ 1ba:	09 f4       	brne	.+2      	; 0x1be <prog_buffer_update+0x12>
+ 1bc:	55 c0       	rjmp	.+170    	; 0x268 <prog_buffer_update+0xbc>
+    {
+        // Which part of Flash/EEPROM are we writing.
+        if (prog_page_address < PROG_FLASH_BOOTLOADER)
+ 1be:	00 91 82 01 	lds	r16, 0x0182
+ 1c2:	10 91 83 01 	lds	r17, 0x0183
+ 1c6:	01 15       	cp	r16, r1
+ 1c8:	80 e7       	ldi	r24, 0x70	; 112
+ 1ca:	18 07       	cpc	r17, r24
+ 1cc:	08 f0       	brcs	.+2      	; 0x1d0 <prog_buffer_update+0x24>
+ 1ce:	35 c0       	rjmp	.+106    	; 0x23a <prog_buffer_update+0x8e>
+    // No need to disable interrupts.
+
+    // No need to make sure EEPROM is not busy.
+
+    // Erase the Flash page at the specified address.
+    asm volatile
+ 1d0:	83 e0       	ldi	r24, 0x03	; 3
+ 1d2:	f8 01       	movw	r30, r16
+ 1d4:	80 93 57 00 	sts	0x0057, r24
+ 1d8:	e8 95       	spm
+          "r" ((uint16_t) address)
+        : "r30", "r31"
+    );
+
+    // Wait until SPM instruction is finished.
+    while (SPMCR & (1<<SPMEN));
+ 1da:	07 b6       	in	r0, 0x37	; 55
+ 1dc:	00 fc       	sbrc	r0, 0
+ 1de:	fd cf       	rjmp	.-6      	; 0x1da <prog_buffer_update+0x2e>
+
+    // Re-enable the RWW section.
+    asm volatile
+ 1e0:	81 e1       	ldi	r24, 0x11	; 17
+ 1e2:	80 93 57 00 	sts	0x0057, r24
+ 1e6:	e8 95       	spm
+        : "=m" (SPMCR)
+        : "r" ((uint8_t) ((1<<RWWSRE) | (1<<SPMEN)))
+    );
+
+    // Wait until SPM instruction is finished.
+    while (SPMCR & (1<<SPMEN));
+ 1e8:	07 b6       	in	r0, 0x37	; 55
+ 1ea:	00 fc       	sbrc	r0, 0
+ 1ec:	fd cf       	rjmp	.-6      	; 0x1e8 <prog_buffer_update+0x3c>
+ 1ee:	c0 e8       	ldi	r28, 0x80	; 128
+ 1f0:	d1 e0       	ldi	r29, 0x01	; 1
+ 1f2:	a0 e0       	ldi	r26, 0x00	; 0
+ 1f4:	b1 e0       	ldi	r27, 0x01	; 1
+ 1f6:	b8 01       	movw	r22, r16
+ 1f8:	62 50       	subi	r22, 0x02	; 2
+ 1fa:	71 40       	sbci	r23, 0x01	; 1
+    {
+        // Prepare the little-endian data word.
+        dataword = *(uint16_t *)(prog_buffer + i);
+
+        // Write the word to the temporary page buffer.
+        asm volatile
+ 1fc:	41 e0       	ldi	r20, 0x01	; 1
+
+    // Fill the temporary page buffer with the programming buffer.
+    for (i = 0; i < PROG_PAGE_SIZE; i += 2)
+    {
+        // Prepare the little-endian data word.
+        dataword = *(uint16_t *)(prog_buffer + i);
+ 1fe:	2d 91       	ld	r18, X+
+ 200:	3d 91       	ld	r19, X+
+ 202:	cb 01       	movw	r24, r22
+ 204:	8a 0f       	add	r24, r26
+ 206:	9b 1f       	adc	r25, r27
+
+        // Write the word to the temporary page buffer.
+        asm volatile
+ 208:	09 01       	movw	r0, r18
+ 20a:	fc 01       	movw	r30, r24
+ 20c:	40 93 57 00 	sts	0x0057, r20
+ 210:	e8 95       	spm
+ 212:	11 24       	eor	r1, r1
+
+    // Wait until SPM instruction is finished.
+    while (SPMCR & (1<<SPMEN));
+
+    // Fill the temporary page buffer with the programming buffer.
+    for (i = 0; i < PROG_PAGE_SIZE; i += 2)
+ 214:	ac 17       	cp	r26, r28
+ 216:	bd 07       	cpc	r27, r29
+ 218:	91 f7       	brne	.-28     	; 0x1fe <prog_buffer_update+0x52>
+            : "r0", "r30", "r31"
+        );
+    }
+
+    // Write the page into Flash.
+    asm volatile
+ 21a:	85 e0       	ldi	r24, 0x05	; 5
+ 21c:	f8 01       	movw	r30, r16
+ 21e:	80 93 57 00 	sts	0x0057, r24
+ 222:	e8 95       	spm
+          "r" ((uint16_t) address)
+        : "r30", "r31"
+    );
+
+    // Wait until SPM instruction is finished.
+    while (SPMCR & (1<<SPMEN));
+ 224:	07 b6       	in	r0, 0x37	; 55
+ 226:	00 fc       	sbrc	r0, 0
+ 228:	fd cf       	rjmp	.-6      	; 0x224 <prog_buffer_update+0x78>
+
+    // Re-enable the RWW section.
+    asm volatile
+ 22a:	81 e1       	ldi	r24, 0x11	; 17
+ 22c:	80 93 57 00 	sts	0x0057, r24
+ 230:	e8 95       	spm
+        : "=m" (SPMCR)
+        : "r" ((uint8_t) ((1<<RWWSRE) | (1<<SPMEN)))
+    );
+
+    // Wait until SPM instruction is finished.
+    while (SPMCR & (1<<SPMEN));
+ 232:	07 b6       	in	r0, 0x37	; 55
+ 234:	00 fc       	sbrc	r0, 0
+ 236:	fd cf       	rjmp	.-6      	; 0x232 <prog_buffer_update+0x86>
+ 238:	15 c0       	rjmp	.+42     	; 0x264 <prog_buffer_update+0xb8>
+#else
+            // Do nothing.  These pages are protected to prevent
+            // overwriting of the bootstrapper application.
+#endif
+        }
+        else if (prog_page_address < PROG_FLASH_END)
+ 23a:	d8 01       	movw	r26, r16
+ 23c:	b0 58       	subi	r27, 0x80	; 128
+ 23e:	a1 15       	cp	r26, r1
+ 240:	84 e0       	ldi	r24, 0x04	; 4
+ 242:	b8 07       	cpc	r27, r24
+ 244:	78 f4       	brcc	.+30     	; 0x264 <prog_buffer_update+0xb8>
+
+static void prog_eeprom_page_write(uint16_t address)
+// Read the EEPROM data at the indicated address into the program buffer.
+{
+    // Use assembly to write to the EEPROM.
+    asm volatile (
+ 246:	e0 e0       	ldi	r30, 0x00	; 0
+ 248:	f1 e0       	ldi	r31, 0x01	; 1
+ 24a:	80 e8       	ldi	r24, 0x80	; 128
+ 24c:	18 2e       	mov	r1, r24
+ 24e:	01 90       	ld	r0, Z+
+ 250:	f9 99       	sbic	0x1f, 1	; 31
+ 252:	fe cf       	rjmp	.-4      	; 0x250 <prog_buffer_update+0xa4>
+ 254:	b2 bd       	out	0x22, r27	; 34
+ 256:	a1 bd       	out	0x21, r26	; 33
+ 258:	00 bc       	out	0x20, r0	; 32
+ 25a:	11 96       	adiw	r26, 0x01	; 1
+ 25c:	fa 9a       	sbi	0x1f, 2	; 31
+ 25e:	f9 9a       	sbi	0x1f, 1	; 31
+ 260:	1a 94       	dec	r1
+ 262:	a9 f7       	brne	.-22     	; 0x24e <prog_buffer_update+0xa2>
+            // Read the EEPROM page into the programming buffer.
+            prog_eeprom_page_write(prog_page_address - PROG_EEPROM_START);
+        }
+
+        // Reset the programming buffer update flag.
+        prog_update_flag = 0;
+ 264:	10 92 84 01 	sts	0x0184, r1
+    }
+}
+ 268:	df 91       	pop	r29
+ 26a:	cf 91       	pop	r28
+ 26c:	1f 91       	pop	r17
+ 26e:	0f 91       	pop	r16
+ 270:	08 95       	ret
+
+00000272 <twi_init>:
+
+void twi_init(void)
+// Initialise TWI hardware for slave mode.
+{
+    // Initialize the TWI state information.
+    twi_write_state = TWI_WRITE_ADDR_HI_BYTE;
+ 272:	10 92 87 01 	sts	0x0187, r1
+    twi_address = 0;
+ 276:	10 92 86 01 	sts	0x0186, r1
+ 27a:	10 92 85 01 	sts	0x0185, r1
+
+    // Set own TWI slave address.
+    TWAR = TWI_SLAVE_ADDRESS << 1;
+ 27e:	8e ef       	ldi	r24, 0xFE	; 254
+ 280:	80 93 ba 00 	sts	0x00BA, r24
+
+    // Default content = SDA released.
+    TWDR = 0xFF;
+ 284:	8f ef       	ldi	r24, 0xFF	; 255
+ 286:	80 93 bb 00 	sts	0x00BB, r24
+
+    // Initialize the TWI interrupt to wait for a new event.
+    TWCR = (1<<TWEN) |                                  // Keep the TWI interface enabled.
+ 28a:	85 ec       	ldi	r24, 0xC5	; 197
+ 28c:	80 93 bc 00 	sts	0x00BC, r24
+ 290:	08 95       	ret
+
+00000292 <twi_deinit>:
+
+void twi_deinit(void)
+// De-initialise TWI hardware.
+{
+    // Reset the TWI registers.
+    TWAR = 0;
+ 292:	10 92 ba 00 	sts	0x00BA, r1
+    TWDR = 0;
+ 296:	10 92 bb 00 	sts	0x00BB, r1
+    TWCR = 0;
+ 29a:	10 92 bc 00 	sts	0x00BC, r1
+ 29e:	08 95       	ret
+
+000002a0 <twi_handle_interrupt_condition>:
+}
+
+
+void twi_handle_interrupt_condition(void)
+{
+    switch (TWSR)
+ 2a0:	80 91 b9 00 	lds	r24, 0x00B9
+ 2a4:	88 3a       	cpi	r24, 0xA8	; 168
+ 2a6:	d1 f0       	breq	.+52     	; 0x2dc <twi_handle_interrupt_condition+0x3c>
+ 2a8:	68 f4       	brcc	.+26     	; 0x2c4 <twi_handle_interrupt_condition+0x24>
+ 2aa:	80 36       	cpi	r24, 0x60	; 96
+ 2ac:	19 f1       	breq	.+70     	; 0x2f4 <twi_handle_interrupt_condition+0x54>
+ 2ae:	20 f4       	brcc	.+8      	; 0x2b8 <twi_handle_interrupt_condition+0x18>
+ 2b0:	88 23       	and	r24, r24
+ 2b2:	09 f4       	brne	.+2      	; 0x2b6 <twi_handle_interrupt_condition+0x16>
+ 2b4:	67 c0       	rjmp	.+206    	; 0x384 <twi_handle_interrupt_condition+0xe4>
+ 2b6:	6a c0       	rjmp	.+212    	; 0x38c <twi_handle_interrupt_condition+0xec>
+ 2b8:	80 38       	cpi	r24, 0x80	; 128
+ 2ba:	11 f1       	breq	.+68     	; 0x300 <twi_handle_interrupt_condition+0x60>
+ 2bc:	80 3a       	cpi	r24, 0xA0	; 160
+ 2be:	09 f4       	brne	.+2      	; 0x2c2 <twi_handle_interrupt_condition+0x22>
+ 2c0:	5b c0       	rjmp	.+182    	; 0x378 <twi_handle_interrupt_condition+0xd8>
+ 2c2:	64 c0       	rjmp	.+200    	; 0x38c <twi_handle_interrupt_condition+0xec>
+ 2c4:	80 3c       	cpi	r24, 0xC0	; 192
+ 2c6:	91 f0       	breq	.+36     	; 0x2ec <twi_handle_interrupt_condition+0x4c>
+ 2c8:	18 f4       	brcc	.+6      	; 0x2d0 <twi_handle_interrupt_condition+0x30>
+ 2ca:	88 3b       	cpi	r24, 0xB8	; 184
+ 2cc:	39 f0       	breq	.+14     	; 0x2dc <twi_handle_interrupt_condition+0x3c>
+ 2ce:	5e c0       	rjmp	.+188    	; 0x38c <twi_handle_interrupt_condition+0xec>
+ 2d0:	88 3c       	cpi	r24, 0xC8	; 200
+ 2d2:	61 f0       	breq	.+24     	; 0x2ec <twi_handle_interrupt_condition+0x4c>
+ 2d4:	88 3f       	cpi	r24, 0xF8	; 248
+ 2d6:	09 f4       	brne	.+2      	; 0x2da <twi_handle_interrupt_condition+0x3a>
+ 2d8:	5c c0       	rjmp	.+184    	; 0x392 <twi_handle_interrupt_condition+0xf2>
+ 2da:	58 c0       	rjmp	.+176    	; 0x38c <twi_handle_interrupt_condition+0xec>
+        case TWI_STX_ADR_ACK:
+        // Data byte in TWDR has been transmitted; ACK has been received.
+        case TWI_STX_DATA_ACK:
+
+            // Get the data to send.
+            TWDR = prog_buffer_get_byte();
+ 2dc:	0e 94 a5 00 	call	0x14a	; 0x14a <prog_buffer_get_byte>
+ 2e0:	80 93 bb 00 	sts	0x00BB, r24
+
+            // Data byte will be transmitted and ACK should be received.
+            TWCR = (1<<TWEN) |                              // Keep the TWI interface enabled.
+ 2e4:	85 ec       	ldi	r24, 0xC5	; 197
+ 2e6:	80 93 bc 00 	sts	0x00BC, r24
+                   (0<<TWSTA) |                             // Don't generate start condition.
+                   (0<<TWSTO) |                             // Don't generate stop condition.
+                   (1<<TWINT) |                             // Clear the TWI interrupt.
+                   (1<<TWEA) |                              // Acknowledge the data.
+                   (0<<TWWC);                               //
+            break;
+ 2ea:	08 95       	ret
+        case TWI_STX_DATA_NACK:
+        // Last data byte in TWDR has been transmitted (TWEA = "0"); ACK has been received.
+        case TWI_STX_DATA_ACK_LAST_BYTE:
+
+            // Switched to the not addressed slave mode; own SLA will be recognized.
+            TWCR = (1<<TWEN) |                              // Keep the TWI interface enabled.
+ 2ec:	85 ec       	ldi	r24, 0xC5	; 197
+ 2ee:	80 93 bc 00 	sts	0x00BC, r24
+                   (0<<TWSTA) |                             // Don't generate start condition.
+                   (0<<TWSTO) |                             // Don't generate stop condition.
+                   (1<<TWINT) |                             // Clear the TWI interrupt.
+                   (1<<TWEA) |                              // Acknowledge the data.
+                   (0<<TWWC);                               //
+            break;
+ 2f2:	08 95       	ret
+
+        // Own SLA+W has been received; ACK has been returned.
+        case TWI_SRX_ADR_ACK:
+
+            // Reset the write state.
+            twi_write_state = TWI_WRITE_ADDR_HI_BYTE;
+ 2f4:	10 92 87 01 	sts	0x0187, r1
+
+            // Data byte will be received and ACK will be returned.
+            TWCR = (1<<TWEN) |                              // Keep the TWI interface enabled.
+ 2f8:	85 ec       	ldi	r24, 0xC5	; 197
+ 2fa:	80 93 bc 00 	sts	0x00BC, r24
+                   (0<<TWSTO) |                             // Don't generate stop condition.
+                   (1<<TWINT) |                             // Clear the TWI interrupt.
+                   (1<<TWEA) |                              // Acknowledge the data.
+                   (0<<TWWC);                               //
+
+            break;
+ 2fe:	08 95       	ret
+
+        // Previously addressed with own SLA+W; data has been received; ACK has been returned.
+        case TWI_SRX_ADR_DATA_ACK:
+
+            // Check the TWI write state to determine what type of byte we received.
+            if (twi_write_state == TWI_WRITE_ADDR_HI_BYTE)
+ 300:	80 91 87 01 	lds	r24, 0x0187
+ 304:	81 11       	cpse	r24, r1
+ 306:	0e c0       	rjmp	.+28     	; 0x324 <twi_handle_interrupt_condition+0x84>
+            {
+                // Set the twi address high byte.
+                twi_address = TWDR;
+ 308:	80 91 bb 00 	lds	r24, 0x00BB
+ 30c:	90 e0       	ldi	r25, 0x00	; 0
+ 30e:	90 93 86 01 	sts	0x0186, r25
+ 312:	80 93 85 01 	sts	0x0185, r24
+
+                // Set the next state.
+                twi_write_state = TWI_WRITE_ADDR_LO_BYTE;
+ 316:	81 e0       	ldi	r24, 0x01	; 1
+ 318:	80 93 87 01 	sts	0x0187, r24
+
+                // Data byte will be received and ACK will be returned.
+                TWCR = (1<<TWEN) |                          // Keep the TWI interface enabled.
+ 31c:	85 ec       	ldi	r24, 0xC5	; 197
+ 31e:	80 93 bc 00 	sts	0x00BC, r24
+ 322:	08 95       	ret
+                       (0<<TWSTO) |                         // Don't generate stop condition.
+                       (1<<TWINT) |                         // Clear the TWI interrupt.
+                       (1<<TWEA) |                          // Acknowledge the data.
+                       (0<<TWWC);                           //
+            }
+            else if (twi_write_state == TWI_WRITE_ADDR_LO_BYTE)
+ 324:	81 30       	cpi	r24, 0x01	; 1
+ 326:	01 f5       	brne	.+64     	; 0x368 <twi_handle_interrupt_condition+0xc8>
+            {
+                // Set the address low byte.
+                twi_address = (twi_address << 8) | TWDR;
+ 328:	20 91 bb 00 	lds	r18, 0x00BB
+ 32c:	80 e0       	ldi	r24, 0x00	; 0
+ 32e:	90 e0       	ldi	r25, 0x00	; 0
+ 330:	90 91 85 01 	lds	r25, 0x0185
+ 334:	82 2b       	or	r24, r18
+ 336:	90 93 86 01 	sts	0x0186, r25
+ 33a:	80 93 85 01 	sts	0x0185, r24
+
+                // Mark the bootloader as active.
+                bootloader_active = 1;
+ 33e:	21 e0       	ldi	r18, 0x01	; 1
+ 340:	20 93 88 01 	sts	0x0188, r18
+
+                // Set the next state.
+                twi_write_state = TWI_WRITE_DATA_BYTE;
+ 344:	22 e0       	ldi	r18, 0x02	; 2
+ 346:	20 93 87 01 	sts	0x0187, r18
+
+                // Set the twi address.  This will load the corresponding page from
+                // flash into the programming buffer for reading and writing.  The
+                // programming code protects itself against invalid addresses.
+                prog_buffer_set_address(twi_address);
+ 34a:	0e 94 5c 00 	call	0xb8	; 0xb8 <prog_buffer_set_address>
+
+                // If this is the magic address then set the bootloader exit flag.
+                if (twi_address == 0xffff) bootloader_exit = 1;
+ 34e:	80 91 85 01 	lds	r24, 0x0185
+ 352:	90 91 86 01 	lds	r25, 0x0186
+ 356:	01 96       	adiw	r24, 0x01	; 1
+ 358:	19 f4       	brne	.+6      	; 0x360 <twi_handle_interrupt_condition+0xc0>
+ 35a:	81 e0       	ldi	r24, 0x01	; 1
+ 35c:	80 93 89 01 	sts	0x0189, r24
+
+                // Data byte will be received and ACK will be returned.
+                TWCR = (1<<TWEN) |                          // Keep the TWI interface enabled.
+ 360:	85 ec       	ldi	r24, 0xC5	; 197
+ 362:	80 93 bc 00 	sts	0x00BC, r24
+ 366:	08 95       	ret
+                       (0<<TWWC);                           //
+            }
+            else
+            {
+                // Write the data to the buffer.
+                prog_buffer_set_byte(TWDR);
+ 368:	80 91 bb 00 	lds	r24, 0x00BB
+ 36c:	0e 94 bc 00 	call	0x178	; 0x178 <prog_buffer_set_byte>
+
+                // Data byte will be received and ACK will be returned.
+                TWCR = (1<<TWEN) |                          // Keep the TWI interface enabled.
+ 370:	85 ec       	ldi	r24, 0xC5	; 197
+ 372:	80 93 bc 00 	sts	0x00BC, r24
+ 376:	08 95       	ret
+
+        // A STOP condition or repeated START condition has been received while still addressed as Slave.
+        case TWI_SRX_STOP_RESTART:
+
+             // Switch to the not addressed slave mode; own SLA will be recognized.
+             TWCR = (1<<TWEN) |                              // Keep the TWI interface enabled.
+ 378:	85 ec       	ldi	r24, 0xC5	; 197
+ 37a:	80 93 bc 00 	sts	0x00BC, r24
+                    (1<<TWINT) |                             // Clear the TWI interrupt.
+                    (1<<TWEA) |                              // Acknowledge the data.
+                    (0<<TWWC);                               //
+
+            // Update the programming buffer if needed.
+            prog_buffer_update();
+ 37e:	0e 94 d6 00 	call	0x1ac	; 0x1ac <prog_buffer_update>
+
+            break;
+ 382:	08 95       	ret
+        // Bus error due to an illegal START or STOP condition.
+        case TWI_BUS_ERROR:
+
+            // Only the internal hardware is affected, no STOP condition is sent on the bus.
+            // In all cases, the bus is released and TWSTO is cleared.
+            TWCR = (1<<TWEN) |                              // Keep the TWI interface enabled.
+ 384:	85 ed       	ldi	r24, 0xD5	; 213
+ 386:	80 93 bc 00 	sts	0x00BC, r24
+                   (0<<TWSTA) |                             // Don't generate start condition.
+                   (1<<TWSTO) |                             // Don't generate stop condition.
+                   (1<<TWINT) |                             // Clear the TWI interrupt.
+                   (1<<TWEA) |                              // Acknowledge the data.
+                   (0<<TWWC);                               //
+            break;
+ 38a:	08 95       	ret
+        case TWI_SRX_ADR_DATA_NACK:
+#endif
+        default:
+
+            // Reset the TWI interrupt to wait for a new event.
+            TWCR = (1<<TWEN) |                                  // Keep the TWI interface enabled.
+ 38c:	85 ec       	ldi	r24, 0xC5	; 197
+ 38e:	80 93 bc 00 	sts	0x00BC, r24
+ 392:	08 95       	ret
+
+00000394 <twi_check_conditions>:
+
+void twi_check_conditions(void)
+// Checks for TWI interrupt conditions.
+{
+    // Check for TWI interrupt condition.
+    if (TWCR & (1<<TWINT))
+ 394:	80 91 bc 00 	lds	r24, 0x00BC
+ 398:	88 23       	and	r24, r24
+ 39a:	14 f4       	brge	.+4      	; 0x3a0 <twi_check_conditions+0xc>
+    {
+        // Handle the TWI interrupt condition.
+        twi_handle_interrupt_condition();
+ 39c:	0e 94 50 01 	call	0x2a0	; 0x2a0 <twi_handle_interrupt_condition>
+ 3a0:	08 95       	ret

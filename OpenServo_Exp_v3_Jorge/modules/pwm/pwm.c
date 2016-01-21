@@ -267,8 +267,8 @@ void pwm_init(void)
     TCNT1 = 0;
     TCCR1A = 0;
     TCCR1B = 0;
-    TCCR1C = 0;
-    TIMSK1 = 0;
+//    TCCR1C = 0;
+//    TIMSK1 = 0;
 
     // Set timer top value.
     ICR1 = PWM_TOP_VALUE(pwm_div);

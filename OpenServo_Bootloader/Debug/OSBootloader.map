@@ -1,0 +1,469 @@
+Archive member included to satisfy reference by file (symbol)
+
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+                              bootloader.o (__do_clear_bss)
+
+Allocating common symbols
+Common symbol       size              file
+
+bootloader_active   0x1               bootloader.o
+bootloader_exit     0x1               bootloader.o
+
+Discarded input sections
+
+ .text          0x00000000        0x4 bootcrt.o
+ .data          0x00000000        0x0 bootcrt.o
+ .bss           0x00000000        0x0 bootcrt.o
+ .text          0x00000000        0x0 bootloader.o
+ .data          0x00000000        0x0 bootloader.o
+ .bss           0x00000000        0x0 bootloader.o
+ .text          0x00000000        0x0 bootstart.o
+ .data          0x00000000        0x0 bootstart.o
+ .bss           0x00000000        0x0 bootstart.o
+ .text          0x00000000        0x0 main.o
+ .data          0x00000000        0x0 main.o
+ .bss           0x00000000        0x0 main.o
+ .debug_line    0x00000000        0x0 main.o
+ .debug_str     0x00000000      0x105 main.o
+ .comment       0x00000000       0x31 main.o
+ .text          0x00000000        0x0 prog.o
+ .data          0x00000000        0x0 prog.o
+ .bss           0x00000000        0x0 prog.o
+ .text          0x00000000        0x0 twi.o
+ .data          0x00000000        0x0 twi.o
+ .bss           0x00000000        0x0 twi.o
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+user_signatures  0x00850000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD bootcrt.o
+LOAD bootloader.o
+LOAD bootstart.o
+LOAD main.o
+LOAD prog.o
+LOAD twi.o
+START GROUP
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libm.a
+END GROUP
+Address of section .bootloader set to 0xe000
+START GROUP
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libm.a
+LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a
+LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega328p/avr5\libatmega328p.a
+END GROUP
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000      0x3a2
+ *(.vectors)
+ .vectors       0x00000000        0x4 bootcrt.o
+                0x00000000                __vector_default
+                0x00000000                __vectors
+ *(.vectors)
+ *(.progmem.gcc*)
+                0x00000004                . = ALIGN (0x2)
+                0x00000004                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000004        0x0 linker stubs
+ *(.trampolines*)
+                0x00000004                __trampolines_end = .
+ *(.progmem*)
+                0x00000004                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000004                __ctors_start = .
+ *(.ctors)
+                0x00000004                __ctors_end = .
+                0x00000004                __dtors_start = .
+ *(.dtors)
+                0x00000004                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000004        0x0 bootcrt.o
+                0x00000004                __init
+                0x00000004                __boot_start
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000004        0xc bootcrt.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000010       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+                0x00000010                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000020        0x4 bootcrt.o
+ *(.init9)
+ *(.text)
+                0x00000024                . = ALIGN (0x2)
+ *(.text.*)
+ .text.main     0x00000024       0x7e bootloader.o
+                0x00000024                main
+ .text.prog_init
+                0x000000a2       0x16 prog.o
+                0x000000a2                prog_init
+ .text.prog_buffer_set_address
+                0x000000b8       0x92 prog.o
+                0x000000b8                prog_buffer_set_address
+ .text.prog_buffer_get_byte
+                0x0000014a       0x2e prog.o
+                0x0000014a                prog_buffer_get_byte
+ .text.prog_buffer_set_byte
+                0x00000178       0x34 prog.o
+                0x00000178                prog_buffer_set_byte
+ .text.prog_buffer_update
+                0x000001ac       0xc6 prog.o
+                0x000001ac                prog_buffer_update
+ .text.twi_init
+                0x00000272       0x20 twi.o
+                0x00000272                twi_init
+ .text.twi_deinit
+                0x00000292        0xe twi.o
+                0x00000292                twi_deinit
+ .text.twi_handle_interrupt_condition
+                0x000002a0       0xf4 twi.o
+                0x000002a0                twi_handle_interrupt_condition
+ .text.twi_check_conditions
+                0x00000394        0xe twi.o
+                0x00000394                twi_check_conditions
+                0x000003a2                . = ALIGN (0x2)
+ *(.fini9)
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ *(.fini0)
+                0x000003a2                _etext = .
+
+.data           0x00800100        0x0 load address 0x000003a2
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00800100                . = ALIGN (0x2)
+                0x00800100                _edata = .
+                0x00800100                PROVIDE (__data_end, .)
+
+.bss            0x00800100       0x8a
+                0x00800100                PROVIDE (__bss_start, .)
+ *(.bss)
+ *(.bss*)
+ .bss.prog_buffer
+                0x00800100       0x80 prog.o
+ .bss.prog_byte_address
+                0x00800180        0x2 prog.o
+ .bss.prog_page_address
+                0x00800182        0x2 prog.o
+ .bss.prog_update_flag
+                0x00800184        0x1 prog.o
+ .bss.twi_address
+                0x00800185        0x2 twi.o
+ .bss.twi_write_state
+                0x00800187        0x1 twi.o
+ *(COMMON)
+ COMMON         0x00800188        0x2 bootloader.o
+                0x00800188                bootloader_active
+                0x00800189                bootloader_exit
+                0x0080018a                PROVIDE (__bss_end, .)
+                0x000003a2                __data_load_start = LOADADDR (.data)
+                0x000003a2                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x0080018a        0x0
+                0x0080018a                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x0080018a                PROVIDE (__noinit_end, .)
+                0x0080018a                _end = .
+                0x0080018a                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.user_signatures
+ *(.user_signatures*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x30
+ *(.comment)
+ .comment       0x00000000       0x30 bootloader.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000030       0x31 prog.o
+ .comment       0x00000030       0x31 twi.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0xd0
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x38 bootcrt.o
+ .debug_aranges
+                0x00000038       0x20 bootloader.o
+ .debug_aranges
+                0x00000058       0x40 prog.o
+ .debug_aranges
+                0x00000098       0x38 twi.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000      0x682
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0x81 bootcrt.o
+ .debug_info    0x00000081      0x183 bootloader.o
+ .debug_info    0x00000204      0x2fb prog.o
+ .debug_info    0x000004ff      0x183 twi.o
+
+.debug_abbrev   0x00000000      0x37f
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x12 bootcrt.o
+ .debug_abbrev  0x00000012      0x110 bootloader.o
+ .debug_abbrev  0x00000122      0x189 prog.o
+ .debug_abbrev  0x000002ab       0xd4 twi.o
+
+.debug_line     0x00000000      0x3cb
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x00000000       0x6f bootcrt.o
+ .debug_line    0x0000006f       0xfe bootloader.o
+ .debug_line    0x0000016d      0x145 prog.o
+ .debug_line    0x000002b2      0x119 twi.o
+
+.debug_frame    0x00000000      0x100
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x34 bootloader.o
+ .debug_frame   0x00000034       0x78 prog.o
+ .debug_frame   0x000000ac       0x54 twi.o
+
+.debug_str      0x00000000      0x358
+ *(.debug_str)
+ .debug_str     0x00000000      0x1ee bootloader.o
+                                0x222 (size before relaxing)
+ .debug_str     0x000001ee      0x124 prog.o
+                                0x2a7 (size before relaxing)
+ .debug_str     0x00000312       0x46 twi.o
+                                0x257 (size before relaxing)
+
+.debug_loc      0x00000000      0x238
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x60 bootloader.o
+ .debug_loc     0x00000060      0x1d8 prog.o
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x00000000       0x98
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x30 bootcrt.o
+ .debug_ranges  0x00000030       0x10 bootloader.o
+ .debug_ranges  0x00000040       0x30 prog.o
+ .debug_ranges  0x00000070       0x28 twi.o
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(OSBootloader.elf elf32-avr)
+LOAD linker stubs
+
+.bootloader     0x0000e000        0x0
