@@ -99,10 +99,10 @@
 
 #endif
 
-#ifdef __AVR_ATmega328P__
+#ifdef __AVR_ATmega328__
 
 // Flash/EEPROM Page Information
-#define FLASH_PAGE_COUNT        (224)
+#define FLASH_PAGE_COUNT        (256)
 #define EEPROM_PAGE_COUNT       (8)
 #define PROG_PAGE_SIZE          (128)
 

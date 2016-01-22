@@ -73,7 +73,7 @@ static uint8_t prog_buffer[PROG_PAGE_SIZE];
 #define RESET_VECTOR_SIZE       (0x0004)
 #endif
 
-#ifdef __AVR_ATmega328P__
+#ifdef __AVR_ATmega328__
 // Account for differences between ATmega8 and ATmega168 register names.
 #define SPMCR                   SPMCSR
 #define EEWE                    EEPE

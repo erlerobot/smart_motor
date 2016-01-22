@@ -104,7 +104,7 @@ static inline uint8_t timer_check_elapsed(void)
 
 #endif // __AVR_ATmega328P__
 
-#ifdef __AVR_ATmega328P__
+#ifdef __AVR_ATmega328__
 
 static inline void timer_init(void)
 {

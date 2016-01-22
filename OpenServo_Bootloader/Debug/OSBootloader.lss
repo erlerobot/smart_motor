@@ -132,7 +132,7 @@ int main(void)
     // Initialize TWI module.
     twi_init();
   4a:	0e 94 39 01 	call	0x272	; 0x272 <twi_init>
-#ifdef __AVR_ATmega328P__
+#ifdef __AVR_ATmega328__
 
 static inline void timer_init(void)
 {
