@@ -3,9 +3,9 @@
 ###############################################################################
 
 ## General Flags
-PROJECT = ATmega168_Bootloader
-MCU = atmega168
-TARGET = ATmega168_Bootloader.elf
+PROJECT = ATmega328_Bootloader
+MCU = atmega328
+TARGET = ATmega328_Bootloader.elf
 CC = avr-gcc
 
 ## Options common to compile, link and assembly rules
@@ -22,7 +22,7 @@ ASMFLAGS += -x assembler-with-cpp -Wa,-gdwarf2
 
 ## Linker flags
 LDFLAGS = $(COMMON)
-LDFLAGS += -nostartfiles -Wl,-section-start=.bootloader=0x3C00 -Wl,-Map=ATmega168_Bootloader.map
+LDFLAGS += -nostartfiles -Wl,-section-start=.bootloader=0x7000 -Wl,-Map=ATmega328_Bootloader.map
 
 ## Objects that must be built in order to link
 OBJECTS = bootcrt.o bootstart.o bootloader.o main.o prog.o twi.o
@@ -31,7 +31,7 @@ OBJECTS = bootcrt.o bootstart.o bootloader.o main.o prog.o twi.o
 LINKONLYOBJECTS =
 
 ## Build
-all: $(TARGET) ATmega168_Bootloader.hex ATmega168_Bootloader.lss size
+all: $(TARGET) ATmega328_Bootloader.hex ATmega328_Bootloader.lss size
 
 ## Compile
 bootcrt.o: bootcrt.s
@@ -72,7 +72,7 @@ size: ${TARGET}
 ## Clean target
 .PHONY: clean
 clean:
-	-rm -rf $(OBJECTS) ATmega168_Bootloader.elf dep/* ATmega168_Bootloader.hex ATmega168_Bootloader.lss ATmega168_Bootloader.map
+	-rm -rf $(OBJECTS) ATmega328_Bootloader.elf dep/* ATmega328_Bootloader.hex ATmega168_Bootloader.lss ATmega168_Bootloader.map
 
 
 ## Other dependencies
