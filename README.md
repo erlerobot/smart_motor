@@ -8,3 +8,5 @@
 
 **OpenServo_Exp_v3_Jorge** -> Organized code by Jorge. It needs a look.
 
+**RPI_SmartServo** -> Code for Raspberry Pi
+
