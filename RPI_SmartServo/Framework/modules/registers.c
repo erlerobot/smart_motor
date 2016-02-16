@@ -1,15 +1,15 @@
 /*************************************************
-** 										        **
-** 	project  : 	RPI_SmartServo					**
-** 	filename :	registers.c					    **
-** 	version  :	1								**
-** 	date     :	15/2/2016						**
-** 												**
+** 					        **
+** 	project  : 	RPI_SmartServo		**
+** 	filename :	registers.c	        **
+** 	version  :	1			**
+** 	date     :	15/2/2016		**
+** 						**
 **************************************************
-** 												**
-** 	Copyright (c) 2016, Jorge Lampérez			**
-** 	All rights reserved.						**
-** 												**
+** 						**
+** 	Copyright (c) 2016, Jorge Lampérez	**
+** 	All rights reserved.			**
+** 						**
 **************************************************
 
 VERSION HISTORY:
@@ -23,7 +23,7 @@ Description   :
 */
 
 #include "registers.h"
-
+#include <stdint.h>
 //Device type
 static uint8_t REG_device_type;
 //Device subtype

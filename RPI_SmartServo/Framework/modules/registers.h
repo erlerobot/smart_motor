@@ -1,15 +1,15 @@
 /*************************************************
-** 										        **
-** 	project  : 	RPI_SmartServo					**
-** 	filename :	registers.h					    **
-** 	version  :	1								**
-** 	date     :	15/2/2016						**
-** 												**
+** 						**
+** 	project  : 	RPI_SmartServo		**
+** 	filename :	registers.h		**
+** 	version  :	1			**
+** 	date     :	15/2/2016		**
+** 						**
 **************************************************
-** 												**
-** 	Copyright (c) 2016, Jorge Lampérez			**
-** 	All rights reserved.						**
-** 												**
+** 						**
+** 	Copyright (c) 2016, Jorge Lampérez	**
+** 	All rights reserved.			**
+** 						**
 **************************************************
 
 VERSION HISTORY:
@@ -23,6 +23,8 @@ Description   :
 */
 #ifndef REGISTERS_H_
 #define REGISTERS_H_ 1
+
+#include<stdint.h>
 
 void REGISTERS_init(void);
 void REGISTERS_default(void);

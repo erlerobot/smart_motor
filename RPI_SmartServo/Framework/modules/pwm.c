@@ -1,15 +1,15 @@
 /*************************************************
-** 										        **
-** 	project  : 	RPI_SmartServo					**
-** 	filename :	pwm.c							**
-** 	version  :	1								**
-** 	date     :	9/2/2016						**
-** 												**
+** 						**
+** 	project  : 	RPI_SmartServo		**
+** 	filename :	pwm.c			**
+** 	version  :	1			**
+** 	date     :	9/2/2016		**
+** 						**
 **************************************************
-** 												**
-** 	Copyright (c) 2016, Jorge Lampérez			**
-** 	All rights reserved.						**
-** 												**
+** 						**
+** 	Copyright (c) 2016, Jorge Lampérez	**
+** 	All rights reserved.			**
+** 						**
 **************************************************
 
 VERSION HISTORY:
@@ -23,8 +23,8 @@ Description   :
 */
 
 #include "pwm.h"
-#include "wiringPi.h"
-
+#include <wiringPi.h>
+#include <stdint.h>
 // PWM define
 #define PWM_RANGE 1024
 #define PWM0_GPIO 12 // pin 32
@@ -47,6 +47,95 @@ static uint8_t pwm_a;
 static uint8_t pwm_b;
 
 
+/*
+	Private Functions.
+*/
+/**************************************************
+*
+* Send PWM signal for rotation with the indicated pwm 
+* ratio (0 - 255).
+* This function is meant to be called only by 
+* pwm_update.
+*
+* @return	None.
+*
+* @note		pwm_duty.
+*
+**************************************************/
+static void pwm_dir_a(uint8_t pwm_duty)
+{
+	// Determine the duty cycle value for the timer.
+    uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
+        // Do we need to reconfigure PWM output for direction A?
+    if (!pwm_a)
+    { // Yes ..
+
+    	// Disable EN_B_GPIO
+        digitalWrite(EN_B_GPIO,0);
+
+    	// Disable PWM0 and PWM1 output.
+    	pwmWrite(PWM0_GPIO,0);
+        pwmWrite(PWM1_GPIO,0);
+
+
+    	// Set EN_A_GPIO to high.
+        digitalWrite(EN_A_GPIO,1);
+
+    	// Reset the B direction flag.
+        pwm_b = 0;
+    }
+
+    // Update the A direction flag.  A non-zero value keeps us from
+    // recofiguring the PWM output A when it is already configured.
+    pwm_a = pwm_duty;
+
+    // Update the PWM duty cycle.
+    pwmWrite(PWM0_GPIO,duty_cycle);
+
+    // Save the pwm A and B duty values. ??
+}
+/**************************************************
+*
+* Send PWM signal for rotation with the indicated pwm 
+* ratio (0 - 255).
+* This function is meant to be called only by 
+* pwm_update.
+*
+* @return	None.
+*
+* @note		pwm_duty.
+*
+**************************************************/
+static void pwm_dir_b(uint8_t pwm_duty)
+{
+	// Determine the duty cycle value for the timer.
+    uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
+        // Do we need to reconfigure PWM output for direction B?
+    if (!pwm_a)
+    { // Yes ..
+
+    	// Disable EN_A_GPIO
+        digitalWrite(EN_A_GPIO,0);
+    	// Disable PWM0 and PWM0 output.
+    	pwmWrite(PWM0_GPIO,0);
+        pwmWrite(PWM1_GPIO,0);
+
+    	// Set EN_B_GPIO to high.
+        digitalWrite(EN_A_GPIO,1);
+    	// Reset the A direction flag.
+        pwm_a = 0;
+    }
+
+    // Update the A direction flag.  A non-zero value keeps us from
+    // recofiguring the PWM output A when it is already configured.
+    pwm_b = pwm_duty;
+
+    // Update the PWM duty cycle.
+    pwmWrite(PWM0_GPIO,duty_cycle);
+    // Save the pwm A and B duty values. ??
+}
+
+
 /**************************************************
 *
 * Initialize the PWM module for controlling a DC motor
@@ -59,11 +148,12 @@ static uint8_t pwm_b;
 void PWM_init(void)
 {	// Initialize the pwm frequency divider value.
 	//[TODO]
+	
 
 	//Enable PMW0/GPIO12
 	pinMode(PWM0_GPIO, PWM_OUTPUT);
 	// Set PWM in mark-space mode
-	pinSetMode(PWM_MODE_MS);
+	pwmSetMode(PWM_MODE_MS);
 	// Divide the RPI PWM clock base frequency(19.2e6) by 2
 	pwmSetClock(PWM_CLOCK_DIV);
 	// Set the PWM range
@@ -73,17 +163,17 @@ void PWM_init(void)
 
 	//Enable PWM1/GPIO13
 	pinMode(PWM1_GPIO, PWM_OUTPUT);
-	pinSetMode(PWM_MODE_MS);
+	pwmSetMode(PWM_MODE_MS);
 	pwmSetClock(PWM_CLOCK_DIV);
 	pwmSetRange(PWM_RANGE);
 	pwmWrite(PWM1_GPIO,0);
 
-    // Set EN_A (GPIO 16) and EN_B (GPIO 19) to output
-    pinMode(EN_A_GPIO, OUTPUT);
-    pinMode(EN_B_GPIO,OUTPUT);
-    // Set EN_A and EN_B to low.
-    digitalWrite(EN_A_GPIO, 0);
-    digitalWrite(EN_B_GPIO, 0);
+    	// Set EN_A (GPIO 16) and EN_B (GPIO 19) to output
+    	pinMode(EN_A_GPIO, OUTPUT);
+    	pinMode(EN_B_GPIO,OUTPUT);
+    	// Set EN_A and EN_B to low.
+    	digitalWrite(EN_A_GPIO, 0);
+    	digitalWrite(EN_B_GPIO, 0);
 
 	// Update the pwm values
 
@@ -101,7 +191,7 @@ void PWM_init(void)
 **************************************************/
 void PWM_update(uint16_t position, int16_t pwm)
 {
-	uint8_t pwm_width;
+    uint8_t pwm_width;
     uint16_t min_position;
     uint16_t max_position;
 
@@ -147,7 +237,7 @@ void PWM_update(uint16_t position, int16_t pwm)
     else
     {
     	// Stop all PWM activity to the motor.
-        pwm_stop();
+        PWM_stop();
     }
 }
 /**************************************************
@@ -180,91 +270,4 @@ void PWM_stop(void)
 	// Save the pwm A and B duty values. ???
 }
 
-/*
-	Private Functions.
-*/
 
-/**************************************************
-*
-* Send PWM signal for rotation with the indicated pwm 
-* ratio (0 - 255).
-* This function is meant to be called only by 
-* pwm_update.
-*
-* @return	None.
-*
-* @note		pwm_duty.
-*
-**************************************************/
-static void pwm_dir_a(uint8_t pwm_duty)
-{
-	// Determine the duty cycle value for the timer.
-    uint16_t duty_cycle = PWM_OCRN_VALUE(PWM_RANGE, pwm_duty);
-        // Do we need to reconfigure PWM output for direction A?
-    if (!pwm_a)
-    { // Yes ..
-
-    	// Disable EN_B_GPIO
-        digitalWrite(EN_B_GPIO,0);
-
-    	// Disable PWM0 and PWM1 output.
-    	pwmWrite(PWM0_GPIO,0);
-        pwmWrite(PWM1_GPIO,0);
-
-
-    	// Set EN_A_GPIO to high.
-        digitalWrite(EN_A_GPIO,1);
-
-    	// Reset the B direction flag.
-        pwm_b = 0;
-    }
-
-    // Update the A direction flag.  A non-zero value keeps us from
-    // recofiguring the PWM output A when it is already configured.
-    pwm_a = pwm_duty;
-
-    // Update the PWM duty cycle.
-    pwmWrite(PWM0_GPIO,duty_cycle);
-
-    // Save the pwm A and B duty values. ??
-}
-/**************************************************
-*
-* Send PWM signal for rotation with the indicated pwm 
-* ratio (0 - 255).
-* This function is meant to be called only by 
-* pwm_update.
-*
-* @return	None.
-*
-* @note		pwm_duty.
-*
-**************************************************/
-static void pwm_dir_b(uint8_t pwm_duty)
-{
-	// Determine the duty cycle value for the timer.
-    uint16_t duty_cycle = PWM_OCRN_VALUE(PWM_RANGE, pwm_duty);
-        // Do we need to reconfigure PWM output for direction B?
-    if (!pwm_a)
-    { // Yes ..
-
-    	// Disable EN_A_GPIO
-        digitalWrite(EN_A_GPIO,0);
-    	// Disable PWM0 and PWM0 output.
-    	pwmWrite(PWM0_GPIO,0);
-        pwmWrite(PWM1_GPIO,0);
-
-    	// Set EN_B_GPIO to high.
-        digitalWrite(EN_A_GPIO,1);
-    	// Reset the A direction flag.
-        pwm_a = 0;
-    }
-
-    // Update the A direction flag.  A non-zero value keeps us from
-    // recofiguring the PWM output A when it is already configured.
-    pwm_b = pwm_duty;
-
-    // Update the PWM duty cycle.
-    pwmWrite(PWM0_GPIO,duty_cycle);
-    // Save the pwm A and B duty values. ??
-}

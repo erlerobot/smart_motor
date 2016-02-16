@@ -1,15 +1,15 @@
 /*************************************************
-** 										        **
-** 	project  : 	RPI_SmartServo					**
-** 	filename :	pwm.h							**
-** 	version  :	1								**
-** 	date     :	9/2/2016						**
-** 												**
+** 					        **
+** 	project  : 	RPI_SmartServo	        **
+** 	filename :	pwm.h			**
+** 	version  :	1			**
+** 	date     :	9/2/2016		**
+** 						**
 **************************************************
-** 												**
-** 	Copyright (c) 2016, Jorge Lampérez			**
-** 	All rights reserved.						**
-** 												**
+** 						**
+** 	Copyright (c) 2016, Jorge Lampérez	**
+** 	All rights reserved.			**
+** 						**
 **************************************************
 
 VERSION HISTORY:
@@ -23,6 +23,8 @@ Description   :
 */
 #ifndef PWM_H_
 #define PWM_H_ 1
+
+#include <stdint.h>
 
 // Initialize the PWM module for controlling a DC motor
 void PWM_init(void);

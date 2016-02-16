@@ -6,9 +6,11 @@
 	#include modules
 */
 #include <wiringPi.h>	
-#include "pwm.h"
-#include "registers.h"
-#include "pid.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "Framework/modules/pwm.h"
+#include "Framework/modules/registers.h"
+#include "Framework/modules/pid.h"
 
 int main(void)
 {
@@ -49,16 +51,27 @@ int main(void)
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
+	printf("Insert new seek_position: \n"); 
+        int16_t seek_position;
+	scanf("%hd",&seek_position); 
+	set_seek_position(seek_position);
+	
 	for(;;)
 	{	
 		// Is position value ready?
-
+			int16_t pwm;
+			int16_t position;
+			
 			// Get the new position value.
-
-			// Call the PID algorithm module to get a new PWM value. 
-
-			// Update the servo movement as indicated by the PWM value.
-
+			printf("Insert new position: \n"); 
+			scanf("%hd",&position); 
+			printf("New position value is: %d \n", position); 
+				
+				// Call the PID algorithm module to get a new PWM value. 
+				pwm = PID_position_to_pwm(position);
+				printf("PWM value is: %d \n", pwm); 
+				// Update the servo movement as indicated by the PWM value.
+				PWM_update(position, pwm);
 
 		// Is a power value ready?
 
