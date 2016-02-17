@@ -155,12 +155,14 @@ int16_t PID_position_to_pwm(int16_t current_position)
     set_velocity(current_velocity);
     // Get the deadband.
     deadband = get_pid_deadband();
+    printf("PID_deadband: %d\n",deadband);
     // Use the filtered position when the seek position is not changing.
     //if (seek_position == previous_seek) current_position = filtered_position;
     previous_seek = seek_position;
     // Keep the seek position bound within the minimum and maximum position.
     if (seek_position < minimum_position) seek_position = minimum_position;
     if (seek_position > maximum_position) seek_position = maximum_position;
+    printf("PID_seek_position: %d\n",seek_position);
     // The proportional component to the PID is the position error.
     p_component = seek_position - current_position;
     printf("PID_p_component: %d\n",p_component);

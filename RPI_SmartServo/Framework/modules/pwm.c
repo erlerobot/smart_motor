@@ -23,8 +23,10 @@ Description   :
 */
 
 #include "pwm.h"
+#include "registers.h"
 #include <wiringPi.h>
 #include <stdint.h>
+#include <stdio.h>
 // PWM define
 #define PWM_RANGE 1024
 #define PWM0_GPIO 12 // pin 32
@@ -35,11 +37,11 @@ Description   :
 #define EN_A_GPIO 16 //pin36
 #define EN_B_GPIO 19 //pin35
 
-#define PWM_DUTY_CYCLE(div,pwm) (uint16_t) (((uint32_t) pwm * (((uint32_t) div << 4) - 1)) / 255)
+#define PWM_DUTY_CYCLE(div,pwm) (uint16_t) (((uint32_t) pwm * ((uint32_t) div  - 1)) / 255)
 
 // CONFIGURATION PARAMETERS HERE THEN MOVE TO SPECIFIC FILE
-#define DEFAULT_MAX_SEEK 0x03A0
-#define DEFAULT_MIN_SEEK 0x0060
+//#define DEFAULT_MAX_SEEK 0x03A0  --> Initialize in pid.c move to a config file
+//#define DEFAULT_MIN_SEEK 0x0060
 #define MAX_POSITION  (1023)
 
 // Flags that indicate PWM output in A and B direction.
@@ -64,9 +66,11 @@ static uint8_t pwm_b;
 **************************************************/
 static void pwm_dir_a(uint8_t pwm_duty)
 {
-	// Determine the duty cycle value for the timer.
+    // Determine the duty cycle value for the timer.
     uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
-        // Do we need to reconfigure PWM output for direction A?
+    printf("PWM_dir_a_duty_cycle %d \n",duty_cycle);
+
+    // Do we need to reconfigure PWM output for direction A?
     if (!pwm_a)
     { // Yes ..
 
@@ -110,8 +114,10 @@ static void pwm_dir_b(uint8_t pwm_duty)
 {
 	// Determine the duty cycle value for the timer.
     uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
+    printf("PWM_dir_b_duty_cycle %d \n",duty_cycle);
+
         // Do we need to reconfigure PWM output for direction B?
-    if (!pwm_a)
+    if (!pwm_b)
     { // Yes ..
 
     	// Disable EN_A_GPIO
@@ -121,7 +127,7 @@ static void pwm_dir_b(uint8_t pwm_duty)
         pwmWrite(PWM1_GPIO,0);
 
     	// Set EN_B_GPIO to high.
-        digitalWrite(EN_A_GPIO,1);
+        digitalWrite(EN_B_GPIO,1);
     	// Reset the A direction flag.
         pwm_a = 0;
     }
@@ -131,7 +137,8 @@ static void pwm_dir_b(uint8_t pwm_duty)
     pwm_b = pwm_duty;
 
     // Update the PWM duty cycle.
-    pwmWrite(PWM0_GPIO,duty_cycle);
+    pwmWrite(PWM1_GPIO,duty_cycle);
+
     // Save the pwm A and B duty values. ??
 }
 
@@ -196,18 +203,22 @@ void PWM_update(uint16_t position, int16_t pwm)
     uint16_t max_position;
 
     // Get the minimum and maximum seek position.
-    min_position = DEFAULT_MIN_SEEK;
-    max_position = DEFAULT_MAX_SEEK;
+    min_position = get_min_seek();
+    max_position = get_max_seek();
 
 	// Make sure these values are sane 10-bit values.
     if (min_position > MAX_POSITION) min_position = MAX_POSITION;
     if (max_position > MAX_POSITION) max_position = MAX_POSITION;
+    printf("PWM_update_min_position %d \n",min_position);
+    printf("PWM_update_max_position %d \n",max_position);
     
     // Disable clockwise movements when position is below the minimum position.
     if ((position < min_position) && (pwm < 0)) pwm = 0;
 
     // Disable counter-clockwise movements when position is above the maximum position.
     if ((position > max_position) && (pwm > 0)) pwm = 0;
+	
+    printf("PWM_update_pwm %d \n",pwm);
 
     // Determine if PWM is disabled in the registers.??
 
@@ -254,7 +265,7 @@ void PWM_stop(void)
 	if (pwm_a || pwm_b)
 	{
 
-		// Disable PWM0 (GPIO12) and PWM1 (GPIO13)  output.
+	// Disable PWM0 (GPIO12) and PWM1 (GPIO13)  output.
         pwmWrite(PWM0_GPIO,0);
         pwmWrite(PWM1_GPIO,0);
 		

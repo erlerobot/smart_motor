@@ -23,3 +23,7 @@ registers.o: Framework/modules/registers.c
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+
+clean:
+	rm *o hello
