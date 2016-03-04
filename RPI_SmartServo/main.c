@@ -1,6 +1,24 @@
-/*
-	main.c
-*/
+/**
+ *  project  : 	RPI_SmartServo			
+ * 	
+ * 	@file main.c
+ *  @brief 
+ * 
+ *  @note 
+ *
+ *  	none
+ *
+ *  \code
+ *  MODIFICATION HISTORY:
+ *
+ *  Ver   Who        Date        Changes
+ *  ----- ---------- ----------  -------------------------------------
+ *  1.00 jlamperez  1/3/2016  First release
+ * 
+ *  \endcode
+ *
+ *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
+ */
 
 /* 
 	#include modules
@@ -11,6 +29,8 @@
 #include "Framework/modules/pwm.h"
 #include "Framework/modules/registers.h"
 #include "Framework/modules/pid.h"
+#include "Framework/modules/adc.h"
+#include "Framework/modules/timer.h"
 
 int main(void)
 {
@@ -31,16 +51,10 @@ int main(void)
 
 	// Initialize the PID algorithm module
 	PID_init();
-	// Initialize the curve motion module
-
-	// Initialize the power module
-
-	// Initialize pulse control
-
-	// Initialize software I2C to talk with encoder
-
-	// Initialize the TWI slave module
-
+	// Initialize ADC
+	ADC_init();
+	// Initialize timer 10 ms.
+	TIMER_init(10000);
 //MODULE INITIALIZATION END
 
 	// Set the initial seek position and velocity

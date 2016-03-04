@@ -1,26 +1,25 @@
-/*************************************************
-** 						**
-** 	project  : 	RPI_SmartServo		**
-** 	filename :	registers.h		**
-** 	version  :	1			**
-** 	date     :	15/2/2016		**
-** 						**
-**************************************************
-** 						**
-** 	Copyright (c) 2016, Jorge Lampérez	**
-** 	All rights reserved.			**
-** 						**
-**************************************************
+/**
+ *  project  :  RPI_SmartServo          
+ *  
+ *  @file registers.h
+ *  @brief 
+ * 
+ *  @note 
+ *
+ *      none
+ *
+ *  \code
+ *  MODIFICATION HISTORY:
+ *
+ *  Ver   Who        Date        Changes
+ *  ----- ---------- ----------  -------------------------------------
+ *  1.00 jlamperez  9/2/2016  First release
+ * 
+ *  \endcode
+ *
+ *  Copyright (c) 2016, Jorge Lampérez. All rights reserved.
+ */
 
-VERSION HISTORY:
-----------------
-
-Version       : 1
-Date          : 15/2/2016
-Revised by    : Jorge Lampérez
-Description   : 
-
-*/
 #ifndef REGISTERS_H_
 #define REGISTERS_H_ 1
 

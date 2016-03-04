@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS =-Wall -lwiringPi
 
-OBJECTS = pwm.o pid.o adc.o registers.o main.o
+OBJECTS = pwm.o pid.o adc.o registers.o main.o ads1115.o i2c.o timer.o
 OUT = SmartServo
 
 
@@ -19,6 +19,15 @@ pwm.o: Framework/modules/pwm.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 registers.o: Framework/modules/registers.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+ads1115.o: Framework/modules/ads1115.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+i2c.o: Framework/modules/i2c.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+timer.o: Framework/modules/timer.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 main.o: main.c
