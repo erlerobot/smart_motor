@@ -125,6 +125,8 @@ int16_t PID_position_to_pwm(int16_t current_position)
     // Use the filtered position to determine velocity.
     //current_velocity = filtered_position - previous_position;
     //previous_position = filtered_position;
+    current_velocity = current_position - previous_position;
+
 
     printf("PID_current_position: %d\n",current_position);	
     previous_position = current_position;
