@@ -54,7 +54,7 @@ int main(void)
 	// Initialize ADC
 	ADC_init();
 	// Initialize timer 10 ms.
-	TIMER_init(10000);
+	TIMER_init(10000000000);
 //MODULE INITIALIZATION END
 
 	// Set the initial seek position and velocity
@@ -65,28 +65,33 @@ int main(void)
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
-	printf("Insert new seek_position: \n"); 
+	printf("MAIN_Insert new seek_position: \n"); 
         int16_t seek_position;
 	scanf("%hd",&seek_position); 
 	set_seek_position(seek_position);
 	
 	for(;;)
 	{	
+		static int i=0;
+		if(adc_position_value_is_ready())
+		{
 		// Is position value ready?
 			int16_t pwm;
 			int16_t position;
 			
-			// Get the new position value.
-			printf("Insert new position: \n"); 
-			scanf("%hd",&position); 
-			printf("New position value is: %d \n", position); 
-				
-				// Call the PID algorithm module to get a new PWM value. 
-				pwm = PID_position_to_pwm(position);
-				printf("PWM value is: %d \n", pwm); 
-				// Update the servo movement as indicated by the PWM value.
-				PWM_update(position, pwm);
-
+			
+			//
+			position = adc_get_position_value();
+			printf("MAIN position value is: %d \n", position);
+			// Call the PID algorithm module to get a new PWM value. 
+			pwm = PID_position_to_pwm(position);
+			printf("PWM value is: %d \n", pwm); 
+			// Update the servo movement as indicated by the PWM value.
+			PWM_update(position, pwm);
+			printf("------------%i--------------\n",i);
+			i++;
+		}
+		
 		// Is a power value ready?
 
 			// Get the new power value.

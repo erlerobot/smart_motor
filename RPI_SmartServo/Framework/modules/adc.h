@@ -24,6 +24,21 @@
 #define ADC_H_ 1
 
 #include <signal.h>
+#include <stdint.h>
+
+extern volatile uint8_t adc_position_ready;
+extern volatile uint16_t adc_position_value;
+
+inline static uint16_t adc_get_position_value()
+{
+	adc_position_ready = 0;  
+
+	return adc_position_value;
+}
+inline static uint8_t adc_position_value_is_ready()
+{
+	return adc_position_ready;
+}
 
 /**
 * 	Initialize ADC conversion.

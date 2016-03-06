@@ -25,6 +25,12 @@
 #include "ads1115.h"
 #include "registers.h"
 #include <signal.h>
+
+
+volatile uint8_t adc_position_ready;
+volatile uint16_t adc_position_value;
+
+
 /**
 *
 * Initialize ADC conversion.
@@ -36,8 +42,10 @@
 */
 void ADC_init(void)
 {	
-	printf("ADC initialization");
+	printf("ADC initialization\n");
 	ADS1115_init(ADS1115_ADDRESS);
+	adc_position_ready = 0;
+	adc_position_value = 0;
 }
 /**
 *
@@ -50,15 +58,15 @@ void ADC_init(void)
 */
 void ADC_readPosition()
 {
-	uint16_t position;
-
-	printf("ADC_readPosition");
+	printf("ADC_readPosition\n"); 
 	
 	// Read from i2C
-	position = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
+	adc_position_value = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
+	printf("ADC position value is: %d \n", adc_position_value);			
 	// Save value in registers position.
-	set_position (position);
+	set_position (adc_position_value);
 	// Put flag to 1.
+	adc_position_ready =1;
 }
 /**
 *
