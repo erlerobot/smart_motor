@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS =-Wall -lwiringPi
+CFLAGS =-Wall -lwiringPi -lrt 
 
 OBJECTS = pwm.o pid.o adc.o registers.o main.o ads1115.o i2c.o timer.o
 OUT = SmartServo

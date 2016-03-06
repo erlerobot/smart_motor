@@ -88,7 +88,11 @@
     #define ADS1115_REG_CONFIG_DR_128SPS    (0x0080)  // 128 samples per second (default)
     #define ADS1115_REG_CONFIG_DR_250SPS    (0x00A0)  // 250 samples per second
     #define ADS1115_REG_CONFIG_DR_475SPS    (0x00C0)  // 475 samples per second
+<<<<<<< HEAD
     #define ADS1115_REG_CONFIG_DR_860SPS    (0x00C0)  // 860 samples per second
+=======
+    #define ADS1115_REG_CONFIG_DR_860SPS    (0x00E0)  // 860 samples per second
+>>>>>>> a8144342b01e0c90e5724e03617f74c01b5af49e
 
     #define ADS1115_REG_CONFIG_CMODE_MASK   (0x0010)
     #define ADS1115_REG_CONFIG_CMODE_TRAD   (0x0000)  // Traditional comparator with hysteresis (default)
