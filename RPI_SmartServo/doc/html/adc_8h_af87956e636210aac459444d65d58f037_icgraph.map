@@ -1,0 +1,6 @@
+<map id="ADC_readPosition" name="ADC_readPosition">
+<area shape="rect" id="node2" href="$adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="181,5,280,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="328,5,475,32"/>
+<area shape="rect" id="node4" href="$timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="523,5,608,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="656,5,707,32"/>
+</map>

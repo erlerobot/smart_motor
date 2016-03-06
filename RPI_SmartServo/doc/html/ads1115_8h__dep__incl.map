@@ -1,0 +1,4 @@
+<map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/ads1115.h" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/ads1115.h">
+<area shape="rect" id="node2" href="$adc_8c.html" title="Adc module implementation. It works like an interface for different adc&#39;s, now ads1115 adc is used..." alt="" coords="5,124,204,195"/>
+<area shape="rect" id="node3" href="$ads1115_8c.html" title="Implementation of the ads1115 adc converter module. " alt="" coords="228,124,435,195"/>
+</map>

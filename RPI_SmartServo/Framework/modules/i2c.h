@@ -1,19 +1,19 @@
 /**
  *  project  : 	RPI_SmartServo			
  * 	
- * 	@file adc.h
- *  @brief 
+ * 	@file i2c.h
+ *  @brief Header I2C module for communication.
  * 
  *  @note 
  *
- *  	none
+ *  	Used for ADS1115 communication but can be reusable.
  *
  *  \code
  *  MODIFICATION HISTORY:
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  1/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *

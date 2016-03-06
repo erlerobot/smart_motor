@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file ads1115.c
- *  @brief 
+ *  @brief Implementation of the ads1115 adc converter module.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  1/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -30,18 +30,41 @@
 static uint8_t ADS1115_address;
 //Gain
 static uint16_t ADS1115_gain;
-
+//ADS1115 i2c file
 static int ADS1115_i2c_fd;
 
+/**
+*   Local functions
+*/
 void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value);
 uint16_t ADS1115_readRegister(int fd, uint8_t reg);
 
+/**
+*   Function to write in an ADS1115 register.
+*
+*   @param    fd linux file for ADS1115.
+*   @param    reg the register to write.
+*   @param    value the value to write in the register.
+*
+*   @return   None.
+*
+*   @note     None. 
+*/
 void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value)
 {
   printf("ADS1115_writeRegister\n");		
   I2C_writeReg16 (fd, reg, value);
 }
-
+/**
+*   Function to read from an ADS1115 register.
+*
+*   @param    fd linux file for ADS1115.
+*   @param    reg the register to read.
+*
+*   @return   None.
+*
+*   @note     The I2C read value is swap to have a correct value. 
+*/
 uint16_t ADS1115_readRegister(int fd, uint8_t reg)
 {
   printf("ADS1115_readRegister\n");
@@ -53,7 +76,14 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
   return (highRegValue8<<8 |lowRegValue8 );
 }
 /**
-	Initialization of the ads1115 adc module.
+*   Initialization for the ADS1115 adc.
+*
+*   @param    address the i2c addreess for communication with ADS1115.
+*
+*   @return   None.
+*
+*   @note     None. 
+*   @todo     See if a bitShift is need for noise and a conversion delay.
 */
 void ADS1115_init(uint8_t address)
 {
@@ -62,25 +92,41 @@ void ADS1115_init(uint8_t address)
 	//bitShift???
 	ADS1115_gain = ADS1115_REG_CONFIG_PGA_6_144V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 
-        ADS1115_i2c_fd = I2C_setup(address);
+  ADS1115_i2c_fd = I2C_setup(address);
   
 }
 /**
-	Set the ads1115 gain
+*   Set the ads1115 gain.
+*
+*   @param    gain the value for the gain field.
+*
+*   @return   None.
+*
+*   @note     None. 
 */
 void ADS1115_setGain(uint16_t gain)
 {
 	ADS1115_gain = gain;
 }
 /**
-	Get the ads1115 gain
+*   Get the ads1115 gain.
+*
+*   @return     Gain value.
+*
+*   @note       None. 
 */
 uint16_t ADS1115_getGain()
 {
 	return ADS1115_gain;
 }
 /**
-	Read the ADC value in singleEnded mode. 4 channels are posible in this mode.
+*   Read the ADC value in singleEnded mode. 4 channels are posible in this mode.
+*
+*   @param      channel Which channel from the ADS1115 is going to be measured.
+*
+*   @return     Single read of 16 bits value.
+*
+*   @note       None. 
 */
 uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
 {	
@@ -90,46 +136,46 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
     	return 0;
   	}
 
-  	/** @todo PONER MI CONFIGURACION*/
-  	uint16_t config = ADS1115_REG_CONFIG_CQUE_NONE    | // Disable the comparator (default val)
-                    ADS1115_REG_CONFIG_CLAT_NONLAT  | // Non-latching (default val)
-                    ADS1115_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   (default val)
-                    ADS1115_REG_CONFIG_CMODE_TRAD   | // Traditional comparator (default val)
-                    ADS1115_REG_CONFIG_DR_128SPS    | // 128 samples per second (default)
-                    ADS1115_REG_CONFIG_MODE_SINGLE;   // Single-shot mode (default)
+  // Configuration of the ADS1115
+  uint16_t config = ADS1115_REG_CONFIG_CQUE_NONE    | // Disable the comparator 
+                    ADS1115_REG_CONFIG_CLAT_NONLAT  | // Non-latching 
+                    ADS1115_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   
+                    ADS1115_REG_CONFIG_CMODE_TRAD   | // Traditional comparator 
+                    ADS1115_REG_CONFIG_DR_128SPS    | // 128 samples per second 
+                    ADS1115_REG_CONFIG_MODE_SINGLE;   // Single-shot mode 
 
-  	// Set PGA/voltage range
-  	config |= ADS1115_gain;
+  // Set PGA/voltage range
+  config |= ADS1115_gain;
 
-  	// Set single-ended input channel
-  	switch (channel)
-  	{
-    	case (0):
-      		config |= ADS1115_REG_CONFIG_MUX_SINGLE_0;
-      		break;
-    	case (1):
-      		config |= ADS1115_REG_CONFIG_MUX_SINGLE_1;
-      		break;
-    	case (2):
-      		config |= ADS1115_REG_CONFIG_MUX_SINGLE_2;
-      		break;
-    	case (3):
-      		config |= ADS1115_REG_CONFIG_MUX_SINGLE_3;
-      		break;
-  	}
+  // Set single-ended input channel
+  switch (channel)
+  {
+   	case (0):
+     		config |= ADS1115_REG_CONFIG_MUX_SINGLE_0;
+     		break;
+   	case (1):
+     		config |= ADS1115_REG_CONFIG_MUX_SINGLE_1;
+     		break;
+   	case (2):
+     		config |= ADS1115_REG_CONFIG_MUX_SINGLE_2;
+     		break;
+   	case (3):
+     		config |= ADS1115_REG_CONFIG_MUX_SINGLE_3;
+     		break;
+  }
 
-  	// Set 'start single-conversion' bit
-  	config |= ADS1115_REG_CONFIG_OS_SINGLE;
+  // Set 'start single-conversion' bit
+  config |= ADS1115_REG_CONFIG_OS_SINGLE;
 	printf("ADS1115 config value is: %d, %.4x \n", config, config);
   	
 	// Write config register to the ADC
-    	ADS1115_writeRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG, config);
+  ADS1115_writeRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG, config);
   	
 	// Wait for the conversion to complete
-     	delay(8);
+  delay(8); //@todo see delay.
   	
 	// Read the conversion results
-     	uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
+  uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
 	printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
     	
 	float voltage = (single_read*0.1875)/1000;
@@ -138,8 +184,8 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
 	return single_read; 
   	
 	// Shift 12-bit results right 4 bits for the ADS1015
-    	// return readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift; 
-  	// Desplaza para ruido.
+  // return readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift; 
+  // Desplaza para ruido.
 
 }
 

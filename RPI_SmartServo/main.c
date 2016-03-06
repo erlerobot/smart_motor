@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file main.c
- *  @brief 
+ *  @brief main file
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  1/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -38,8 +38,8 @@ int main(void)
 // MODULE INITIALIZATION
 
 	// This initialises the wiringPi system and 
-	//assumes that the calling program is going 
-	//to be using the Broadcom GPIO pin numbers directly.
+	// assumes that the calling program is going 
+	// to be using the Broadcom GPIO pin numbers directly.
 	wiringPiSetupGpio();
 	// Configure pins to the default states
 
@@ -61,15 +61,15 @@ int main(void)
 
 	// XXX Enable PWM and writing.
 
-
-	// Main processing loop for the servo. It basically 
-	// looks for new position, power or TWI commands to 
-	// be processed.
 	printf("MAIN_Insert new seek_position: \n"); 
         int16_t seek_position;
 	scanf("%hd",&seek_position); 
 	set_seek_position(seek_position);
 	
+
+	// Main processing loop for the servo. It basically 
+	// looks for new position, power or TWI commands to 
+	// be processed.
 	for(;;)
 	{	
 		static int i=0;
@@ -79,8 +79,8 @@ int main(void)
 			int16_t pwm;
 			int16_t position;
 			
-			
-			//
+			/** @todo */
+			// get position() better ??
 			position = adc_get_position_value();
 			printf("MAIN position value is: %d \n", position);
 			// Call the PID algorithm module to get a new PWM value. 

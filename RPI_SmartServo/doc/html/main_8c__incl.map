@@ -1,0 +1,7 @@
+<map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/main.c" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/main.c">
+<area shape="rect" id="node5" href="$pwm_8h.html" title="Header for pwm module. " alt="" coords="245,109,426,136"/>
+<area shape="rect" id="node6" href="$registers_8h.html" title="Registers header. " alt="" coords="451,109,655,136"/>
+<area shape="rect" id="node7" href="$pid_8h.html" title="Header for PID module implementation. " alt="" coords="679,109,850,136"/>
+<area shape="rect" id="node8" href="$adc_8h.html" title="Header for the adc module. " alt="" coords="875,109,1049,136"/>
+<area shape="rect" id="node10" href="$timer_8h.html" title="Header for timer module. " alt="" coords="1073,109,1256,136"/>
+</map>

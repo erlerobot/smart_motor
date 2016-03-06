@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file timer.c
- *  @brief 
+ *  @brief Implementation for timer module.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  2/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -39,11 +39,13 @@ sigset_t mask;
 
 /**
 *
-* Create th timer.
+*   Create the timer.
 *
-* @return	None.
+*   @param freq_nanosecs nanoseconds value.
 *
-* @note		None.
+*   @return	None.
+*
+*   @note		None.
 *
 */
 void TIMER_create(long long freq_nanosecs)
@@ -73,6 +75,15 @@ void TIMER_create(long long freq_nanosecs)
          errExit("timer_settime");
 }
 
+/**
+*
+*   Timer signal handler.
+*
+*   @return None.
+*
+*   @note   None.
+*
+*/
 void TIMER_signalHandler()
 {
 	struct sigaction sa;
@@ -88,7 +99,15 @@ void TIMER_signalHandler()
   if (sigaction(SIG, &sa, NULL) == -1)
         errExit("sigaction");
 }
-
+/**
+*
+*   Timer signal block.
+*
+*   @return None.
+*
+*   @note   None.
+*
+*/
 void TIMER_signalBlock()
 {
     /* Block timer signal temporarily */
@@ -101,7 +120,15 @@ void TIMER_signalBlock()
     if (sigprocmask(SIG_SETMASK, &mask, NULL) == -1)
         errExit("sigprocmask");
 }
-
+/**
+*
+*   Timer signal unblock.
+*
+*   @return None.
+*
+*   @note   None.
+*
+*/
 void TIMER_signalUnblock()
 {
 	   /* Unlock the timer signal, so that timer notification
@@ -111,14 +138,15 @@ void TIMER_signalUnblock()
     if (sigprocmask(SIG_UNBLOCK, &mask, NULL) == -1)
         errExit("sigprocmask");
 }
-
 /** 
 *
-* Initialize timer.
+*   Initialize timer.
 *
-* @return	None.
+*   @param freq_nanosecs nanoseconds value.
 *
-* @note		None.
+*   @return None.
+*
+*   @note   None.
 *
 */
 void TIMER_init(long long freq_nanosecs)

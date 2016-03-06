@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file i2c.c
- *  @brief 
+ *  @brief I2C module for communication implementation.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  3/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -56,14 +56,18 @@
 #define I2C_SMBUS_I2C_BLOCK_MAX	32	/* Not specified but we use same structure */
 
 // Structures used in the ioctl() calls
-
+/**
+  Different type of data in the same memory space i2c_smbus_data
+*/
 union i2c_smbus_data
 {
   uint8_t  byte ;
   uint16_t word ;
   uint8_t  block [I2C_SMBUS_BLOCK_MAX + 2] ;	// block [0] is used for length + one more for PEC
 } ;
-
+/**
+  Struct for i2c_smbus_ioctl_data
+*/
 struct i2c_smbus_ioctl_data
 {
   char read_write ;
@@ -83,15 +87,19 @@ static inline int i2c_smbus_access (int fd, char rw, uint8_t command, int size, 
   return ioctl (fd, I2C_SMBUS, &args) ;
 } 
 
+// Local functions
 int I2C_setupInterface (const char *device, int devId);
 
 /**
 *
-* Read an 8 bit value from a regsiter on the device
+*   Read an 8 bit value from a regsiter on the device
 *
-* @return	None.
+*   @param    fd linux file where to read
+*   @param    reg the register to read (8 bit)
 *
-* @note		None.
+*   @return	  an 8 bit value.
+*
+*   @note		  None.
 *
 */
 uint8_t I2C_readReg8 (int fd, uint8_t reg)
@@ -105,11 +113,14 @@ uint8_t I2C_readReg8 (int fd, uint8_t reg)
 }
 /**
 *
-* Read an 16-bit value from a regsiter on the device
+*   Read an 16-bit value from a regsiter on the device
 *
-* @return	None.
+*   @param    fd linux file where to read
+*   @param    reg the register to read (8 bit)
 *
-* @note		None.
+*   @return	  a 16 bit value.
+*
+*   @note		  None.
 *
 */
 uint16_t I2C_readReg16 (int fd, uint8_t reg)
@@ -123,11 +134,15 @@ uint16_t I2C_readReg16 (int fd, uint8_t reg)
 }
 /**
 *
-* Write an 8 bit value to the given register
+*   Write an 8 bit value to the given register
 *
-* @return	None.
+*   @param    fd linux file where to read.
+*   @param    reg the register to write (8 bit).
+*   @param    value the value to write to the register (16 bit).
 *
-* @note		None.
+*   @return	  int value.
+*
+*   @note		  None.
 *
 */
 int I2C_writeReg8 (int fd, uint8_t reg, uint16_t value)
@@ -139,11 +154,15 @@ int I2C_writeReg8 (int fd, uint8_t reg, uint16_t value)
 }
 /**
 *
-* Write an 16-bit value to the given register
+*   Write an 16-bit value to the given register
 *
-* @return	None.
+*   @param    fd linux file where to read.
+*   @param    reg the register to write (8 bit).
+*   @param    value the value to write to the register (16 bit).
 *
-* @note		None.
+*   @return   int value.
+*
+*   @note     None.
 *
 */
 int I2C_writeReg16 (int fd, uint8_t reg, uint16_t value)
@@ -155,11 +174,14 @@ int I2C_writeReg16 (int fd, uint8_t reg, uint16_t value)
 }
 /**
 *
-* Interface
+*   Interface for I2C
 *
-* @return	None.
+*   @param    device /dev/i2c-1. 
+*   @param    devId .
 *
-* @note		None.
+*   @return	  None.
+*
+*   @note		  /dev/i2c-1.
 *
 */
 int I2C_setupInterface (const char *device, int devId)
@@ -183,13 +205,13 @@ int I2C_setupInterface (const char *device, int devId)
 }
 /**
 *
-* Open the I2C device, and register the target device
+*   Open the I2C device, and register the target device
 *
-* @param  	devId
+*   @param  	devId
 *
-* @return	None.
+*   @return	  None.
 *
-* @note		None.
+*   @note		 /dev/i2c-1.
 *
 */
 int I2C_setup (const uint8_t devId)

@@ -1,0 +1,5 @@
+<map id="I2C_setup" name="I2C_setup">
+<area shape="rect" id="node2" href="$ads1115_8h.html#af6edcb14b2e080c91ccc5873ad8388cc" title="ADS1115_init" alt="" coords="133,5,235,32"/>
+<area shape="rect" id="node3" href="$adc_8h.html#a69f491a768a81c2cf99ee2653ad3002d" title="ADC_init" alt="" coords="283,5,356,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="404,5,455,32"/>
+</map>

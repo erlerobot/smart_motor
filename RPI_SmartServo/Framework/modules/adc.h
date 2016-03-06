@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file adc.h
- *  @brief 
+ *  @brief Header for the adc module.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  1/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -29,17 +29,22 @@
 extern volatile uint8_t adc_position_ready;
 extern volatile uint16_t adc_position_value;
 
+/**
+* 	Inline function to get adc_position_value
+*/
 inline static uint16_t adc_get_position_value()
 {
 	adc_position_ready = 0;  
 
 	return adc_position_value;
 }
+/**
+* 	Inline function to see if the adc_position_value is ready.
+*/
 inline static uint8_t adc_position_value_is_ready()
 {
 	return adc_position_ready;
 }
-
 /**
 * 	Initialize ADC conversion.
 */

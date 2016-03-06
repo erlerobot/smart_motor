@@ -1,0 +1,7 @@
+<map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/registers.h" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/registers.h">
+<area shape="rect" id="node2" href="$adc_8c.html" title="Adc module implementation. It works like an interface for different adc&#39;s, now ads1115 adc is used..." alt="" coords="5,124,204,195"/>
+<area shape="rect" id="node3" href="$pid_8c.html" title="PID module implementation. " alt="" coords="228,124,427,195"/>
+<area shape="rect" id="node4" href="$pwm_8c.html" title="Implementation for pwm module. " alt="" coords="451,124,649,195"/>
+<area shape="rect" id="node5" href="$registers_8c.html" title="Registers implementation. " alt="" coords="674,124,882,195"/>
+<area shape="rect" id="node6" href="$main_8c.html" title="main file " alt="" coords="907,131,1148,187"/>
+</map>

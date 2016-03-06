@@ -2,7 +2,7 @@
  *  project  : 	RPI_SmartServo			
  * 	
  * 	@file adc.c
- *  @brief 
+ *  @brief Adc module implementation. It works like an interface for different adc's, now ads1115 adc is used.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  1/3/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -37,19 +37,21 @@ volatile uint16_t adc_position_value;
 *
 * @return	None.
 *
-* @note		None.
+* @note		ADC used, ADS1115. 
 *
 */
-void ADC_init(void)
+void ADC_init()
 {	
 	printf("ADC initialization\n");
+	// Init ADS1115 adc.
 	ADS1115_init(ADS1115_ADDRESS);
+	// Init module global variables.
 	adc_position_ready = 0;
 	adc_position_value = 0;
 }
 /**
 *
-* Read position from ADC
+* Read position from ADC. 
 *
 * @return	None.
 *
@@ -109,12 +111,13 @@ void ADC_readBattery()
 
 
 }
-
 /**
 *
-* ADC handler for the timer signal. 
+* ADC handler for the timer signal. Read 16 bit ADC value.
 *
-* @param sig ...
+* @param 	sig 
+* @param 	si 
+* @param 	uc 
 *
 * @return	None.
 *
@@ -123,27 +126,15 @@ void ADC_readBattery()
 */
 void ADC_handler(int sig, siginfo_t *si, void *uc)
 {
-	// Handle ADC interrupt
 
-	// Read 16 bit ADC value
-
-		// POSITION (Potenciometer)
-		ADC_readPosition();
-			// Save the new position value.
-			// Flag the position value ready.
-			// Start the ADC of the power(current) channel
-
-		// CURRENT
-		ADC_readCurrent();
-			// Save the new power value
-			// Flag the power value as ready
-			// Is adc_voltage needed??
-
-		// BATTERY
-		ADC_readBattery();
-			// Save voltage value.
-
-		ADC_readVoltage();
+	// POSITION (Potenciometer)
+	ADC_readPosition();
+	// CURRENT
+	ADC_readCurrent();
+	// BATTERY
+	ADC_readBattery();
+	//VOLTAGE
+	ADC_readVoltage();
 }
 
 

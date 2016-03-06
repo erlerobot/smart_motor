@@ -1,0 +1,3 @@
+<map id="ADS1115_readRegister" name="ADS1115_readRegister">
+<area shape="rect" id="node2" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="211,5,321,32"/>
+</map>

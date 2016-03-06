@@ -1,0 +1,5 @@
+<map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/adc.h" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/adc.h">
+<area shape="rect" id="node2" href="$adc_8c.html" title="Adc module implementation. It works like an interface for different adc&#39;s, now ads1115 adc is used..." alt="" coords="5,124,204,195"/>
+<area shape="rect" id="node3" href="$timer_8c.html" title="Implementation for timer module. " alt="" coords="228,124,427,195"/>
+<area shape="rect" id="node4" href="$main_8c.html" title="main file " alt="" coords="451,131,692,187"/>
+</map>

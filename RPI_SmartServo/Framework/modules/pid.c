@@ -2,7 +2,7 @@
  *  project  :  RPI_SmartServo          
  *  
  *  @file pid.c
- *  @brief 
+ *  @brief PID module implementation.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  15/2/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -45,15 +45,15 @@ static int16_t previous_position;
 #define DEFAULT_MIN_SEEK        0x0060
 #define DEFAULT_MAX_SEEK        0x03A0
 
-/**************************************************
+/**
 *
-* Initialize the pid algorithm module.
+*   Initialize the pid algorithm module.
 *
-* @return	None.
+*   @return	  None.
 *
-* @note		None.
+*   @note	      None.
 *
-**************************************************/
+*/
 void PID_init(void)
 {
 
@@ -64,15 +64,15 @@ void PID_init(void)
 
 }
 
-/**************************************************
+/**
 *
-* Initialize the pid related registers.
+*   Initialize the pid related registers.
 *
-* @return	None.
+*   @return	  None.
 *
-* @note		None.
+*   @note	  None.
 *
-**************************************************/
+*/
 void PID_registers_default(void)
 {
 	//Default deadband
@@ -88,21 +88,22 @@ void PID_registers_default(void)
 
 }
 
-/**************************************************
+/**
 *
-* This is a modified pid algorithm by which the 
-* seek position and seek velocity are assumed to be a
-* moving target.  The algorithm attempts to output a 
-* pwm value that will achieve a predicted position and 
-* velocity. 
-* Take position as input and output assigned 
-* PWM to be applied to the servo motors.
+*   This is a modified pid algorithm by which the seek position and seek 
+*   velocity are assumed to be a moving target.  The algorithm attempts to 
+*   output a pwm value that will achieve a predicted position and 
+*   velocity. 
+*   Take position as input and output assigned PWM to be applied to the 
+*   servo motors.
 *
-* @return	pwm value (-255 to 255).
+*   @param    current_position current position of the potentiometer.
 *
-* @note		position (0-1024)
+*   @return   pwm value (-255 to 255).
 *
-**************************************************/
+*   @note     position (0-1024)
+*
+*/
 int16_t PID_position_to_pwm(int16_t current_position)
 {
     // We declare these static to keep them off the stack.

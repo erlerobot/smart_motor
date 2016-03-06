@@ -2,7 +2,7 @@
  *  project  :  RPI_SmartServo          
  *  
  *  @file pwm.c
- *  @brief 
+ *  @brief Implementation for pwm module.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  9/2/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -51,18 +51,18 @@ static uint8_t pwm_b;
 /*
 	Private Functions.
 */
-/**************************************************
+/**
 *
-* Send PWM signal for rotation with the indicated pwm 
-* ratio (0 - 255).
-* This function is meant to be called only by 
-* pwm_update.
+*   Send PWM signal for rotation with the indicated pwm ratio (0 - 255).
+*   This function is meant to be called only by pwm_update.
 *
-* @return	None.
+*   @param      pwm_duty the value of the pwm duty.
 *
-* @note		pwm_duty.
+*   @return	    None.
 *
-**************************************************/
+*   @note		pwm_duty.
+*
+*/
 static void pwm_dir_a(uint8_t pwm_duty)
 {
     // Determine the duty cycle value for the timer.
@@ -97,18 +97,18 @@ static void pwm_dir_a(uint8_t pwm_duty)
 
     // Save the pwm A and B duty values. ??
 }
-/**************************************************
+/**
 *
-* Send PWM signal for rotation with the indicated pwm 
-* ratio (0 - 255).
-* This function is meant to be called only by 
-* pwm_update.
+*   Send PWM signal for rotation with the indicated pwm ratio (0 - 255).
+*   This function is meant to be called only by pwm_update.
 *
-* @return	None.
+*   @param      pwm_duty the value of the pwm duty.
 *
-* @note		pwm_duty.
+*   @return	    None.
 *
-**************************************************/
+*   @note	    pwm_duty.
+*
+**/
 static void pwm_dir_b(uint8_t pwm_duty)
 {
 	// Determine the duty cycle value for the timer.
@@ -142,15 +142,15 @@ static void pwm_dir_b(uint8_t pwm_duty)
 }
 
 
-/**************************************************
+/**
 *
-* Initialize the PWM module for controlling a DC motor
+*   Initialize the PWM module for controlling a DC motor
 *
-* @return	None.
+*   @return	    None.
 *
-* @note		None.
+*   @note		None.
 *
-**************************************************/
+*/
 void PWM_init(void)
 {	// Initialize the pwm frequency divider value.
 	//[TODO]
@@ -185,16 +185,19 @@ void PWM_init(void)
 
 }
 
-/**************************************************
+/**
 *
-* Update PWM signal sent to the motor -255 to -1 cw,
-* 1-255 ccw and 0 stop.
+*   Update PWM signal sent to the motor -255 to -1 cw,
+*   1-255 ccw and 0 stop.
 *
-* @return	None.
+*   @param      position current position of the potentiometer. 
+*   @param      pwm pwm value to update.
 *
-* @note		intpu position and pwm value.
+*   @return	    None.
 *
-**************************************************/
+*   @note		input position and pwm value.
+*
+*/
 void PWM_update(uint16_t position, int16_t pwm)
 {
     uint8_t pwm_width;
@@ -250,15 +253,15 @@ void PWM_update(uint16_t position, int16_t pwm)
         PWM_stop();
     }
 }
-/**************************************************
+/**
 *
-* Stop all PWM signals to the motor.
+*   Stop all PWM signals to the motor.
 *
-* @return	None.
+*   @return	    None.
 *
-* @note		None.
+*    @note		None.
 *
-**************************************************/
+*/
 void PWM_stop(void)
 {
 	if (pwm_a || pwm_b)

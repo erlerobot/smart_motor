@@ -2,7 +2,7 @@
  *  project  :  RPI_SmartServo          
  *  
  *  @file config.h
- *  @brief 
+ *  @brief Configuration file for RPI_SmartServo
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  15/2/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
@@ -23,8 +23,11 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_ 1
 
-/* Define different options for SmartServo.
-[TODO]
+/** Define different options for SmartServo.
+	@todo todo
+	Configuration for the ADS1115 ??
+	PID values MAX and MIN ??
+	PWM GPIOS PWM ???
 */
 
 

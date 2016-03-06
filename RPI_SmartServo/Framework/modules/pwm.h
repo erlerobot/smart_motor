@@ -2,7 +2,7 @@
  *  project  :  RPI_SmartServo          
  *  
  *  @file pwm.h
- *  @brief 
+ *  @brief Header for pwm module.
  * 
  *  @note 
  *
@@ -13,7 +13,7 @@
  *
  *  Ver   Who        Date        Changes
  *  ----- ---------- ----------  -------------------------------------
- *  1.00 jlamperez  9/2/2016  First release
+ *  1.00 jlamperez  6/3/2016  First release
  * 
  *  \endcode
  *
