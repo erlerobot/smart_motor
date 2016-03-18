@@ -54,7 +54,7 @@ int main(void)
 	// Initialize ADC
 	ADC_init();
 	// Initialize timer 10 ms.
-	TIMER_init(10000000000);
+	TIMER_init(1000000000);
 //MODULE INITIALIZATION END
 
 	// Set the initial seek position and velocity

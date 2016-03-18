@@ -72,7 +72,16 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
   uint16_t readRegValue16 = I2C_readReg16(fd, reg);
   uint8_t highRegValue8 = readRegValue16 & 0xFF;
   uint8_t lowRegValue8 = (readRegValue16>>8)&0xFF;	
-   		
+   
+  //printf("ADS1115 high: %.2x \n", highRegValue8>>7);   	
+  //remove negative values because of the noise	
+  if((highRegValue8 >> 7) ==1 )
+  {
+	highRegValue8 = 0x00;
+  	lowRegValue8 = 0x00;	
+ }	
+
+	
   return (highRegValue8<<8 |lowRegValue8 );
 }
 /**
@@ -176,6 +185,7 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
   	
 	// Read the conversion results
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
+//	single_read = single_read >> 4;
 	printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
     	
 	float voltage = (single_read*0.1875)/1000;

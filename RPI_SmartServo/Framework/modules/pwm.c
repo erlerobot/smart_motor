@@ -21,16 +21,22 @@
  */
 
 
+#include <stdint.h> 
+#include <stdio.h>
+#include <unistd.h>
+#include <wiringPi.h>
 #include "pwm.h"
 #include "registers.h"
-#include <wiringPi.h>
-#include <stdint.h>
-#include <stdio.h>
+
 // PWM define
 #define PWM_RANGE 1024
 #define PWM0_GPIO 12 // pin 32
 #define PWM1_GPIO 13 // pin 33
 #define PWM_CLOCK_DIV 2
+
+// Delay between direction change of the chopper
+// This value should be maximum the period of the PWM
+#define	PWM_DIR_CHANGE_DELAY	100
 
 //EN_A and EN_N define
 #define EN_A_GPIO 16 //pin36
@@ -77,8 +83,9 @@ static void pwm_dir_a(uint8_t pwm_duty)
         digitalWrite(EN_B_GPIO,0);
 
     	// Disable PWM0 and PWM1 output.
-    	pwmWrite(PWM0_GPIO,0);
         pwmWrite(PWM1_GPIO,0);
+   	pwmWrite(PWM0_GPIO,0);
+ 	delayMicroseconds(PWM_DIR_CHANGE_DELAY);
 
 
     	// Set EN_A_GPIO to high.
@@ -124,6 +131,7 @@ static void pwm_dir_b(uint8_t pwm_duty)
     	// Disable PWM0 and PWM0 output.
     	pwmWrite(PWM0_GPIO,0);
         pwmWrite(PWM1_GPIO,0);
+	delayMicroseconds(PWM_DIR_CHANGE_DELAY);
 
     	// Set EN_B_GPIO to high.
         digitalWrite(EN_B_GPIO,1);
