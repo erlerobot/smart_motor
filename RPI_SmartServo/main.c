@@ -26,11 +26,16 @@
 #include <wiringPi.h>	
 #include <stdint.h>
 #include <stdio.h>
+#include <pthread.h>
 #include "Framework/modules/pwm.h"
 #include "Framework/modules/registers.h"
 #include "Framework/modules/pid.h"
 #include "Framework/modules/adc.h"
 #include "Framework/modules/timer.h"
+#include "Framework/modules/server.h"
+
+void createServer();//Creates the server thread to recive commands via TCP/IP
+void* serverThread(void*);
 
 int main(void)
 {
@@ -43,16 +48,16 @@ int main(void)
 	wiringPiSetupGpio();
 	// Configure pins to the default states
 
+	//Create Server thread for communication
+	createServer();
 	// First, initialize registers that control servo operation
 	REGISTERS_init();
 	// Initialize the PWM module
 	PWM_init();
-	// Initialize the ADC module
-
+	// Initialize ADC module
+	ADC_init();
 	// Initialize the PID algorithm module
 	PID_init();
-	// Initialize ADC
-	ADC_init();
 	// Initialize timer 10 ms.
 	TIMER_init(1000000000);
 //MODULE INITIALIZATION END
@@ -102,4 +107,16 @@ int main(void)
 
 			// handle twi command
 	}
+}
+
+void createServer(){
+	pthread_t thread_id;
+	if (pthread_create(&thread_id, NULL, serverThread, 0) < 0) {
+		perror("could not create the server thread");
+	}
+}
+
+void* serverThread(void*){
+	SERVER_init();
+	return 0;
 }
