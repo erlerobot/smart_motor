@@ -73,7 +73,9 @@ void REGISTERS_default(void)
 //Setter methods
 void set_device_type (uint8_t device_type)
 {
+	//lock (*id_mutex_global)
   REG_device_type = device_type;
+  //unlock ()
 }
 
 void set_device_subtype (uint8_t device_subtype)

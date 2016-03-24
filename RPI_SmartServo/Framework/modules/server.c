@@ -43,6 +43,15 @@ int esperarConexion(int socketEspera);
 //the thread function
 void *connection_handler(void *);
 
+/**
+*
+*   Initialize the Server. Create a socket and wait for conection.
+*
+*   @return	0.
+*
+*   @note		None.
+*
+*/
 int SERVER_init(){
 
     int socket_desc;
@@ -52,7 +61,15 @@ int SERVER_init(){
 
     return 0;
 }
-
+/**
+*
+*   Create socket and bind it.
+*
+*   @return	socket descriptor.
+*
+*   @note		None.
+*
+*/
 int comenzarPeticionServidor()
 {
 	int socket_desc;
@@ -83,6 +100,18 @@ int comenzarPeticionServidor()
     return socket_desc;
 }
 
+/**
+*
+*   Wait for connections from the server to the client. A thread is created
+*   for each client.
+*
+*   @param socket_desc socket descriptor to achive communication.
+*
+*   @return	0.
+*
+*   @note		None.
+*
+*/
 int esperarConexion(int socket_desc)
 {
 	int client_sock , c;
@@ -120,6 +149,15 @@ int esperarConexion(int socket_desc)
     return 0;
 }
 
+/**
+*
+*   This will handle connection for each client.
+*
+*   @param socket_desc pointer to send and recive MSG.
+*
+*   @note		None.
+*
+*/
 /*
  * This will handle connection for each client
  * */

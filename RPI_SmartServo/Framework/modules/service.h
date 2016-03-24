@@ -1,8 +1,23 @@
-/*
- * service.h
+/**
+ *  project  : 	RPI_SmartServo
  *
- *  Created on: 20/03/2016
- *      Author: jorge
+ * 	@file service.h
+ *  @brief Header for service module.
+ *
+ *  @note
+ *
+ *  	none
+ *
+ *  \code
+ *  MODIFICATION HISTORY:
+ *
+ *  Ver   Who        Date        Changes
+ *  ----- ---------- ----------  -------------------------------------
+ *  1.00 jlamperez  24/3/2016  First release
+ *
+ *  \endcode
+ *
+ *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
 #ifndef SERVICE_H_
@@ -39,14 +54,18 @@
 
 #define CMD_END					60
 
-
-
+/**
+ *  MSG struct to send between server and client.
+ */
 typedef struct{
 		unsigned char cmd;
 		uint16_t value;
 
 }MSG;
 
+/**
+ *  State machine for server client communication in server side.
+ */
 unsigned int SERVICE_execute(MSG *msg);
 
 #endif /* SERVICE_H_ */

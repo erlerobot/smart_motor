@@ -1,14 +1,41 @@
-/*
- * service.c
+/**
+ *  project  : 	RPI_SmartServo
  *
- *  Created on: 20/03/2016
- *      Author: jorge
+ * 	@file service.c
+ *  @brief State machine for the Server communication.
+ *
+ *  @note
+ *
+ *  	none
+ *
+ *  \code
+ *  MODIFICATION HISTORY:
+ *
+ *  Ver   Who        Date        Changes
+ *  ----- ---------- ----------  -------------------------------------
+ *  1.00 jlamperez  24/3/2016  First release
+ *
+ *  \endcode
+ *
+ *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 #include <stdio.h>
 #include <string.h>
 #include "service.h"
 #include "registers.h"
 
+
+/**
+*
+*   State machine to execute in the server side for communication.
+*
+*   @param msg Pointer to a MSG structure.
+*
+*   @return	@todo.
+*
+*   @note		None.
+*
+*/
 unsigned int SERVICE_execute(MSG *msg) {
 	puts("SERVICE_execute");
 	unsigned int ret = 0;
