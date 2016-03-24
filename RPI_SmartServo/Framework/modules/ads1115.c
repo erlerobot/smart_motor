@@ -53,7 +53,10 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg);
 void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value)
 {
   printf("ADS1115_writeRegister\n");		
-  I2C_writeReg16 (fd, reg, value);
+  uint8_t highWriteValue8 = value & 0xFF;
+  uint8_t lowWriteValue8 = (value>>8)&0xFF;		
+  I2C_writeReg16 (fd, reg, highWriteValue8<<8 |lowWriteValue8);
+
 }
 /**
 *   Function to read from an ADS1115 register.
@@ -73,15 +76,6 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
   uint8_t highRegValue8 = readRegValue16 & 0xFF;
   uint8_t lowRegValue8 = (readRegValue16>>8)&0xFF;	
    
-  //printf("ADS1115 high: %.2x \n", highRegValue8>>7);   	
-  //remove negative values because of the noise	
-  if((highRegValue8 >> 7) ==1 )
-  {
-	highRegValue8 = 0x00;
-  	lowRegValue8 = 0x00;	
- }	
-
-	
   return (highRegValue8<<8 |lowRegValue8 );
 }
 /**
@@ -150,7 +144,7 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
                     ADS1115_REG_CONFIG_CLAT_NONLAT  | // Non-latching 
                     ADS1115_REG_CONFIG_CPOL_ACTVLOW | // Alert/Rdy active low   
                     ADS1115_REG_CONFIG_CMODE_TRAD   | // Traditional comparator 
-                    ADS1115_REG_CONFIG_DR_128SPS    | // 128 samples per second 
+                    ADS1115_REG_CONFIG_DR_860SPS    | // 128 samples per second 
                     ADS1115_REG_CONFIG_MODE_SINGLE;   // Single-shot mode 
 
   // Set PGA/voltage range
@@ -175,14 +169,16 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
 
   // Set 'start single-conversion' bit
   config |= ADS1115_REG_CONFIG_OS_SINGLE;
-	printf("ADS1115 config value is: %d, %.4x \n", config, config);
-  	
+
 	// Write config register to the ADC
   ADS1115_writeRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG, config);
   	
 	// Wait for the conversion to complete
   delay(8); //@todo see delay.
-  	
+	//read config register
+  uint16_t config_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG) ;
+  printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
+	
 	// Read the conversion results
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
 //	single_read = single_read >> 4;

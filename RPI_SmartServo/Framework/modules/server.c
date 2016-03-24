@@ -141,6 +141,7 @@ void *connection_handler(void *socket_desc)
     //Receive a message from client
     while( ((read_size = recv(sock , (void*)&msg , sizeof(MSG) , 0)) > 0 ) && end!=-1)
     {
+	printf("comando:%i\n",msg.cmd);
         //end of string marker
     	end = SERVICE_execute(&msg);
 		//Send the message back to client
@@ -161,7 +162,7 @@ void *connection_handler(void *socket_desc)
     /**
      * @ todo See how to close the sockets!!
      */
-    close(socket_desc);
+    //close(socket_desc);
 
     return 0;
 }

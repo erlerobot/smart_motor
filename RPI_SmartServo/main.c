@@ -66,10 +66,10 @@ int main(void)
 
 	// XXX Enable PWM and writing.
 
-	printf("MAIN_Insert new seek_position: \n"); 
-        int16_t seek_position;
-	scanf("%hd",&seek_position); 
-	set_seek_position(seek_position);
+//	printf("MAIN_Insert new seek_position: \n"); 
+//        int16_t seek_position;
+//	scanf("%hd",&seek_position); 
+	set_seek_position(0);
 	
 
 	// Main processing loop for the servo. It basically 
@@ -116,7 +116,7 @@ void createServer(){
 	}
 }
 
-void* serverThread(void*){
+void *serverThread(void *server_desc){
 	SERVER_init();
 	return 0;
 }
