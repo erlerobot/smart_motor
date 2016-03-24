@@ -30,6 +30,10 @@
 static uint8_t ADS1115_address;
 //Gain
 static uint16_t ADS1115_gain;
+//Bit shift
+static uint8_t ADS1115_bitShift;
+//Conversion delay
+static uint8_t ADS1115_delay;
 //ADS1115 i2c file
 static int ADS1115_i2c_fd;
 
@@ -77,7 +81,14 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
   uint8_t highRegValue8 = readRegValue16 & 0xFF;
   uint8_t lowRegValue8 = (readRegValue16>>8)&0xFF;	
    
-  return (highRegValue8<<8 |lowRegValue8 );
+  uint16_t readValue16 = highRegValue8<<8 |lowRegValue8;
+
+  if(reg == ADS1115_REG_POINTER_CONFIG)
+  {
+	  readValue16 = readValue16 >> ADS1115_bitShift;  //12 bit efective resolution ADC (noise)
+  }
+
+  return readValue16;
 }
 /**
 *   Initialization for the ADS1115 adc.
@@ -92,12 +103,11 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
 void ADS1115_init(uint8_t address)
 {
 	ADS1115_address = address;
-	//Conversion delay???
-	//bitShift???
+	ADS1115_delay = 8;
+	ADS1115_bitShift = 3;
 	ADS1115_gain = ADS1115_REG_CONFIG_PGA_6_144V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 
-  ADS1115_i2c_fd = I2C_setup(address);
-  
+    ADS1115_i2c_fd = I2C_setup(address);
 }
 /**
 *   Set the ads1115 gain.
@@ -175,24 +185,19 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
   ADS1115_writeRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG, config);
   	
 	// Wait for the conversion to complete
-  delay(8); //@todo see delay.
+  delay(ADS1115_delay); //@todo see delay.
 	//read config register
   uint16_t config_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG) ;
   printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
 	
 	// Read the conversion results
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
-//	single_read = single_read >> 4;
-	printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
+  printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
     	
-	float voltage = (single_read*0.1875)/1000;
-	printf("ADS1115 Voltage is: %f \n", voltage);
+  float voltage = (single_read*0.1875)/1000;
+  printf("ADS1115 Voltage is: %f \n", voltage);
     	
-	return single_read; 
-  	
-	// Shift 12-bit results right 4 bits for the ADS1015
-  // return readRegister(m_i2cAddress, ADS1015_REG_POINTER_CONVERT) >> m_bitShift; 
-  // Desplaza para ruido.
+  return single_read;
 
 }
 

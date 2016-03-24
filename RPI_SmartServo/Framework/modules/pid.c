@@ -20,30 +20,15 @@
  *  Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
-#include "pid.h"
-#include "registers.h"
 #include <stdint.h>
 #include <stdio.h>
-
-// The minimum and maximum servo position as defined by 10-bit ADC values.
-#define MIN_POSITION (0)
-#define MAX_POSITION (1023)
-
-// The minimum and maximum output.
-#define MAX_OUTPUT              (255)
-#define MIN_OUTPUT              (-MAX_OUTPUT)
+#include "../../config.h"
+#include "pid.h"
+#include "registers.h"
 
 // Values preserved across multiple PID iterations.
 static int16_t previous_seek;
 static int16_t previous_position;
-
-//DEFAULT VALUES
-#define DEFAULT_PID_DEADBAND    0x01
-#define DEFAULT_PID_PGAIN       0x0600
-#define DEFAULT_PID_DGAIN       0x0C00
-#define DEFAULT_PID_IGAIN       0x0000
-#define DEFAULT_MIN_SEEK        0x0060
-#define DEFAULT_MAX_SEEK        0x03A0
 
 /**
 *
@@ -76,14 +61,14 @@ void PID_init(void)
 void PID_registers_default(void)
 {
 	//Default deadband
-    set_pid_deadband((uint8_t) DEFAULT_PID_DEADBAND);
+    set_pid_deadband((uint8_t) CONFIG_DEFAULT_PID_DEADBAND);
 	// Default gain values
-    set_pid_pgain ((uint16_t) DEFAULT_PID_PGAIN);
-    set_pid_dgain ((uint16_t) DEFAULT_PID_DGAIN);
-    set_pid_igain ((uint16_t) DEFAULT_PID_IGAIN);
+    set_pid_pgain ((uint16_t) CONFIG_DEFAULT_PID_PGAIN);
+    set_pid_dgain ((uint16_t) CONFIG_DEFAULT_PID_DGAIN);
+    set_pid_igain ((uint16_t) CONFIG_DEFAULT_PID_IGAIN);
 	// Default position limits
-    set_min_seek ((uint16_t) DEFAULT_MIN_SEEK);
-    set_max_seek ((uint16_t) DEFAULT_MAX_SEEK);
+    set_min_seek ((uint16_t) CONFIG_DEFAULT_MIN_SEEK);
+    set_max_seek ((uint16_t) CONFIG_DEFAULT_MAX_SEEK);
 	// Default reverse seeking
 
 }
@@ -195,15 +180,15 @@ int16_t PID_position_to_pwm(int16_t current_position)
     pwm_output >>= 8;
 
         // Check for output saturation.
-    if (pwm_output > MAX_OUTPUT)
+    if (pwm_output > CONFIG_PID_MAX_OUTPUT)
     {
         // Can't go higher than the maximum output value.
-        pwm_output = MAX_OUTPUT;
+        pwm_output = CONFIG_PID_MAX_OUTPUT;
     }
-    else if (pwm_output < MIN_OUTPUT)
+    else if (pwm_output < CONFIG_PID_MIN_OUTPUT)
     {
         // Can't go lower than the minimum output value.
-        pwm_output = MIN_OUTPUT;
+        pwm_output = CONFIG_PID_MIN_OUTPUT;
     }
 
     // Return the PID output.

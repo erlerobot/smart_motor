@@ -25,29 +25,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <wiringPi.h>
+#include "../../config.h"
 #include "pwm.h"
 #include "registers.h"
 
-// PWM define
-#define PWM_RANGE 1024
-#define PWM0_GPIO 12 // pin 32
-#define PWM1_GPIO 13 // pin 33
-#define PWM_CLOCK_DIV 2
-
-// Delay between direction change of the chopper
-// This value should be maximum the period of the PWM
-#define	PWM_DIR_CHANGE_DELAY	100
-
-//EN_A and EN_N define
-#define EN_A_GPIO 16 //pin36
-#define EN_B_GPIO 19 //pin35
-
+//Convert the [-255 ,255] to a value between 0 and PWM_RANGE
 #define PWM_DUTY_CYCLE(div,pwm) (uint16_t) (((uint32_t) pwm * ((uint32_t) div  - 1)) / 255)
-
-// CONFIGURATION PARAMETERS HERE THEN MOVE TO SPECIFIC FILE
-//#define DEFAULT_MAX_SEEK 0x03A0  --> Initialize in pid.c move to a config file
-//#define DEFAULT_MIN_SEEK 0x0060
-#define MAX_POSITION  (1023)
 
 // Flags that indicate PWM output in A and B direction.
 static uint8_t pwm_a;
@@ -72,7 +55,7 @@ static uint8_t pwm_b;
 static void pwm_dir_a(uint8_t pwm_duty)
 {
     // Determine the duty cycle value for the timer.
-    uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
+    uint16_t duty_cycle = PWM_DUTY_CYCLE(CONFIG_PWM_RANGE, pwm_duty);
     printf("PWM_dir_a_duty_cycle %d \n",duty_cycle);
 
     // Do we need to reconfigure PWM output for direction A?
@@ -80,16 +63,16 @@ static void pwm_dir_a(uint8_t pwm_duty)
     { // Yes ..
 
     	// Disable EN_B_GPIO
-        digitalWrite(EN_B_GPIO,0);
+        digitalWrite(CONFIG_EN_B_GPIO,0);
 
     	// Disable PWM0 and PWM1 output.
-        pwmWrite(PWM1_GPIO,0);
-   	pwmWrite(PWM0_GPIO,0);
- 	delayMicroseconds(PWM_DIR_CHANGE_DELAY);
+        pwmWrite(CONFIG_PWM1_GPIO,0);
+        pwmWrite(CONFIG_PWM0_GPIO,0);
+        delayMicroseconds(CONFIG_PWM_DIR_CHANGE_DELAY);
 
 
     	// Set EN_A_GPIO to high.
-        digitalWrite(EN_A_GPIO,1);
+        digitalWrite(CONFIG_EN_A_GPIO,1);
 
     	// Reset the B direction flag.
         pwm_b = 0;
@@ -100,7 +83,7 @@ static void pwm_dir_a(uint8_t pwm_duty)
     pwm_a = pwm_duty;
 
     // Update the PWM duty cycle.
-    pwmWrite(PWM0_GPIO,duty_cycle);
+    pwmWrite(CONFIG_PWM0_GPIO,duty_cycle);
 
     // Save the pwm A and B duty values. ??
 }
@@ -119,7 +102,7 @@ static void pwm_dir_a(uint8_t pwm_duty)
 static void pwm_dir_b(uint8_t pwm_duty)
 {
 	// Determine the duty cycle value for the timer.
-    uint16_t duty_cycle = PWM_DUTY_CYCLE(PWM_RANGE, pwm_duty);
+    uint16_t duty_cycle = PWM_DUTY_CYCLE(CONFIG_PWM_RANGE, pwm_duty);
     printf("PWM_dir_b_duty_cycle %d \n",duty_cycle);
 
         // Do we need to reconfigure PWM output for direction B?
@@ -127,14 +110,14 @@ static void pwm_dir_b(uint8_t pwm_duty)
     { // Yes ..
 
     	// Disable EN_A_GPIO
-        digitalWrite(EN_A_GPIO,0);
+        digitalWrite(CONFIG_EN_A_GPIO,0);
     	// Disable PWM0 and PWM0 output.
-    	pwmWrite(PWM0_GPIO,0);
-        pwmWrite(PWM1_GPIO,0);
-	delayMicroseconds(PWM_DIR_CHANGE_DELAY);
+    	pwmWrite(CONFIG_PWM0_GPIO,0);
+        pwmWrite(CONFIG_PWM1_GPIO,0);
+        delayMicroseconds(CONFIG_PWM_DIR_CHANGE_DELAY);
 
     	// Set EN_B_GPIO to high.
-        digitalWrite(EN_B_GPIO,1);
+        digitalWrite(CONFIG_EN_B_GPIO,1);
     	// Reset the A direction flag.
         pwm_a = 0;
     }
@@ -144,7 +127,7 @@ static void pwm_dir_b(uint8_t pwm_duty)
     pwm_b = pwm_duty;
 
     // Update the PWM duty cycle.
-    pwmWrite(PWM1_GPIO,duty_cycle);
+    pwmWrite(CONFIG_PWM1_GPIO,duty_cycle);
 
     // Save the pwm A and B duty values. ??
 }
@@ -165,29 +148,29 @@ void PWM_init(void)
 	
 
 	//Enable PMW0/GPIO12
-	pinMode(PWM0_GPIO, PWM_OUTPUT);
+	pinMode(CONFIG_PWM0_GPIO, PWM_OUTPUT);
 	// Set PWM in mark-space mode
 	pwmSetMode(PWM_MODE_MS);
 	// Divide the RPI PWM clock base frequency(19.2e6) by 2
-	pwmSetClock(PWM_CLOCK_DIV);
+	pwmSetClock(CONFIG_PWM_CLOCK_DIV);
 	// Set the PWM range
-	pwmSetRange(PWM_RANGE);
+	pwmSetRange(CONFIG_PWM_RANGE);
 	// Initialize PWM signal to 0.
-	pwmWrite(PWM0_GPIO,0);
+	pwmWrite(CONFIG_PWM0_GPIO,0);
 
 	//Enable PWM1/GPIO13
-	pinMode(PWM1_GPIO, PWM_OUTPUT);
+	pinMode(CONFIG_PWM1_GPIO, PWM_OUTPUT);
 	pwmSetMode(PWM_MODE_MS);
-	pwmSetClock(PWM_CLOCK_DIV);
-	pwmSetRange(PWM_RANGE);
-	pwmWrite(PWM1_GPIO,0);
+	pwmSetClock(CONFIG_PWM_CLOCK_DIV);
+	pwmSetRange(CONFIG_PWM_RANGE);
+	pwmWrite(CONFIG_PWM1_GPIO,0);
 
-    	// Set EN_A (GPIO 16) and EN_B (GPIO 19) to output
-    	pinMode(EN_A_GPIO, OUTPUT);
-    	pinMode(EN_B_GPIO,OUTPUT);
-    	// Set EN_A and EN_B to low.
-    	digitalWrite(EN_A_GPIO, 0);
-    	digitalWrite(EN_B_GPIO, 0);
+    // Set EN_A (GPIO 16) and EN_B (GPIO 19) to output
+    pinMode(CONFIG_EN_A_GPIO, OUTPUT);
+    pinMode(CONFIG_EN_B_GPIO,OUTPUT);
+    // Set EN_A and EN_B to low.
+    digitalWrite(CONFIG_EN_A_GPIO, 0);
+    digitalWrite(CONFIG_EN_B_GPIO, 0);
 
 	// Update the pwm values
 
@@ -217,8 +200,8 @@ void PWM_update(uint16_t position, int16_t pwm)
     max_position = get_max_seek();
 
 	// Make sure these values are sane 10-bit values.
-    if (min_position > MAX_POSITION) min_position = MAX_POSITION;
-    if (max_position > MAX_POSITION) max_position = MAX_POSITION;
+    if (min_position > CONFIG_PWM_MAX_POSITION) min_position = CONFIG_PWM_MAX_POSITION;
+    if (max_position > CONFIG_PWM_MAX_POSITION) max_position = CONFIG_PWM_MAX_POSITION;
     printf("PWM_update_min_position %d \n",min_position);
     printf("PWM_update_max_position %d \n",max_position);
     
@@ -275,13 +258,13 @@ void PWM_stop(void)
 	if (pwm_a || pwm_b)
 	{
 
-	// Disable PWM0 (GPIO12) and PWM1 (GPIO13)  output.
-        pwmWrite(PWM0_GPIO,0);
-        pwmWrite(PWM1_GPIO,0);
+	    // Disable PWM0 (GPIO12) and PWM1 (GPIO13)  output.
+        pwmWrite(CONFIG_PWM0_GPIO,0);
+        pwmWrite(CONFIG_PWM1_GPIO,0);
 		
         // Hold EN_A and EN_B low.
-        digitalWrite(EN_A_GPIO, 0);
-        digitalWrite(EN_B_GPIO, 0);
+        digitalWrite(CONFIG_EN_A_GPIO, 0);
+        digitalWrite(CONFIG_EN_B_GPIO, 0);
 
 		// Reset the A and B direction flags.
         pwm_a = 0;
