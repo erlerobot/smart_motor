@@ -52,7 +52,8 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg);
 */
 void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value)
 {
-  printf("ADS1115_writeRegister\n");		
+  printf("ADS1115_writeRegister\n");
+		
   uint8_t highWriteValue8 = value & 0xFF;
   uint8_t lowWriteValue8 = (value>>8)&0xFF;		
   I2C_writeReg16 (fd, reg, highWriteValue8<<8 |lowWriteValue8);
