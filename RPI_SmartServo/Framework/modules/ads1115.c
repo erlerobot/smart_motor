@@ -83,7 +83,7 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
    
   uint16_t readValue16 = highRegValue8<<8 |lowRegValue8;
 
-  if(reg == ADS1115_REG_POINTER_CONFIG)
+  if(reg == ADS1115_REG_POINTER_CONVERT)
   {
 	  readValue16 = readValue16 >> ADS1115_bitShift;  //12 bit efective resolution ADC (noise)
   }
@@ -194,7 +194,8 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
   printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
     	
-  float voltage = (single_read*0.1875)/1000;
+  //float voltage = (single_read*0.1875)/1000; //for 15 bits
+  float voltage = (single_read*1.5)/1000; //for 12 bits
   printf("ADS1115 Voltage is: %f \n", voltage);
     	
   return single_read;
