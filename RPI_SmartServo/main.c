@@ -39,7 +39,7 @@ void* serverThread(void*);
 
 int main(void)
 {
-
+	printf("Smart Servo\n");
 // MODULE INITIALIZATION
 
 	// This initialises the wiringPi system and 
@@ -51,6 +51,7 @@ int main(void)
 	//Create Server thread for communication
 	createServer();
 	// First, initialize registers that control servo operation
+	// Set the initial seek position and velocity
 	REGISTERS_init();
 	// Initialize the PWM module
 	PWM_init();
@@ -62,39 +63,30 @@ int main(void)
 	TIMER_init(1000000000);
 //MODULE INITIALIZATION END
 
-	// Set the initial seek position and velocity
-
 	// XXX Enable PWM and writing.
-
-//	printf("MAIN_Insert new seek_position: \n"); 
-//        int16_t seek_position;
-//	scanf("%hd",&seek_position); 
-	set_seek_position(0);
 	
-
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
 	for(;;)
 	{	
-		static int i=0;
+
 		if(adc_position_value_is_ready())
 		{
-		// Is position value ready?
+		    // Is position value ready?
 			int16_t pwm;
 			int16_t position;
 			
 			/** @todo */
 			// get position() better ??
 			position = adc_get_position_value();
-			printf("MAIN position value is: %d \n", position);
+
 			// Call the PID algorithm module to get a new PWM value. 
 			pwm = PID_position_to_pwm(position);
-			printf("PWM value is: %d \n", pwm); 
+
 			// Update the servo movement as indicated by the PWM value.
 			PWM_update(position, pwm);
-			printf("------------%i--------------\n",i);
-			i++;
+
 		}
 		
 		// Is a power value ready?

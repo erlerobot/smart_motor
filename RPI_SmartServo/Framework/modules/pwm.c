@@ -56,7 +56,9 @@ static void pwm_dir_a(uint8_t pwm_duty)
 {
     // Determine the duty cycle value for the timer.
     uint16_t duty_cycle = PWM_DUTY_CYCLE(CONFIG_PWM_RANGE, pwm_duty);
+#ifdef CONFIG_DEBUGGER
     printf("PWM_dir_a_duty_cycle %d \n",duty_cycle);
+#endif
 
     // Do we need to reconfigure PWM output for direction A?
     if (!pwm_a)
@@ -103,7 +105,9 @@ static void pwm_dir_b(uint8_t pwm_duty)
 {
 	// Determine the duty cycle value for the timer.
     uint16_t duty_cycle = PWM_DUTY_CYCLE(CONFIG_PWM_RANGE, pwm_duty);
+#ifdef CONFIG_DEBUGGER
     printf("PWM_dir_b_duty_cycle %d \n",duty_cycle);
+#endif
 
         // Do we need to reconfigure PWM output for direction B?
     if (!pwm_b)
@@ -201,16 +205,12 @@ void PWM_update(uint16_t position, int16_t pwm)
 	// Make sure these values are sane 10-bit values.
     if (min_position > CONFIG_PWM_MAX_POSITION) min_position = CONFIG_PWM_MAX_POSITION;
     if (max_position > CONFIG_PWM_MAX_POSITION) max_position = CONFIG_PWM_MAX_POSITION;
-    printf("PWM_update_min_position %d \n",min_position);
-    printf("PWM_update_max_position %d \n",max_position);
     
     // Disable clockwise movements when position is below the minimum position.
     if ((position < min_position) && (pwm < 0)) pwm = 0;
 
     // Disable counter-clockwise movements when position is above the maximum position.
     if ((position > max_position) && (pwm > 0)) pwm = 0;
-	
-    printf("PWM_update_pwm %d \n",pwm);
 
     // Determine if PWM is disabled in the registers.??
 

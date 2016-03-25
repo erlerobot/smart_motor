@@ -113,23 +113,15 @@ int16_t PID_position_to_pwm(int16_t current_position)
     //previous_position = filtered_position;
     current_velocity = current_position - previous_position;
 
-
-    printf("PID_current_position: %d\n",current_position);	
     previous_position = current_position;
 
     // Get the seek position and velocity.
     seek_position = get_seek_position();
-    printf("PID_seek_position: %d\n",seek_position);
-
     seek_velocity = get_seek_velocity();
-    printf("PID_seek_velocity: %d\n",seek_velocity);
 
     // Get the minimum and maximum position.
     minimum_position = get_min_seek();
-    printf("PID_minimum_position: %d\n",minimum_position);
-
     maximum_position = get_max_seek();
-    printf("PID_maximum_position: %d\n",maximum_position);
     	
 
     /*
@@ -142,27 +134,21 @@ int16_t PID_position_to_pwm(int16_t current_position)
     set_velocity(current_velocity);
     // Get the deadband.
     deadband = get_pid_deadband();
-    printf("PID_deadband: %d\n",deadband);
     // Use the filtered position when the seek position is not changing.
     //if (seek_position == previous_seek) current_position = filtered_position;
     previous_seek = seek_position;
     // Keep the seek position bound within the minimum and maximum position.
     if (seek_position < minimum_position) seek_position = minimum_position;
     if (seek_position > maximum_position) seek_position = maximum_position;
-    printf("PID_seek_position: %d\n",seek_position);
     // The proportional component to the PID is the position error.
     p_component = seek_position - current_position;
-    printf("PID_p_component: %d\n",p_component);
 
     // The derivative component to the PID is the velocity.
     d_component = seek_velocity - current_velocity;
-    printf("PID_d_component: %d\n",d_component);
  
     // Get the proportional, derivative and integral gains.
     p_gain = get_pid_pgain();
-    printf("PID_p_gain: %d\n",p_gain);
     d_gain = get_pid_dgain();
-    printf("PID_d_gain: %d\n",d_gain);
     // Start with zero PWM output.
     pwm_output = 0;
 
@@ -191,6 +177,19 @@ int16_t PID_position_to_pwm(int16_t current_position)
         pwm_output = CONFIG_PID_MIN_OUTPUT;
     }
 
+#ifdef CONFIG_DEBUGGER
+    printf("PID_minimum_position: %d\n",minimum_position);
+    printf("PID_maximum_position: %d\n",maximum_position);
+    printf("PID_current_position: %d\n",current_position);
+    printf("PID_seek_position: %d\n",seek_position);
+    printf("PID_seek_velocity: %d\n",seek_velocity);
+    printf("PID_deadband: %d\n",deadband);
+    printf("PID_p_component: %d\n",p_component);
+    printf("PID_d_component: %d\n",d_component);
+    printf("PID_p_gain: %d\n",p_gain);
+    printf("PID_d_gain: %d\n",d_gain);
+    printf("PID pwm value is: %d \n", pwm_output);
+#endif
     // Return the PID output.
     return (int16_t) pwm_output;
 }

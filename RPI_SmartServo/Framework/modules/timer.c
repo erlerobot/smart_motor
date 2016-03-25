@@ -20,13 +20,14 @@
  *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
-#include "timer.h"
 #include <time.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "timer.h"
 #include "adc.h"
+#include "../../config.h"
 
 #define CLOCKID CLOCK_REALTIME
 #define SIG SIGRTMIN
@@ -63,9 +64,9 @@ void TIMER_create(long long freq_nanosecs)
 
 	if (timer_create(CLOCKID, &sev, &timerid) == -1)
         errExit("timer_create");
-
+#ifdef CONFIG_DEBUGGER
   printf("timer ID is 0x%lx\n", (long) timerid);
-
+#endif
   its.it_value.tv_sec = freq_nanosecs / 1000000000;
   its.it_value.tv_nsec = freq_nanosecs % 1000000000;
   its.it_interval.tv_sec = its.it_value.tv_sec;
@@ -89,9 +90,9 @@ void TIMER_signalHandler()
 	struct sigaction sa;
 
 	/* Establish handler for timer signal */
-
+#ifdef CONFIG_DEBUGGER
   printf("Establishing handler for signal %d\n", SIG);
-   	
+#endif
   sa.sa_flags = SA_SIGINFO;
   sa.sa_sigaction = ADC_handler;
   sigemptyset(&sa.sa_mask);
@@ -111,9 +112,9 @@ void TIMER_signalHandler()
 void TIMER_signalBlock()
 {
     /* Block timer signal temporarily */
-
+#ifdef CONFIG_DEBUGGER
    	printf("Blocking signal %d\n", SIG);
-    
+#endif
     sigemptyset(&mask);
     sigaddset(&mask, SIG);
     
@@ -133,8 +134,9 @@ void TIMER_signalUnblock()
 {
 	   /* Unlock the timer signal, so that timer notification
        can be delivered */
-
+#ifdef CONFIG_DEBUGGER
    printf("Unblocking signal %d\n", SIG);
+#endif
     if (sigprocmask(SIG_UNBLOCK, &mask, NULL) == -1)
         errExit("sigprocmask");
 }

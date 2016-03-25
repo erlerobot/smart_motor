@@ -13,6 +13,7 @@
 #include <pthread.h> //for threading , link with lpthread
 #include "server.h"
 #include "service.h"
+#include "../../config.h"
 
 char *server_intro ="**************************************************************\n"
     			"*             SmartServo controlling system                  *\n"
@@ -81,8 +82,9 @@ int comenzarPeticionServidor()
     {
         printf("Could not create socket");
     }
+#ifdef CONFIG_DEBUGGER
     puts("Socket created");
-
+#endif
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
@@ -95,7 +97,9 @@ int comenzarPeticionServidor()
         perror("bind failed. Error");
         return 1;
     }
+#ifdef CONFIG_DEBUGGER
     puts("bind done");
+#endif
 
     return socket_desc;
 }
@@ -121,15 +125,18 @@ int esperarConexion(int socket_desc)
     listen(socket_desc , 3);
 
     //Accept and incoming connection
+#ifdef CONFIG_DEBUGGER
     puts("Waiting for incoming connections...");
+#endif
     c = sizeof(struct sockaddr_in);
 
 	pthread_t thread_id; //Pero solo se creará un thread_id no??
 
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
+	  #ifdef CONFIG_DEBUGGER
         puts("Connection accepted");
-
+      #endif
         if( pthread_create( &thread_id , NULL ,  connection_handler , (void*) &client_sock) < 0)
         {
             perror("could not create thread");
@@ -138,7 +145,7 @@ int esperarConexion(int socket_desc)
 
         //Now join the thread , so that we dont terminate before the thread
         //pthread_join( thread_id , NULL);
-        puts("Handler assigned");
+        //puts("Handler assigned");
     }
 
     if (client_sock < 0)
@@ -179,7 +186,9 @@ void *connection_handler(void *socket_desc)
     //Receive a message from client
     while( ((read_size = recv(sock , (void*)&msg , sizeof(MSG) , 0)) > 0 ) && end!=-1)
     {
-	printf("comando:%i\n",msg.cmd);
+      #ifdef CONFIG_DEBUGGER
+	    printf("comando:%i\n",msg.cmd);
+      #endif
         //end of string marker
     	end = SERVICE_execute(&msg);
 		//Send the message back to client
@@ -190,7 +199,9 @@ void *connection_handler(void *socket_desc)
 
     if(read_size == 0)
     {
+      #ifdef CONFIG_DEBUGGER
         puts("Client disconnected");
+      #endif
         fflush(stdout);
     }
     else if(read_size == -1)

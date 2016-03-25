@@ -62,12 +62,14 @@ static uint8_t REG_reverse_seek;
 
 void REGISTERS_init(void)
 {
-
+	set_seek_position(0);
+	set_seek_velocity(0);
 }
 
 void REGISTERS_default(void)
 {
-
+	set_seek_position(0);
+	set_seek_velocity(0);
 }
 
 //Setter methods

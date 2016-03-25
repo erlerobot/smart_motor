@@ -20,11 +20,14 @@
  *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
-#include "adc.h"
+
+#include <signal.h>
 #include <stdio.h>
+#include "adc.h"
 #include "ads1115.h"
 #include "registers.h"
-#include <signal.h>
+#include "../../config.h"
+
 
 
 volatile uint8_t adc_position_ready;
@@ -42,7 +45,9 @@ volatile uint16_t adc_position_value;
 */
 void ADC_init()
 {	
+#ifdef CONFIG_DEBUGGER
 	printf("ADC initialization\n");
+#endif
 	// Init ADS1115 adc.
 	ADS1115_init(ADS1115_ADDRESS);
 	// Init module global variables.
@@ -60,11 +65,14 @@ void ADC_init()
 */
 void ADC_readPosition()
 {
+#ifdef CONFIG_DEBUGGER
 	printf("ADC_readPosition\n"); 
-	
+#endif
 	// Read from i2C
 	adc_position_value = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
+#ifdef CONFIG_DEBUGGER
 	printf("ADC position value is: %d \n", adc_position_value);			
+#endif
 	// Save value in registers position.
 	set_position (adc_position_value);
 	// Put flag to 1.

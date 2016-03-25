@@ -20,11 +20,12 @@
  *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
-#include "ads1115.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <wiringPi.h>
+#include "ads1115.h"
 #include "i2c.h"
+#include "../../config.h"
 
 //Address
 static uint8_t ADS1115_address;
@@ -56,8 +57,10 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg);
 */
 void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value)
 {
-  printf("ADS1115_writeRegister\n");
-		
+#ifdef CONFIG_DEBUGGER
+	printf("ADS1115_writeRegister\n");
+#endif
+
   uint8_t highWriteValue8 = value & 0xFF;
   uint8_t lowWriteValue8 = (value>>8)&0xFF;		
   I2C_writeReg16 (fd, reg, highWriteValue8<<8 |lowWriteValue8);
@@ -75,7 +78,10 @@ void ADS1115_writeRegister(int fd, uint8_t reg, uint16_t value)
 */
 uint16_t ADS1115_readRegister(int fd, uint8_t reg)
 {
+#ifdef CONFIG_DEBUGGER
   printf("ADS1115_readRegister\n");
+#endif
+
   //swap read high and low registers. 
   uint16_t readRegValue16 = I2C_readReg16(fd, reg);
   uint8_t highRegValue8 = readRegValue16 & 0xFF;
@@ -144,7 +150,10 @@ uint16_t ADS1115_getGain()
 */
 uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
 {	
+#ifdef CONFIG_DEBUGGER
 	printf("ADC_ADS1115_readADC_singleEnded\n");
+#endif
+
 	if (channel > 3)
   	{
     	return 0;
@@ -188,15 +197,19 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
   delay(ADS1115_delay); //@todo see delay.
 	//read config register
   uint16_t config_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG) ;
-  printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
 	
 	// Read the conversion results
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
-  printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
     	
   //float voltage = (single_read*0.1875)/1000; //for 15 bits
   float voltage = (single_read*1.5)/1000; //for 12 bits
+
+
+#ifdef CONFIG_DEBUGGER
+  printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
+  printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
   printf("ADS1115 Voltage is: %f \n", voltage);
+#endif
     	
   return single_read;
 
