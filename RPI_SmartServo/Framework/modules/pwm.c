@@ -175,7 +175,6 @@ void PWM_init(void)
 	// Update the pwm values
 
 }
-
 /**
 *
 *   Update PWM signal sent to the motor -255 to -1 cw,

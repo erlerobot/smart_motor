@@ -25,11 +25,26 @@
 
 /** Define different options for SmartServo.
 	@todo todo
-	Configuration for the ADS1115 ??
+	Configuration for the ADS1115
 */
 
 /**
- *  PID configuration
+ *  Board.  
+ *  @todo PWM and EN GPIO can be changed
+ */
+
+#define RPI_0 0     //For raspberry pi 0
+#define RPI_1 1     //For raspberry pi one
+#define RPI_2 2     //For raspberry pi two
+
+/**
+ *  Debugger configuration.
+ */
+
+#define CONFIG_DEBUGGER 0
+
+/**
+ *  PID configuration.
  */
 
 // The minimum and maximum servo position as defined by 12-bit ADC values.
@@ -48,18 +63,21 @@
 #define CONFIG_DEFAULT_MAX_SEEK        0x0CFD //0x0D08
 
 /**
- *  PWM and EN configuration
+ *  PWM and EN configuration.
  */
 
 // PWM frequency = 19.2 Mhz/PWM_RANGE/CLOCK_DIV.
 // PWM frequency of 9765.525 Hz with next two config values.
-#define CONFIG_PWM_RANGE 1024
+//#define CONFIG_PWM_RANGE 1024
+#define CONFIG_PWM_RANGE 4096  //f=2343.75Hz
 #define CONFIG_PWM_CLOCK_DIV 2
 // Delay between direction change of the chopper
 // This value should be maximum the period of the PWM
-#define	CONFIG_PWM_DIR_CHANGE_DELAY	100
+//#define	CONFIG_PWM_DIR_CHANGE_DELAY	100 //for 1024
+#define	CONFIG_PWM_DIR_CHANGE_DELAY	500  //for 4096
 // PWM maximum position value
-#define CONFIG_PWM_MAX_POSITION  (1023)
+//#define CONFIG_PWM_MAX_POSITION  (1023)
+#define CONFIG_PWM_MAX_POSITION  (4095)
 // PWM GPIO
 #define CONFIG_PWM0_GPIO 12 // pin 32
 #define CONFIG_PWM1_GPIO 13 // pin 33
