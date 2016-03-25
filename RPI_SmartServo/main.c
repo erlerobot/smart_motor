@@ -27,12 +27,14 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <time.h>
 #include "Framework/modules/pwm.h"
 #include "Framework/modules/registers.h"
 #include "Framework/modules/pid.h"
 #include "Framework/modules/adc.h"
 #include "Framework/modules/timer.h"
 #include "Framework/modules/server.h"
+#include "config.h"
 
 void createServer();//Creates the server thread to recive commands via TCP/IP
 void* serverThread(void*);
@@ -60,7 +62,7 @@ int main(void)
 	// Initialize the PID algorithm module
 	PID_init();
 	// Initialize timer 10 ms.
-	TIMER_init(1000000000);
+	TIMER_init(CONFIG_TIMER);
 //MODULE INITIALIZATION END
 
 	// XXX Enable PWM and writing.
@@ -70,10 +72,13 @@ int main(void)
 	// be processed.
 	for(;;)
 	{	
-
+		
+		static int i=0;
 		if(adc_position_value_is_ready())
-		{
+		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
+		    
 		    // Is position value ready?
+                        clock_t tic = clock();
 			int16_t pwm;
 			int16_t position;
 			
@@ -86,9 +91,13 @@ int main(void)
 
 			// Update the servo movement as indicated by the PWM value.
 			PWM_update(position, pwm);
-
+                        printf("MAIN position value is: %d \n", position);
+			printf("MAIN pwm value is: %d \n", pwm);
+			printf("------------%i--------------\n",i);
+			i++;
+			clock_t toc = clock();
+		        printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 		}
-		
 		// Is a power value ready?
 
 			// Get the new power value.

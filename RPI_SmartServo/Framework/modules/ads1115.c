@@ -109,7 +109,7 @@ uint16_t ADS1115_readRegister(int fd, uint8_t reg)
 void ADS1115_init(uint8_t address)
 {
 	ADS1115_address = address;
-	ADS1115_delay = 8;
+	ADS1115_delay = 2;
 	ADS1115_bitShift = 3;
 	ADS1115_gain = ADS1115_REG_CONFIG_PGA_6_144V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 

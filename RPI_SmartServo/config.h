@@ -41,7 +41,13 @@
  *  Debugger configuration.
  */
 
-#define CONFIG_DEBUGGER 0
+//#define CONFIG_DEBUGGER 0
+
+/**
+ *  TIMER configuration.
+ */
+
+#define CONFIG_TIMER 100000000
 
 /**
  *  PID configuration.
@@ -55,8 +61,8 @@
 #define CONFIG_PID_MIN_OUTPUT          (-CONFIG_PID_MAX_OUTPUT)
 // Default PID values
 #define CONFIG_DEFAULT_PID_DEADBAND    0x01
-#define CONFIG_DEFAULT_PID_PGAIN       0x0600
-#define CONFIG_DEFAULT_PID_DGAIN       0x0C00
+#define CONFIG_DEFAULT_PID_PGAIN       0x0060
+#define CONFIG_DEFAULT_PID_DGAIN       0x0000
 #define CONFIG_DEFAULT_PID_IGAIN       0x0000
 // Max and min seek values
 #define CONFIG_DEFAULT_MIN_SEEK        0x0001
