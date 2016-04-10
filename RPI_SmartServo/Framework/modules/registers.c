@@ -33,8 +33,10 @@ static uint16_t REG_flags;
 static uint16_t REG_position;
 //Velocity
 static uint16_t REG_velocity;
-//Power
-static uint16_t REG_power;
+//Current
+static uint16_t REG_current;
+//Battery
+static uint16_t REG_battery;
 //PWM_DIRA
 static uint8_t REG_pwm_dir_a;
 //PWM_DIRB
@@ -100,9 +102,13 @@ void set_velocity (uint16_t velocity)
   REG_velocity = velocity;
 }
 
-void set_power (uint16_t power)
+void set_current (uint16_t current)
 {
-  REG_power = power;
+  REG_current = current;
+}
+void set_battery (uint16_t battery)
+{
+  REG_battery = battery;
 }
 
 void set_pwm_dir_a (uint8_t pwm_dir_a)
@@ -192,9 +198,13 @@ uint16_t get_velocity (void)
   return REG_velocity;
 }
 
-uint16_t get_power (void)
+uint16_t get_current (void)
 {
-  return REG_power;
+  return REG_current;
+}
+uint16_t get_battery (void)
+{
+  return REG_battery;
 }
 
 uint8_t get_pwm_dir_a (void)

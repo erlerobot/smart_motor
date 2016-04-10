@@ -50,8 +50,6 @@ int main(void)
 	wiringPiSetupGpio();
 	// Configure pins to the default states
 
-	//Create Server thread for communication
-	createServer();
 	// First, initialize registers that control servo operation
 	// Set the initial seek position and velocity
 	REGISTERS_init();
@@ -64,9 +62,10 @@ int main(void)
 	// Initialize timer 10 ms.
 	TIMER_init(CONFIG_TIMER);
 //MODULE INITIALIZATION END
-
-	// XXX Enable PWM and writing.
 	
+	//Create Server thread for communication
+	createServer();
+
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
@@ -78,7 +77,7 @@ int main(void)
 		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
 		    
 		    // Is position value ready?
-                        clock_t tic = clock();
+            clock_t tic = clock();
 			int16_t pwm;
 			int16_t position;
 			
@@ -96,7 +95,7 @@ int main(void)
 			printf("------------%i--------------\n",i);
 			i++;
 			clock_t toc = clock();
-		        printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+		    printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 		}
 		// Is a power value ready?
 

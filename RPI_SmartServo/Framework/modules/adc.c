@@ -90,6 +90,9 @@ void ADC_readPosition()
 void ADC_readVoltage()
 {
 	/** @todo */
+	uint16_t adc_voltage_value;
+	adc_voltage_value = ADS1115_readADC_singleEnded(VOLTAGE_CHANNEL);
+	set_voltage(adc_voltage_value);
 }
 /**
 *
@@ -103,6 +106,10 @@ void ADC_readVoltage()
 void ADC_readCurrent()
 {
 	/** @todo */
+	uint16_t adc_current_value;
+	adc_current_value = ADS1115_readADC_singleEnded(CURRENT_CHANNEL);
+	set_current(adc_current_value);
+
 }
 /**
 *
@@ -116,6 +123,9 @@ void ADC_readCurrent()
 void ADC_readBattery()
 {
 	/** @todo */
+	uint16_t adc_battery_value;
+	adc_battery_value = ADS1115_readADC_singleEnded(BATTERY_CHANNEL);
+	set_battery(adc_battery_value);
 
 
 }
