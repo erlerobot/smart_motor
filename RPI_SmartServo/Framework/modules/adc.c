@@ -70,9 +70,11 @@ void ADC_readPosition()
 #endif
 	// Read from i2C
 	adc_position_value = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
-#ifdef CONFIG_DEBUGGER
-	printf("ADC position value is: %d \n", adc_position_value);			
-#endif
+
+	printf("ADC position bit: %d \n", adc_position_value);			
+        float voltage = (adc_position_value*1.5)/1000; //for 12 bits
+        printf("ADC position voltage: %f \n", voltage);
+
 	// Save value in registers position.
 	set_position (adc_position_value);
 	// Put flag to 1.
@@ -93,6 +95,11 @@ void ADC_readTemp()
 	uint16_t adc_temp_value;
 	adc_temp_value = ADS1115_readADC_singleEnded(TEMP_CHANNEL);
 	set_temp(adc_temp_value);
+
+        printf("ADC Temp bit: %d \n", adc_temp_value);
+// Change 0.01 for resolution
+        float temp = (adc_temp_value*0.0015- 0.4)/0.0195; //for 12 bits
+        printf("ADC Temp is:%f ºC\n",temp);
 }
 /**
 *
@@ -109,6 +116,10 @@ void ADC_readCurrent()
 	uint16_t adc_current_value;
 	adc_current_value = ADS1115_readADC_singleEnded(CURRENT_CHANNEL);
 	set_current(adc_current_value);
+
+        printf("ADC Current bit: %d \n", adc_current_value);
+        float current = (adc_current_value*0.0015)/(0.05*4990*0.01); //for 12 bits
+        printf("ADC Current is: %f \n", current);
 
 }
 /**
@@ -127,6 +138,9 @@ void ADC_readBattery()
 	adc_battery_value = ADS1115_readADC_singleEnded(BATTERY_CHANNEL);
 	set_battery(adc_battery_value);
 
+        printf("ADC Battery bit: %d \n", adc_battery_value);
+        float battery = adc_battery_value*3.7*0.0015; //for 12 bits
+        printf("ADC Battery is: %f \n", battery);
 
 }
 /**

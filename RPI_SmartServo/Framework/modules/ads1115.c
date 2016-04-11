@@ -111,7 +111,7 @@ void ADS1115_init(uint8_t address)
 	ADS1115_address = address;
 	ADS1115_delay = 2;
 	ADS1115_bitShift = 3;
-	ADS1115_gain = ADS1115_REG_CONFIG_PGA_4_096V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
+	ADS1115_gain = ADS1115_REG_CONFIG_PGA_6_144V; /* 4_096 +/- 6.144V range (limited to VDD +0.3V max!) */
 
     ADS1115_i2c_fd = I2C_setup(address);
 }

@@ -166,7 +166,7 @@ float RPISERVO_getTemp()
 float RPISERVO_getBattery()
 {
 	float battery;
-	battery = get_battery()*K_battery;
+	battery = get_battery()*37000/10000; //3V3 rescaled 5??
 	return battery;
 }
 /**

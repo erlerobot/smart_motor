@@ -77,8 +77,8 @@ unsigned int SERVICE_execute(MSG *msg) {
 		msg->value = get_seek_velocity();
 		//puts("Seek velocity");
 		break;
-	case CMD_GET_VOLTAGE:
-		msg->value = get_voltage();
+	case CMD_GET_TEMP:
+		msg->value = get_temp();
 		//puts("Voltage");
 		break;
 	case CMD_GET_PID_DEADBAND:
