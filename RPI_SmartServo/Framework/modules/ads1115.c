@@ -111,7 +111,7 @@ void ADS1115_init(uint8_t address)
 	ADS1115_address = address;
 	ADS1115_delay = 2;
 	ADS1115_bitShift = 3;
-	ADS1115_gain = ADS1115_REG_CONFIG_PGA_6_144V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
+	ADS1115_gain = ADS1115_REG_CONFIG_PGA_4_096V; /* +/- 6.144V range (limited to VDD +0.3V max!) */
 
     ADS1115_i2c_fd = I2C_setup(address);
 }
@@ -201,14 +201,12 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
 	// Read the conversion results
   uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
     	
-  //float voltage = (single_read*0.1875)/1000; //for 15 bits
-  float voltage = (single_read*1.5)/1000; //for 12 bits
 
 
 #ifdef CONFIG_DEBUGGER
   printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
   printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
-  printf("ADS1115 Voltage is: %f \n", voltage);
+  
 #endif
     	
   return single_read;

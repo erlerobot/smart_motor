@@ -91,8 +91,13 @@ void ADC_readVoltage()
 {
 	/** @todo */
 	uint16_t adc_voltage_value;
-	adc_voltage_value = ADS1115_readADC_singleEnded(VOLTAGE_CHANNEL);
-	set_voltage(adc_voltage_value);
+	adc_temp_value = ADS1115_readADC_singleEnded(VOLTAGE_CHANNEL);
+	set_voltage(adc_temp_value);
+
+        //float temp = (single_read*0.1875)/1000; //for 15 bits
+        float temp = (adc_temp_value*1.5)/1000; //for 12 bits
+        printf("ADS1115 Voltage is: %f \n", voltage);
+
 }
 /**
 *
@@ -109,6 +114,9 @@ void ADC_readCurrent()
 	uint16_t adc_current_value;
 	adc_current_value = ADS1115_readADC_singleEnded(CURRENT_CHANNEL);
 	set_current(adc_current_value);
+        
+        //float voltage = (single_read*1.5)/1000; //for 12 bits
+        //printf("ADS1115 Voltage is: %f \n", voltage);
 
 }
 /**
@@ -127,6 +135,8 @@ void ADC_readBattery()
 	adc_battery_value = ADS1115_readADC_singleEnded(BATTERY_CHANNEL);
 	set_battery(adc_battery_value);
 
+        float voltage = (single_read*1.5)/1000; //for 12 bits
+        printf("ADS1115 Voltage is: %f \n", voltage);
 
 }
 /**
