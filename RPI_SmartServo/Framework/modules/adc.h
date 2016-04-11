@@ -56,7 +56,7 @@ void ADC_readPosition();
 /**
 * 	Read voltage from ADC
 */
-void ADC_readVoltage();
+void ADC_readTemp();
 /**
 * 	Read current from ADC
 */

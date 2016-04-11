@@ -87,12 +87,12 @@ void ADC_readPosition()
 * @note		None.
 *
 */
-void ADC_readVoltage()
+void ADC_readTemp()
 {
 	/** @todo */
-	uint16_t adc_voltage_value;
-	adc_voltage_value = ADS1115_readADC_singleEnded(VOLTAGE_CHANNEL);
-	set_voltage(adc_voltage_value);
+	uint16_t adc_temp_value;
+	adc_temp_value = ADS1115_readADC_singleEnded(TEMP_CHANNEL);
+	set_temp(adc_temp_value);
 }
 /**
 *
@@ -152,7 +152,7 @@ void ADC_handler(int sig, siginfo_t *si, void *uc)
 	// BATTERY
 	ADC_readBattery();
 	//VOLTAGE
-	ADC_readVoltage();
+	ADC_readTemp();
 }
 
 

@@ -36,7 +36,7 @@
     -----------------------------------------------------------------------*/
     #define POSITION_CHANNEL                (0x0)    // 
     #define CURRENT_CHANNEL                 (0x1)    //
-    #define VOLTAGE_CHANNEL                 (0x2)    //
+    #define TEMP_CHANNEL                    (0x2)    //
     #define BATTERY_CHANNEL                 (0x3)    //
 /*=========================================================================*/
 
