@@ -40,8 +40,8 @@
 /**
  *  TIMER configuration.
  */
-#define CONFIG_TIMER 100000000 //100ms
-//#define CONFIG_TIMER  10000000 //10ms
+//#define CONFIG_TIMER 100000000 //100ms
+#define CONFIG_TIMER  10000000 //10ms
 
 /**
  *  Debugger configuration.

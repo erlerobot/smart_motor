@@ -45,8 +45,8 @@ static uint8_t REG_pwm_dir_b;
 static uint16_t REG_seek_position;
 //Seek velocity
 static uint16_t REG_seek_velocity;
-//Voltage 
-static uint16_t REG_voltage;
+//Temperature
+static uint16_t REG_temp;
 //PID deadband
 static uint8_t REG_pid_deadband;
 //PID PGAIN
@@ -131,9 +131,9 @@ void set_seek_velocity (uint16_t seek_velocity)
   REG_seek_velocity = seek_velocity;
 }
 
-void set_voltage (uint16_t voltage)
+void set_temp (uint16_t temp)
 {
-  REG_voltage = voltage;
+  REG_temp = temp;
 }
 
 void set_pid_deadband (uint8_t pid_deadband)
@@ -227,9 +227,9 @@ uint16_t get_seek_velocity (void)
   return REG_seek_velocity;
 }
 
-uint16_t get_voltage (void)
+uint16_t get_temp (void)
 {
-  return REG_voltage;
+  return REG_temp;
 }
 
 uint8_t get_pid_deadband (void)
