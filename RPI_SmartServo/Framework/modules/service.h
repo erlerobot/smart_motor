@@ -23,35 +23,31 @@
 #ifndef SERVICE_H_
 #define SERVICE_H_
 
-#include<stdint.h>
-
 /**********CMD_GET**************/
-#define CMD_GET_DEVICE_TYPE		0
-#define CMD_GET_DEVICE_SUBTYPE	1
-#define CMD_GET_FLAGS			2
-#define CMD_GET_POSITION		3
-#define CMD_GET_VELOCITY	 	4
-#define CMD_GET_PWM_DIR_A		5
-#define CMD_GET_PWM_DIR_B		6
-#define CMD_GET_SEEK_POSITION	7
-#define CMD_GET_SEEK_VELOCITY	8
-#define CMD_GET_TEMP			9
+#define CMD_GET_ID       		0
+#define CMD_GET_POSITION    	1
+#define CMD_GET_TEMP			2
+#define CMD_GET_BATTERY 		3
+#define CMD_GET_CURRENT  	 	4
+#define CMD_GET_ERROR    		5
+#define CMD_GET_VELOCITY		6
+#define CMD_GET_PID_CONF        7
+#define CMD_GET_CW_LIMIT        8
+#define CMD_GET_CCW_LIMIT       9
+#define CMD_GET_ALL             10
+/** todo
+#define CMD_GET_SEEK_VELOCITY	9
 #define CMD_GET_PID_DEADBAND	10
-#define CMD_GET_PID_PGAIN		11
-#define CMD_GET_PID_IGAIN		12
-#define CMD_GET_PID_DGAIN		13
-#define CMD_GET_MIN_SEEK		14
-#define CMD_GET_MAX_SEEK		15
-#define CMD_GET_ALL				16
+*/
 /***********CMD_SET***************/
-#define CMD_SET_FLAGS 			30
-#define CMD_SET_SEEK_POSITION	31
+#define CMD_SET_ID  			30
+#define CMD_SET_GOAL         	31
+#define CMD_SET_CW_LIMIT        32
+#define CMD_SET_CCW_LIMIT       33
+#define CMD_SET_PID_CONF        34
+/** todo
 #define CMD_SET_SEEK_VELOCITY	32
-#define CMD_SET_PID_DEADBAND	33
-#define CMD_SET_PID_PGAIN		34
-#define CMD_SET_PID_IGAIN		35
-#define CMD_SET_PID_DGAIN		36
-
+*/
 #define CMD_END					60
 
 /**
@@ -59,7 +55,17 @@
  */
 typedef struct{
 		unsigned char cmd;
-		uint16_t value;
+		int id;
+		float position;
+		float temp;
+		float battery;
+		float current;
+		float error;
+		float velocity;
+		int p_gain;
+		int d_gain;
+		int cw_limit;
+		int ccw_limit;
 
 }MSG;
 

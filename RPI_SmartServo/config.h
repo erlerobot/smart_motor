@@ -69,11 +69,11 @@
  */
 #elif (RPI_BOARD == 1)
 // PWM GPIO
-#define CONFIG_PWM0_GPIO X // pin X
-#define CONFIG_PWM1_GPIO X // pin X
+#define CONFIG_PWM0_GPIO 12 // pin X
+#define CONFIG_PWM1_GPIO 13 // pin X
 // EN_A and EN_N GPIO
-#define CONFIG_EN_A_GPIO X //pin X
-#define CONFIG_EN_B_GPIO X //pin X
+#define CONFIG_EN_A_GPIO 16 //pin X
+#define CONFIG_EN_B_GPIO 19 //pin X
 /*
  * RPIO_2
  */
@@ -95,6 +95,11 @@
  * ADC 10 bits
  */
 #if (ADC_RESOLUTION == BITS_10)
+/**
+ *  ADC and Potentiometer resolution values to convert to voltage and grades
+ */
+#define ADC_RES_CONSTANT 0.006  //(6.1444/2^10)
+#define POT_RES_CONSTANT 3.78   //(5V/ADC_RES)/220º
 /**
  *  PID configuration.
  */
@@ -133,6 +138,11 @@
  * ADC 12 bits
  */
 #elif (ADC_RESOLUTION == BITS_12)
+/**
+ *  ADC and Potentiometer resolution values to convert to voltage and grades
+ */
+#define ADC_RES_CONSTANT 0.0015  //(6.144/2^12)
+#define POT_RES_CONSTANT 15.15   //(5V/ADC_RES)/220º
 /**
  *  PID configuration.
  */

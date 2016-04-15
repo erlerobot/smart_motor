@@ -20,7 +20,6 @@
  *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
-
 #include <signal.h>
 #include <stdio.h>
 #include "adc.h"
@@ -28,23 +27,19 @@
 #include "registers.h"
 #include "../../config.h"
 
-
-
 volatile uint8_t adc_position_ready;
 volatile uint16_t adc_position_value;
 
-
 /**
-*
-* Initialize ADC conversion.
-*
-* @return	None.
-*
-* @note		ADC used, ADS1115. 
-*
-*/
-void ADC_init()
-{	
+ *
+ * Initialize ADC conversion.
+ *
+ * @return	None.
+ *
+ * @note		ADC used, ADS1115.
+ *
+ */
+void ADC_init() {
 #ifdef CONFIG_DEBUGGER
 	printf("ADC initialization\n");
 #endif
@@ -55,109 +50,106 @@ void ADC_init()
 	adc_position_value = 0;
 }
 /**
-*
-* Read position from ADC. 
-*
-* @return	None.
-*
-* @note		None.
-*
-*/
-void ADC_readPosition()
-{
+ *
+ * Read position from ADC.
+ *
+ * @return	None.
+ *
+ * @note		None.
+ *
+ */
+void ADC_readPosition() {
 #ifdef CONFIG_DEBUGGER
-	printf("ADC_readPosition\n"); 
+	printf("ADC_readPosition\n");
 #endif
 	// Read from i2C
 	adc_position_value = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
-
-	printf("ADC position bit: %d \n", adc_position_value);			
-        float voltage = (adc_position_value*1.5)/1000; //for 12 bits
-        printf("ADC position voltage: %f \n", voltage);
-
 	// Save value in registers position.
-	set_position (adc_position_value);
+	set_position(adc_position_value);
 	// Put flag to 1.
-	adc_position_ready =1;
+	adc_position_ready = 1;
+#ifdef CONFIG_DEBUGGER
+	printf("ADC position bit: %d \n", adc_position_value);
+	float voltage = (adc_position_value*ADC_RES_CONSTANT)/1000; //for 12 bits
+	printf("ADC position voltage: %f \n", voltage);
+#endif
 }
 /**
-*
-* Read voltage from ADC
-*
-* @return	None.
-*
-* @note		None.
-*
-*/
-void ADC_readTemp()
-{
-	/** @todo */
+ *
+ * Read voltage from ADC
+ *
+ * @return	None.
+ *
+ * @note		None.
+ *
+ */
+void ADC_readTemp() {
 	uint16_t adc_temp_value;
 	adc_temp_value = ADS1115_readADC_singleEnded(TEMP_CHANNEL);
 	set_temp(adc_temp_value);
 
-        printf("ADC Temp bit: %d \n", adc_temp_value);
-// Change 0.01 for resolution
-        float temp = (adc_temp_value*0.0015- 0.4)/0.0195; //for 12 bits
-        printf("ADC Temp is:%f ºC\n",temp);
+#ifdef CONFIG_DEBUGGER
+	printf("ADC Temp bit: %d \n", adc_temp_value);
+	float temp = (adc_temp_value * ADC_RES_CONSTANT - 0.4) / 0.0195;
+	printf("ADC Temp is:%f ºC\n", temp);
+#endif
 }
 /**
-*
-* Read current from ADC
-*
-* @return	None.
-*
-* @note		None.
-*
-*/
-void ADC_readCurrent()
-{
-	/** @todo */
+ *
+ * Read current from ADC
+ *
+ * @return	None.
+ *
+ * @note		None.
+ *
+ */
+void ADC_readCurrent() {
 	uint16_t adc_current_value;
 	adc_current_value = ADS1115_readADC_singleEnded(CURRENT_CHANNEL);
 	set_current(adc_current_value);
 
-        printf("ADC Current bit: %d \n", adc_current_value);
-        float current = (adc_current_value*0.0015)/(0.05*4990*0.01); //for 12 bits
-        printf("ADC Current is: %f \n", current);
+#ifdef CONFIG_DEBUGGER
+	printf("ADC Current bit: %d \n", adc_current_value);
+	float current = (adc_current_value * ADC_RES_CONSTANT) / (0.05 * 4990 * 0.01);
+	printf("ADC Current is: %f \n", current);
+#endif
 
 }
 /**
-*
-* Read battery from ADC
-*
-* @return	None.
-*
-* @note		None.
-*
-*/
-void ADC_readBattery()
-{
-	/** @todo */
+ *
+ * Read battery from ADC
+ *
+ * @return	None.
+ *
+ * @note		None.
+ *
+ */
+void ADC_readBattery() {
 	uint16_t adc_battery_value;
 	adc_battery_value = ADS1115_readADC_singleEnded(BATTERY_CHANNEL);
 	set_battery(adc_battery_value);
 
-        printf("ADC Battery bit: %d \n", adc_battery_value);
-        float battery = adc_battery_value*3.7*0.0015; //for 12 bits
-        printf("ADC Battery is: %f \n", battery);
+#ifdef CONFIG_DEBUGGER
+	printf("ADC Battery bit: %d \n", adc_battery_value);
+	float battery = adc_battery_value * 3.7 * ADC_RES_CONSTANT;
+	printf("ADC Battery is: %f \n", battery);
+#endif
 
 }
 /**
-*
-* ADC handler for the timer signal. Read 16 bit ADC value.
-*
-* @param 	sig 
-* @param 	si 
-* @param 	uc 
-*
-* @return	None.
-*
-* @note		None.
-*
-*/
-void ADC_handler(int sig, siginfo_t *si, void *uc)
-{
+ *
+ * ADC handler for the timer signal. Read 16 bit ADC value.
+ *
+ * @param 	sig
+ * @param 	si
+ * @param 	uc
+ *
+ * @return	None.
+ *
+ * @note		None.
+ *
+ */
+void ADC_handler(int sig, siginfo_t *si, void *uc) {
 
 	// POSITION (Potenciometer)
 	ADC_readPosition();
@@ -168,7 +160,4 @@ void ADC_handler(int sig, siginfo_t *si, void *uc)
 	//VOLTAGE
 	ADC_readTemp();
 }
-
-
-
 

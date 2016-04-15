@@ -195,15 +195,14 @@ uint16_t ADS1115_readADC_singleEnded(uint8_t channel)
   	
 	// Wait for the conversion to complete
   delay(ADS1115_delay); //@todo see delay.
-	//read config register
-  uint16_t config_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG) ;
-	
-	// Read the conversion results
-  uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
-    	
 
 
 #ifdef CONFIG_DEBUGGER
+  //read config register
+  uint16_t config_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONFIG) ;
+	// Read the conversion results
+  uint16_t single_read = ADS1115_readRegister(ADS1115_i2c_fd, ADS1115_REG_POINTER_CONVERT) ;
+    	
   printf("ADS1115 config value is: %d, %.4x \n", config_read, config_read);
   printf("ADS1115 single_read value is: %d, %.4x \n", single_read, single_read);
   

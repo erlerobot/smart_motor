@@ -20,6 +20,7 @@
  *	Copyright (c) 2016, Jorge Lampérez. All rights reserved.
  */
 
+#include <stdint.h>
 #include "rpiservo.h"
 #include "registers.h"
 #include "../../config.h"
@@ -37,7 +38,8 @@
 */
 void RPISERVO_setID(int device_type)
 {
-	//set_device_type(device_type);
+	/**todo*/
+	set_device_type((uint16_t)device_type);
 }
 /**
 *
@@ -52,7 +54,7 @@ void RPISERVO_setID(int device_type)
 */
 void RPISERVO_setGoal(int degrees)
 {
-	set_position((uint16_t)degrees*K_resolution);
+	set_position((uint16_t)degrees*POT_RES_CONSTANT);
 }
 /**
 *
@@ -67,7 +69,7 @@ void RPISERVO_setGoal(int degrees)
 */
 void RPISERVO_setCWLimit(int degrees)
 {
-	set_min_seek((uint16_t)degrees*K_resolution);
+	set_min_seek((uint16_t)degrees*POT_RES_CONSTANT);
 }
 /**
 *
@@ -82,7 +84,7 @@ void RPISERVO_setCWLimit(int degrees)
 */
 void RPISERVO_setCCWLimit(int degrees)
 {
-	set_max_seek((uint16_t)degrees*K_resolution);
+	set_max_seek((uint16_t)degrees*POT_RES_CONSTANT);
 }
 /**
 *
@@ -97,11 +99,11 @@ void RPISERVO_setCCWLimit(int degrees)
 * @note		None.
 *
 */
-void RPISERVO_setPIDconf(int pgain, int dgain, int igain)
-{
-	set_pid_pgain(pgain);
-	set_pid_dgain(dgain);
-	set_pid_igain(igain);
+void RPISERVO_setPIDconf(int pgain, int dgain)
+{	/**todo*/
+	set_pid_pgain((uint16_t)pgain);
+	set_pid_dgain((uint16_t)dgain);
+//	set_pid_igain((uint16_t)igain);
 }
 /**
 *
@@ -129,7 +131,7 @@ int RPISERVO_getID()
 float RPISERVO_getPosition()
 {
 	float position;
-	position = get_position()/K_resolution;
+	position = get_position()/POT_RES_CONSTANT;
 	return position;
 }
 /**
@@ -150,8 +152,7 @@ float RPISERVO_getPosition()
 float RPISERVO_getTemp()
 {
 	float temp;
-	temp = (get_temp() - 0.4)/0.0195;
-
+	temp = (get_temp()* ADC_RES_CONSTANT - 0.4) / 0.0195;
 	return temp;
 }
 /**
@@ -166,7 +167,7 @@ float RPISERVO_getTemp()
 float RPISERVO_getBattery()
 {
 	float battery;
-	battery = get_battery()*37000/10000; //3V3 rescaled 5??
+	float battery = get_battery()* 3.7 * ADC_RES_CONSTANT;//3V3 rescaled 5??
 	return battery;
 }
 /**
@@ -198,7 +199,7 @@ float RPISERVO_getBattery()
 float RPISERVO_getCurrent()
 {
 	float current;
-	current = get_current()/(0.05*4990*0.01); //ILOAD = VOUT/(RSENSExROUTx0.01)
+	current = (get_current() * ADC_RES_CONSTANT) / (0.05 * 4990 * 0.01);//ILOAD = VOUT/(RSENSExROUTx0.01)
 	return current;
 }
 /**
@@ -213,7 +214,7 @@ float RPISERVO_getCurrent()
 float RPISERVO_getError()
 {
 	float error;
-	error = (get_position()-get_seek_position())/K_resolution; //Pasarlo a grados.
+	error = (get_position()-get_seek_position())/POT_RES_CONSTANT; //Pasarlo a grados.
 	return 0;
 }
 /**
@@ -225,9 +226,44 @@ float RPISERVO_getError()
 * @note		None.
 *
 */
+
 float RPISERVO_getVelocity()
-{
+{   /**todo*/
 	return 0;
+}
+/**
+*
+* Get the minimum seek position for RPI servo in degrees.
+*
+* @param 	degrees.
+*
+* @return	None.
+*
+* @note		None.
+*
+*/
+int RPISERVO_getCWLimit()
+{
+	int cw_limit;
+	cw_limit = get_min_seek()/POT_RES_CONSTANT;
+	return cw_limit;
+}
+/**
+*
+* Get the maximum seek position for the RPI servo.
+*
+* @param 	degrees.
+*
+* @return	None.
+*
+* @note		None.
+*
+*/
+int RPISERVO_getCCWLimit()
+{
+	int ccw_limit;
+	ccw_limit = get_max_seek()/POT_RES_CONSTANT;
+	return ccw_limit;
 }
 
 
