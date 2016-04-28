@@ -212,60 +212,6 @@ Standard A4 size frame in Landscape</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="WSNlib">
-<packages>
-<package name="SOT23">
-<description>&lt;b&gt;SOT-23&lt;/b&gt;</description>
-<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
-<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
-<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
-<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
-<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
-<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
-<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
-<text x="-0.889" y="2.032" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-1.016" y="-0.1905" size="0.4064" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
-<rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
-<rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
-</package>
-</packages>
-<symbols>
-<symbol name="ZXCT1009FTA">
-<pin name="RS+" x="-5.08" y="10.16" length="middle" rot="R270"/>
-<pin name="RS-" x="0" y="10.16" length="middle" rot="R270"/>
-<pin name="IOUT" x="-2.54" y="-10.16" length="middle" rot="R90"/>
-<wire x1="-7.62" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
-<wire x1="2.54" y1="5.08" x2="2.54" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
-<text x="-10.16" y="-5.08" size="1.27" layer="95" rot="R90">&gt;NAME</text>
-<text x="5.08" y="-5.08" size="1.27" layer="96" rot="R90">&gt;VALUE</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="ZXCT1009" prefix="U">
-<description>ZXCT1009 Current Monitor (current output)
-
-http://www.diodes.com/zetex/_pdfs/3.0/pdf/ZXCT1009.pdf</description>
-<gates>
-<gate name="G$1" symbol="ZXCT1009FTA" x="2.54" y="0"/>
-</gates>
-<devices>
-<device name="" package="SOT23">
-<connects>
-<connect gate="G$1" pin="IOUT" pad="1"/>
-<connect gate="G$1" pin="RS+" pad="2"/>
-<connect gate="G$1" pin="RS-" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-Resistors">
 <description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
 In this library you'll find resistors, capacitors, inductors, test points, jumper pads, etc.&lt;br&gt;&lt;br&gt;
@@ -925,6 +871,21 @@ Source: http://www.diodes.com/datasheets/ds31262.pdf</description>
 <text x="-4.699" y="1.8542" size="1.27" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-4.318" y="-5.9944" size="1.27" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
 </package>
+<package name="SOT23">
+<description>&lt;b&gt;SOT-23&lt;/b&gt;</description>
+<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<text x="-0.889" y="2.032" size="0.4064" layer="25">&gt;NAME</text>
+<text x="-1.016" y="-0.1905" size="0.4064" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
+<rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
+<rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="RPI">
@@ -1145,6 +1106,17 @@ Source: http://www.diodes.com/datasheets/ds31262.pdf</description>
 <text x="-4.572" y="6.2738" size="2.0828" layer="95" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-5.2324" y="-12.7508" size="2.0828" layer="96" ratio="10" rot="SR0">&gt;VALUE</text>
 </symbol>
+<symbol name="ZXCT1009FTA">
+<pin name="RS+" x="-5.08" y="10.16" length="middle" rot="R270"/>
+<pin name="RS-" x="0" y="10.16" length="middle" rot="R270"/>
+<pin name="IOUT" x="-2.54" y="-10.16" length="middle" rot="R90"/>
+<wire x1="-7.62" y1="5.08" x2="2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="5.08" x2="2.54" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
+<text x="-10.16" y="-5.08" size="1.27" layer="95" rot="R90">&gt;NAME</text>
+<text x="5.08" y="-5.08" size="1.27" layer="96" rot="R90">&gt;VALUE</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="RPI">
@@ -1339,6 +1311,26 @@ Source: http://www.diodes.com/datasheets/ds31262.pdf</description>
 <attribute name="PACKAGE" value="TO-92-3" constant="no"/>
 <attribute name="SUPPLIER" value="Microchip" constant="no"/>
 </technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="ZXCT1009" prefix="U">
+<description>ZXCT1009 Current Monitor (current output)
+
+http://www.diodes.com/zetex/_pdfs/3.0/pdf/ZXCT1009.pdf</description>
+<gates>
+<gate name="G$1" symbol="ZXCT1009FTA" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT23">
+<connects>
+<connect gate="G$1" pin="IOUT" pad="3"/>
+<connect gate="G$1" pin="RS+" pad="2"/>
+<connect gate="G$1" pin="RS-" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
 </technologies>
 </device>
 </devices>
@@ -8694,7 +8686,6 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 </classes>
 <parts>
 <part name="FRAME1" library="SparkFun-Aesthetics" deviceset="FRAME-A4L" device=""/>
-<part name="U1" library="WSNlib" deviceset="ZXCT1009" device=""/>
 <part name="R1" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="1K"/>
 <part name="R2" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="4.99K"/>
 <part name="R3" library="SparkFun-Resistors" deviceset="RESISTOR" device="PTH-1/4W" value="2K"/>
@@ -8756,6 +8747,7 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <part name="M+" library="wirepad" deviceset="1,6/0,9" device=""/>
 <part name="M-" library="wirepad" deviceset="1,6/0,9" device=""/>
 <part name="GND13" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
+<part name="U1" library="00LibreriaErle" deviceset="ZXCT1009" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8763,7 +8755,6 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
-<instance part="U1" gate="G$1" x="185.42" y="142.24" rot="R270"/>
 <instance part="R1" gate="G$1" x="160.02" y="144.78"/>
 <instance part="R2" gate="G$1" x="167.64" y="137.16" rot="R90"/>
 <instance part="R3" gate="G$1" x="175.26" y="111.76" rot="R90"/>
@@ -8827,6 +8818,7 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <instance part="M+" gate="1" x="208.28" y="93.98" rot="R180"/>
 <instance part="M-" gate="1" x="215.9" y="93.98"/>
 <instance part="GND13" gate="1" x="127" y="109.22"/>
+<instance part="U1" gate="G$1" x="185.42" y="142.24" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -8999,12 +8991,12 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <net name="N$1" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
-<pinref part="U1" gate="G$1" pin="IOUT"/>
 <wire x1="165.1" y1="144.78" x2="167.64" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="167.64" y1="144.78" x2="175.26" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="142.24" x2="167.64" y2="144.78" width="0.1524" layer="91"/>
 <junction x="167.64" y="144.78"/>
+<pinref part="U1" gate="G$1" pin="IOUT"/>
 </segment>
 </net>
 <net name="CURRENT" class="0">
@@ -9176,7 +9168,6 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 </net>
 <net name="N$12" class="0">
 <segment>
-<pinref part="U1" gate="G$1" pin="RS-"/>
 <wire x1="195.58" y1="142.24" x2="200.66" y2="142.24" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="142.24" x2="200.66" y2="137.16" width="0.1524" layer="91"/>
 <pinref part="R13" gate="G$1" pin="1"/>
@@ -9190,6 +9181,7 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <wire x1="210.82" y1="137.16" x2="210.82" y2="114.3" width="0.1524" layer="91"/>
 <junction x="210.82" y="137.16"/>
 <junction x="210.82" y="114.3"/>
+<pinref part="U1" gate="G$1" pin="RS-"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -9217,7 +9209,6 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <junction x="25.4" y="162.56"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="RS+"/>
 <pinref part="R13" gate="G$1" pin="2"/>
 <wire x1="195.58" y1="147.32" x2="210.82" y2="147.32" width="0.1524" layer="91"/>
 <wire x1="210.82" y1="147.32" x2="210.82" y2="157.48" width="0.1524" layer="91"/>
@@ -9238,6 +9229,7 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <wire x1="228.6" y1="144.78" x2="228.6" y2="147.32" width="0.1524" layer="91"/>
 <junction x="228.6" y="147.32"/>
 <pinref part="P+2" gate="1" pin="+12V"/>
+<pinref part="U1" gate="G$1" pin="RS+"/>
 </segment>
 <segment>
 <pinref part="R11" gate="G$1" pin="2"/>
