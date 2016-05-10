@@ -66,6 +66,7 @@ typedef struct{
 		int d_gain;
 		int cw_limit;
 		int ccw_limit;
+                int goal;
 
 }MSG;
 

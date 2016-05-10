@@ -26,7 +26,7 @@ void RPISERVO_setID(int device_type);
 void RPISERVO_setGoal(int degrees);
 void RPISERVO_setCWLimit(int degrees);
 void RPISERVO_setCCWLimit(int degrees);
-void RPISERVO_setPIDconf(int pgain, int dgain, int igain);
+void RPISERVO_setPIDconf(int pgain, int dgain);
 
 int RPISERVO_getID();
 float RPISERVO_getPosition();
@@ -35,6 +35,8 @@ float RPISERVO_getBattery();
 float RPISERVO_getCurrent();
 float RPISERVO_getError();
 float RPISERVO_getVelocity();
+int RPISERVO_getCWLimit();
+int RPISERVO_getCCWLimit();
 
 
 #endif /* FRAMEWORK_MODULES_RPISERVO_H_ */

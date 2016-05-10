@@ -42,6 +42,5 @@ rpiservo.o: Framework/modules/rpiservo.c
 main.o: main.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-
 clean:
 	rm *o hello

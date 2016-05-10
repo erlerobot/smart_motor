@@ -54,7 +54,7 @@ void RPISERVO_setID(int device_type)
 */
 void RPISERVO_setGoal(int degrees)
 {
-	set_position((uint16_t)degrees*POT_RES_CONSTANT);
+	set_seek_position((uint16_t)degrees*POT_RES_CONSTANT);
 }
 /**
 *
@@ -167,7 +167,7 @@ float RPISERVO_getTemp()
 float RPISERVO_getBattery()
 {
 	float battery;
-	float battery = get_battery()* 3.7 * ADC_RES_CONSTANT;//3V3 rescaled 5??
+	battery = get_battery()* 3.7 * ADC_RES_CONSTANT;//3V3 rescaled 5??
 	return battery;
 }
 /**
@@ -215,7 +215,7 @@ float RPISERVO_getError()
 {
 	float error;
 	error = (get_position()-get_seek_position())/POT_RES_CONSTANT; //Pasarlo a grados.
-	return 0;
+	return error;
 }
 /**
 *

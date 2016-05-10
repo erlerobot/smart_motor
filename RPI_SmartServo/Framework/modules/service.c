@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "service.h"
+#include "registers.h" /** todo Try to remove it*/ 
 #include "rpiservo.h"
 
 /**
@@ -97,7 +98,7 @@ unsigned int SERVICE_execute(MSG *msg) {
 		//puts("Set id");
 		break;
 	case CMD_SET_GOAL:
-		RPISERVO_setGoal(msg->position);
+		RPISERVO_setGoal(msg->goal);
 		//puts("Set Goal");
 		break;
 	case CMD_SET_CW_LIMIT:
@@ -110,10 +111,7 @@ unsigned int SERVICE_execute(MSG *msg) {
 		break;
 	case CMD_SET_PID_CONF:
 		RPISERVO_setPIDconf(msg->p_gain, msg->d_gain);
-//		set_pid_pgain(msg->p_gain);
-		//puts("Set PID pgain");
-//		set_pid_dgain(msg->d_gain);
-		//puts("Set PID dgain");
+		//puts("Set PID conf");
 		break;
 	case CMD_END:				//CMD_END
 		//puts("End");
