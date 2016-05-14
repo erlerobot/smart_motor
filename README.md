@@ -1,10 +1,14 @@
 # smart_servo
 
+### ATmega 328 Microcontroller development
+
 **AVR_OpenServo_V3** -> Stable firmware. Used to create the first prototype.
 
 **AVR_OpenServo_V3-dev** -> Firmware under development more features than the above code.
 
 **OpenServo_Bootloader** -> The bootloader for OpenServo proyect. It is not set in the correct memory place.
+
+### RPI development
 
 **RPI_SmartServo** -> Code for Raspberry Pi.
 
