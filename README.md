@@ -6,7 +6,9 @@
 
 **OpenServo_Bootloader** -> The bootloader for OpenServo proyect. It is not set in the correct memory place.
 
-**OpenServo_Exp_v3_Jorge** -> Organized code by Jorge. It needs a look.
+**RPI_SmartServo** -> Code for Raspberry Pi.
 
-**RPI_SmartServo** -> Code for Raspberry Pi
+**RPI_SmartServo_Client** -> Client to send commands to the SmartServo.
+
+**RPI_SmartServo_eagle** -> Schematics and boards for eagle SmartServo.
 
