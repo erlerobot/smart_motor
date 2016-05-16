@@ -13,6 +13,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "ads1115.h"
 
 #define CLOCKID CLOCK_REALTIME
 #define SIG SIGRTMIN
@@ -26,8 +27,16 @@ sigset_t mask;
 void ADC_handler(int sig, siginfo_t *si, void *uc) {
 	static int cont=0;
 	// POSITION (Potenciometer)
+	uint16_t pos = ADS1115_readADC_singleEnded(POSITION_CHANNEL);
+        uint16_t temp = ADS1115_readADC_singleEnded(TEMP_CHANNEL);
+        uint16_t battery = ADS1115_readADC_singleEnded(BATTERY_CHANNEL);
+        uint16_t current = ADS1115_readADC_singleEnded(CURRENT_CHANNEL);
+	
+        printf("ADS1115 pos: %d, temp: %d, battery: %d, current: %d \n", pos, temp, battery, current); 
+
+
 	printf("handler %i \n", cont);
-	printf("Time: %d seconds\n", (double)clock());
+//	printf("Time: %d seconds\n", (double)clock());
 	cont++;
 }
 
@@ -142,6 +151,7 @@ int main(void) {
 //	long long freq_nanosecs= 100000000;//100ms
 //	long long freq_nanosecs= 1000000000;//1s
 
+	ADS1115_init(ADS1115_ADDRESS);
 	//Establish handler for timer signal.
 	TIMER_signalHandler();
 	//Block timer signal temporarily
