@@ -21,4 +21,4 @@ Timer.o: Timer.c
 
 
 clean:
-	rm *o hello
+	rm *o all
