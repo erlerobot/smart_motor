@@ -1,12 +1,12 @@
 <map id="TIMER_signalHandler" name="TIMER_signalHandler">
-<area shape="rect" id="node2" href="$adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="200,107,299,133"/>
-<area shape="rect" id="node3" href="$adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="347,31,475,57"/>
-<area shape="rect" id="node9" href="$adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="349,81,472,108"/>
-<area shape="rect" id="node10" href="$adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="349,132,472,159"/>
-<area shape="rect" id="node11" href="$adc_8c.html#a8aa0fa26eb2a980b9379f5ce18e44bcb" title="ADC_readVoltage" alt="" coords="348,183,473,209"/>
-<area shape="rect" id="node4" href="$ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="523,31,737,57"/>
-<area shape="rect" id="node5" href="$ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="785,5,944,32"/>
-<area shape="rect" id="node7" href="$ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="786,56,943,83"/>
-<area shape="rect" id="node6" href="$i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="992,5,1104,32"/>
-<area shape="rect" id="node8" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="993,56,1103,83"/>
+<area shape="rect" id="node2" href="$adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="200,81,299,108"/>
+<area shape="rect" id="node3" href="$adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="347,5,475,32"/>
+<area shape="rect" id="node9" href="$adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="349,56,472,83"/>
+<area shape="rect" id="node10" href="$adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="349,107,472,133"/>
+<area shape="rect" id="node11" href="$adc_8c.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="354,157,467,184"/>
+<area shape="rect" id="node4" href="$ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="523,81,737,108"/>
+<area shape="rect" id="node5" href="$ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="785,56,944,83"/>
+<area shape="rect" id="node7" href="$ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="786,107,943,133"/>
+<area shape="rect" id="node6" href="$i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="992,56,1104,83"/>
+<area shape="rect" id="node8" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="993,107,1103,133"/>
 </map>

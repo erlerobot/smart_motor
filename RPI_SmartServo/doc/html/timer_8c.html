@@ -98,20 +98,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Implementation for timer module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="timer_8h_source.html">timer.h</a>&quot;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="timer_8h_source.html">timer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="adc_8h_source.html">adc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">../../config.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for timer.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="timer_8c__incl.png" border="0" usemap="#_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2timer_8c" alt=""/></div>
 <map name="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2timer_8c" id="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2timer_8c">
-<area shape="rect" id="node2" href="timer_8h.html" title="Header for timer module. " alt="" coords="5,124,68,151"/>
-<area shape="rect" id="node8" href="adc_8h.html" title="Header for the adc module. " alt="" coords="492,124,547,151"/>
+<area shape="rect" id="node7" href="timer_8h.html" title="Header for timer module. " alt="" coords="405,124,467,151"/>
+<area shape="rect" id="node8" href="adc_8h.html" title="Header for the adc module. " alt="" coords="491,124,546,151"/>
+<area shape="rect" id="node10" href="config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="571,124,661,151"/>
 </map>
 </div>
 </div>
@@ -170,7 +172,7 @@ sigset_t&#160;</td><td class="memItemRight" valign="bottom"><b>mask</b></td></tr
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { perror(msg); exit(EXIT_FAILURE); \</div><div class="line">                        } <span class="keywordflow">while</span> (0)</div></div><!-- fragment -->
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00034">34</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00035">35</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 </div>
 </div>
@@ -198,7 +200,7 @@ sigset_t&#160;</td><td class="memItemRight" valign="bottom"><b>mask</b></td></tr
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00051">51</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00052">52</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -236,27 +238,27 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00152">152</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00154">154</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="timer_8c_a3332c4ca088be34086661be1c1f43878_cgraph.png" border="0" usemap="#timer_8c_a3332c4ca088be34086661be1c1f43878_cgraph" alt=""/></div>
 <map name="timer_8c_a3332c4ca088be34086661be1c1f43878_cgraph" id="timer_8c_a3332c4ca088be34086661be1c1f43878_cgraph">
-<area shape="rect" id="node2" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="140,107,287,133"/>
-<area shape="rect" id="node13" href="timer_8c.html#a9ee20e1b1c4608bca7f44fb9c382eb37" title="TIMER_signalBlock" alt="" coords="146,157,281,184"/>
-<area shape="rect" id="node14" href="timer_8c.html#aa3c867a93de00dfe97b5393f635b9de7" title="TIMER_create" alt="" coords="161,208,265,235"/>
-<area shape="rect" id="node15" href="timer_8c.html#a3377fa6877a42c5719b02ba3870a3de7" title="TIMER_signalUnblock" alt="" coords="139,259,288,285"/>
-<area shape="rect" id="node3" href="adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="336,107,435,133"/>
-<area shape="rect" id="node4" href="adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="483,31,611,57"/>
-<area shape="rect" id="node10" href="adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="485,81,608,108"/>
-<area shape="rect" id="node11" href="adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="485,132,608,159"/>
-<area shape="rect" id="node12" href="adc_8c.html#a8aa0fa26eb2a980b9379f5ce18e44bcb" title="ADC_readVoltage" alt="" coords="484,183,609,209"/>
-<area shape="rect" id="node5" href="ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="659,31,873,57"/>
-<area shape="rect" id="node6" href="ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="921,5,1080,32"/>
-<area shape="rect" id="node8" href="ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="922,56,1079,83"/>
-<area shape="rect" id="node7" href="i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="1128,5,1240,32"/>
-<area shape="rect" id="node9" href="i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="1129,56,1239,83"/>
+<area shape="rect" id="node2" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="140,81,287,108"/>
+<area shape="rect" id="node13" href="timer_8c.html#a9ee20e1b1c4608bca7f44fb9c382eb37" title="TIMER_signalBlock" alt="" coords="146,132,281,159"/>
+<area shape="rect" id="node14" href="timer_8c.html#aa3c867a93de00dfe97b5393f635b9de7" title="TIMER_create" alt="" coords="161,183,265,209"/>
+<area shape="rect" id="node15" href="timer_8c.html#a3377fa6877a42c5719b02ba3870a3de7" title="TIMER_signalUnblock" alt="" coords="139,233,288,260"/>
+<area shape="rect" id="node3" href="adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="336,81,435,108"/>
+<area shape="rect" id="node4" href="adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="483,5,611,32"/>
+<area shape="rect" id="node10" href="adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="485,56,608,83"/>
+<area shape="rect" id="node11" href="adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="485,107,608,133"/>
+<area shape="rect" id="node12" href="adc_8c.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="490,157,603,184"/>
+<area shape="rect" id="node5" href="ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="659,81,873,108"/>
+<area shape="rect" id="node6" href="ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="921,56,1080,83"/>
+<area shape="rect" id="node8" href="ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="922,107,1079,133"/>
+<area shape="rect" id="node7" href="i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="1128,56,1240,83"/>
+<area shape="rect" id="node9" href="i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="1129,107,1239,133"/>
 </map>
 </div>
 </p>
@@ -289,7 +291,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00111">111</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00112">112</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -320,23 +322,23 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00087">87</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00088">88</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="timer_8c_a50a083c41dc57b0dbd91cf640b0ed955_cgraph.png" border="0" usemap="#timer_8c_a50a083c41dc57b0dbd91cf640b0ed955_cgraph" alt=""/></div>
 <map name="timer_8c_a50a083c41dc57b0dbd91cf640b0ed955_cgraph" id="timer_8c_a50a083c41dc57b0dbd91cf640b0ed955_cgraph">
-<area shape="rect" id="node2" href="adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="200,107,299,133"/>
-<area shape="rect" id="node3" href="adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="347,31,475,57"/>
-<area shape="rect" id="node9" href="adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="349,81,472,108"/>
-<area shape="rect" id="node10" href="adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="349,132,472,159"/>
-<area shape="rect" id="node11" href="adc_8c.html#a8aa0fa26eb2a980b9379f5ce18e44bcb" title="ADC_readVoltage" alt="" coords="348,183,473,209"/>
-<area shape="rect" id="node4" href="ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="523,31,737,57"/>
-<area shape="rect" id="node5" href="ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="785,5,944,32"/>
-<area shape="rect" id="node7" href="ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="786,56,943,83"/>
-<area shape="rect" id="node6" href="i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="992,5,1104,32"/>
-<area shape="rect" id="node8" href="i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="993,56,1103,83"/>
+<area shape="rect" id="node2" href="adc_8c.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="200,81,299,108"/>
+<area shape="rect" id="node3" href="adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="347,5,475,32"/>
+<area shape="rect" id="node9" href="adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="349,56,472,83"/>
+<area shape="rect" id="node10" href="adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="349,107,472,133"/>
+<area shape="rect" id="node11" href="adc_8c.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="354,157,467,184"/>
+<area shape="rect" id="node4" href="ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="523,81,737,108"/>
+<area shape="rect" id="node5" href="ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="785,56,944,83"/>
+<area shape="rect" id="node7" href="ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="786,107,943,133"/>
+<area shape="rect" id="node6" href="i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="992,56,1104,83"/>
+<area shape="rect" id="node8" href="i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="993,107,1103,133"/>
 </map>
 </div>
 </p>
@@ -370,7 +372,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="timer_8c_source.html#l00132">132</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
+<p>Definition at line <a class="el" href="timer_8c_source.html#l00133">133</a> of file <a class="el" href="timer_8c_source.html">timer.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>

@@ -1,0 +1,7 @@
+<map id="ADC_readBattery" name="ADC_readBattery">
+<area shape="rect" id="node2" href="$ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="176,31,391,57"/>
+<area shape="rect" id="node3" href="$ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="439,5,597,32"/>
+<area shape="rect" id="node5" href="$ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="439,56,597,83"/>
+<area shape="rect" id="node4" href="$i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="645,5,757,32"/>
+<area shape="rect" id="node6" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="646,56,757,83"/>
+</map>

@@ -1,11 +1,11 @@
 <map id="ADC_handler" name="ADC_handler">
-<area shape="rect" id="node2" href="$adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="152,31,280,57"/>
-<area shape="rect" id="node8" href="$adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="155,81,277,108"/>
-<area shape="rect" id="node9" href="$adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="155,132,277,159"/>
-<area shape="rect" id="node10" href="$adc_8c.html#a8aa0fa26eb2a980b9379f5ce18e44bcb" title="ADC_readVoltage" alt="" coords="153,183,279,209"/>
-<area shape="rect" id="node3" href="$ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="328,31,543,57"/>
-<area shape="rect" id="node4" href="$ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="591,5,749,32"/>
-<area shape="rect" id="node6" href="$ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="591,56,749,83"/>
-<area shape="rect" id="node5" href="$i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="797,5,909,32"/>
-<area shape="rect" id="node7" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="798,56,909,83"/>
+<area shape="rect" id="node2" href="$adc_8c.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="152,5,280,32"/>
+<area shape="rect" id="node8" href="$adc_8c.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="155,56,277,83"/>
+<area shape="rect" id="node9" href="$adc_8c.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="155,107,277,133"/>
+<area shape="rect" id="node10" href="$adc_8c.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="159,157,273,184"/>
+<area shape="rect" id="node3" href="$ads1115_8c.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="328,81,543,108"/>
+<area shape="rect" id="node4" href="$ads1115_8c.html#aba696fabe301566cbfeabc48d0c57129" title="ADS1115_writeRegister" alt="" coords="591,56,749,83"/>
+<area shape="rect" id="node6" href="$ads1115_8c.html#abda5e215e9bd6f83c17ee68f701bfe05" title="ADS1115_readRegister" alt="" coords="591,107,749,133"/>
+<area shape="rect" id="node5" href="$i2c_8c.html#adcff58d2a6bf9e191274fb223548d5cb" title="I2C_writeReg16" alt="" coords="797,56,909,83"/>
+<area shape="rect" id="node7" href="$i2c_8c.html#a389f4aac069e4ca913df90c4ec1eb466" title="I2C_readReg16" alt="" coords="798,107,909,133"/>
 </map>

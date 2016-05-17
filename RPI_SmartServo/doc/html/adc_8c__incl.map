@@ -1,5 +1,6 @@
 <map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/adc.c" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/adc.c">
-<area shape="rect" id="node2" href="$adc_8h.html" title="Header for the adc module. " alt="" coords="45,124,99,151"/>
-<area shape="rect" id="node6" href="$ads1115_8h.html" title="Header for the ads1115 adc converter module. " alt="" coords="209,124,292,151"/>
-<area shape="rect" id="node7" href="$registers_8h.html" title="Registers header. " alt="" coords="316,124,399,151"/>
+<area shape="rect" id="node4" href="$adc_8h.html" title="Header for the adc module. " alt="" coords="108,124,163,151"/>
+<area shape="rect" id="node6" href="$ads1115_8h.html" title="Header for the ads1115 adc converter module. " alt="" coords="188,124,270,151"/>
+<area shape="rect" id="node7" href="$registers_8h.html" title="Registers header. " alt="" coords="294,124,377,151"/>
+<area shape="rect" id="node8" href="$config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="401,124,492,151"/>
 </map>

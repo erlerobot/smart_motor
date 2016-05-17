@@ -97,18 +97,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Implementation for pwm module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="pwm_8h_source.html">pwm.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="registers_8h_source.html">registers.h</a>&quot;</code><br />
-<code>#include &lt;wiringPi.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wiringPi.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">../../config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pwm_8h_source.html">pwm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="registers_8h_source.html">registers.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for pwm.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="pwm_8c__incl.png" border="0" usemap="#_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pwm_8c" alt=""/></div>
 <map name="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pwm_8c" id="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pwm_8c">
-<area shape="rect" id="node2" href="pwm_8h.html" title="Header for pwm module. " alt="" coords="5,124,65,151"/>
-<area shape="rect" id="node4" href="registers_8h.html" title="Registers header. " alt="" coords="141,124,223,151"/>
+<area shape="rect" id="node6" href="config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="311,124,402,151"/>
+<area shape="rect" id="node7" href="pwm_8h.html" title="Header for pwm module. " alt="" coords="426,124,486,151"/>
+<area shape="rect" id="node8" href="registers_8h.html" title="Registers header. " alt="" coords="511,124,594,151"/>
 </map>
 </div>
 </div>
@@ -116,30 +119,9 @@ Include dependency graph for pwm.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac5eaff3aaedd542ec3c12b37c4bab0ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5eaff3aaedd542ec3c12b37c4bab0ff"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PWM_RANGE</b>&#160;&#160;&#160;1024</td></tr>
-<tr class="separator:ac5eaff3aaedd542ec3c12b37c4bab0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d90effd67dbe1b801a7cf7316187caf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d90effd67dbe1b801a7cf7316187caf"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PWM0_GPIO</b>&#160;&#160;&#160;12</td></tr>
-<tr class="separator:a6d90effd67dbe1b801a7cf7316187caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a811881def2c378cce9255b00624eeb1b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a811881def2c378cce9255b00624eeb1b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PWM1_GPIO</b>&#160;&#160;&#160;13</td></tr>
-<tr class="separator:a811881def2c378cce9255b00624eeb1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a101ebf20dafde27e3c7fe53ae140af94"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a101ebf20dafde27e3c7fe53ae140af94"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PWM_CLOCK_DIV</b>&#160;&#160;&#160;2</td></tr>
-<tr class="separator:a101ebf20dafde27e3c7fe53ae140af94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22c9dd6bfbfa7ed8ab46d16b465c895c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22c9dd6bfbfa7ed8ab46d16b465c895c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EN_A_GPIO</b>&#160;&#160;&#160;16</td></tr>
-<tr class="separator:a22c9dd6bfbfa7ed8ab46d16b465c895c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20bf6c1c1b0f512c43d51046a71e7982"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20bf6c1c1b0f512c43d51046a71e7982"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>EN_B_GPIO</b>&#160;&#160;&#160;19</td></tr>
-<tr class="separator:a20bf6c1c1b0f512c43d51046a71e7982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5221181f089200cfbbc50c3e5debd1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5221181f089200cfbbc50c3e5debd1c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>PWM_DUTY_CYCLE</b>(div,  pwm)&#160;&#160;&#160;(uint16_t) (((uint32_t) pwm * ((uint32_t) div  - 1)) / 255)</td></tr>
 <tr class="separator:ae5221181f089200cfbbc50c3e5debd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850290a622822618b3cfb2fb46f8d269"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a850290a622822618b3cfb2fb46f8d269"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_POSITION</b>&#160;&#160;&#160;(1023)</td></tr>
-<tr class="separator:a850290a622822618b3cfb2fb46f8d269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -176,7 +158,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="pwm_8c_source.html#l00154">154</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
+<p>Definition at line <a class="el" href="pwm_8c_source.html#l00149">149</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -207,7 +189,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="pwm_8c_source.html#l00265">265</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
+<p>Definition at line <a class="el" href="pwm_8c_source.html#l00255">255</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -256,7 +238,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>input position and pwm value. </dd></dl>
 
-<p>Definition at line <a class="el" href="pwm_8c_source.html#l00201">201</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
+<p>Definition at line <a class="el" href="pwm_8c_source.html#l00195">195</a> of file <a class="el" href="pwm_8c_source.html">pwm.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>

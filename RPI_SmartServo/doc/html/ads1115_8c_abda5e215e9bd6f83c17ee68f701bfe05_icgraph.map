@@ -1,8 +1,11 @@
 <map id="ADS1115_readRegister" name="ADS1115_readRegister">
-<area shape="rect" id="node2" href="$ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="211,5,425,32"/>
+<area shape="rect" id="node2" href="$ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="211,81,425,108"/>
 <area shape="rect" id="node3" href="$adc_8h.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="473,5,601,32"/>
-<area shape="rect" id="node4" href="$adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="649,5,748,32"/>
-<area shape="rect" id="node5" href="$timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="796,5,943,32"/>
-<area shape="rect" id="node6" href="$timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="991,5,1076,32"/>
-<area shape="rect" id="node7" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1124,5,1175,32"/>
+<area shape="rect" id="node8" href="$adc_8h.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="481,56,594,83"/>
+<area shape="rect" id="node9" href="$adc_8h.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="476,107,599,133"/>
+<area shape="rect" id="node10" href="$adc_8h.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="476,157,599,184"/>
+<area shape="rect" id="node4" href="$adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="649,81,748,108"/>
+<area shape="rect" id="node5" href="$timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="796,81,943,108"/>
+<area shape="rect" id="node6" href="$timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="991,81,1076,108"/>
+<area shape="rect" id="node7" href="$main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1124,81,1175,108"/>
 </map>

@@ -1,4 +1,5 @@
 <map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/timer.c" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/timer.c">
-<area shape="rect" id="node2" href="$timer_8h.html" title="Header for timer module. " alt="" coords="5,124,68,151"/>
-<area shape="rect" id="node8" href="$adc_8h.html" title="Header for the adc module. " alt="" coords="492,124,547,151"/>
+<area shape="rect" id="node7" href="$timer_8h.html" title="Header for timer module. " alt="" coords="405,124,467,151"/>
+<area shape="rect" id="node8" href="$adc_8h.html" title="Header for the adc module. " alt="" coords="491,124,546,151"/>
+<area shape="rect" id="node10" href="$config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="571,124,661,151"/>
 </map>

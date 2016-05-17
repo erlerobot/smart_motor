@@ -1,4 +1,5 @@
 <map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/pwm.c" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/Framework/modules/pwm.c">
-<area shape="rect" id="node2" href="$pwm_8h.html" title="Header for pwm module. " alt="" coords="5,124,65,151"/>
-<area shape="rect" id="node4" href="$registers_8h.html" title="Registers header. " alt="" coords="141,124,223,151"/>
+<area shape="rect" id="node6" href="$config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="311,124,402,151"/>
+<area shape="rect" id="node7" href="$pwm_8h.html" title="Header for pwm module. " alt="" coords="426,124,486,151"/>
+<area shape="rect" id="node8" href="$registers_8h.html" title="Registers header. " alt="" coords="511,124,594,151"/>
 </map>

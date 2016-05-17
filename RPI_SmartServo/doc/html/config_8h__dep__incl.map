@@ -1,0 +1,10 @@
+<map id="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/config.h" name="D:/Mondragon/Proyecto_ERLE/Código/Repositorio/smart_motor/RPI_SmartServo/config.h">
+<area shape="rect" id="node2" href="$adc_8c.html" title="Adc module implementation. It works like an interface for different adc&#39;s, now ads1115 adc is used..." alt="" coords="5,124,204,195"/>
+<area shape="rect" id="node3" href="$ads1115_8c.html" title="Implementation of the ads1115 adc converter module. " alt="" coords="228,124,435,195"/>
+<area shape="rect" id="node4" href="$pid_8c.html" title="PID module implementation. " alt="" coords="459,124,657,195"/>
+<area shape="rect" id="node5" href="$pwm_8c.html" title="Implementation for pwm module. " alt="" coords="681,124,880,195"/>
+<area shape="rect" id="node6" href="$rpiservo_8c.html" title="Implementation for rpiservo module, interface for communication. " alt="" coords="905,124,1107,195"/>
+<area shape="rect" id="node7" href="$server_8c_source.html" title="D:/Mondragon/Proyecto\l_ERLE/Código/Repositorio\l/smart_motor/RPI_SmartServo\l/Framework/modules/server.c" alt="" coords="1132,124,1331,195"/>
+<area shape="rect" id="node8" href="$timer_8c.html" title="Implementation for timer module. " alt="" coords="1355,124,1553,195"/>
+<area shape="rect" id="node9" href="$main_8c.html" title="main file " alt="" coords="1577,131,1819,187"/>
+</map>

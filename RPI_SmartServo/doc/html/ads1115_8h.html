@@ -123,12 +123,12 @@ Macros</h2></td></tr>
 <tr class="memitem:a0da8f861d3e8a2c7ab30057b55ff2449"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0da8f861d3e8a2c7ab30057b55ff2449"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>POSITION_CHANNEL</b>&#160;&#160;&#160;(0x0)</td></tr>
 <tr class="separator:a0da8f861d3e8a2c7ab30057b55ff2449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd8667fc25046d473ccd587a667edac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4dd8667fc25046d473ccd587a667edac"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TEMP_CHANNEL</b>&#160;&#160;&#160;(0x1)</td></tr>
+<tr class="separator:a4dd8667fc25046d473ccd587a667edac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a501e37e951966e98511c9c1eb0c7d397"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a501e37e951966e98511c9c1eb0c7d397"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CURRENT_CHANNEL</b>&#160;&#160;&#160;(0x1)</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CURRENT_CHANNEL</b>&#160;&#160;&#160;(0x2)</td></tr>
 <tr class="separator:a501e37e951966e98511c9c1eb0c7d397"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ad11a109af35fa8de5e0b1b3e60142b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ad11a109af35fa8de5e0b1b3e60142b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>VOLTAGE_CHANNEL</b>&#160;&#160;&#160;(0x2)</td></tr>
-<tr class="separator:a3ad11a109af35fa8de5e0b1b3e60142b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3be0db38f35febf791b42c29d293fe09"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3be0db38f35febf791b42c29d293fe09"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>BATTERY_CHANNEL</b>&#160;&#160;&#160;(0x3)</td></tr>
 <tr class="separator:a3be0db38f35febf791b42c29d293fe09"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -323,7 +323,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Gain value.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00118">118</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00138">138</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 </div>
 </div>
@@ -350,9 +350,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>See if a bitShift is need for noise and a conversion delay. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>See if a bitShift is need for noise and a conversion delay. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00088">88</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00109">109</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -402,7 +402,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Single read of 16 bits value.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00131">131</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00151">151</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -423,10 +423,13 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="ads1115_8h_a081733a06333455eeba1c38ef8a1c940_icgraph.png" border="0" usemap="#ads1115_8h_a081733a06333455eeba1c38ef8a1c940_icgraph" alt=""/></div>
 <map name="ads1115_8h_a081733a06333455eeba1c38ef8a1c940_icgraph" id="ads1115_8h_a081733a06333455eeba1c38ef8a1c940_icgraph">
 <area shape="rect" id="node2" href="adc_8h.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="268,5,396,32"/>
-<area shape="rect" id="node3" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="444,5,543,32"/>
-<area shape="rect" id="node4" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="591,5,737,32"/>
-<area shape="rect" id="node5" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="785,5,871,32"/>
-<area shape="rect" id="node6" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="919,5,969,32"/>
+<area shape="rect" id="node7" href="adc_8h.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="275,56,389,83"/>
+<area shape="rect" id="node8" href="adc_8h.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="271,107,393,133"/>
+<area shape="rect" id="node9" href="adc_8h.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="271,157,393,184"/>
+<area shape="rect" id="node3" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="444,81,543,108"/>
+<area shape="rect" id="node4" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="591,81,737,108"/>
+<area shape="rect" id="node5" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="785,81,871,108"/>
+<area shape="rect" id="node6" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="919,81,969,108"/>
 </map>
 </div>
 </p>
@@ -457,7 +460,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00107">107</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00127">127</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 </div>
 </div>

@@ -96,18 +96,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Implementation of the ads1115 adc converter module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="ads1115_8h_source.html">ads1115.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;wiringPi.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="ads1115_8h_source.html">ads1115.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="i2c_8h_source.html">i2c.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">../../config.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ads1115.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="ads1115_8c__incl.png" border="0" usemap="#_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2ads1115_8c" alt=""/></div>
 <map name="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2ads1115_8c" id="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2ads1115_8c">
-<area shape="rect" id="node2" href="ads1115_8h.html" title="Header for the ads1115 adc converter module. " alt="" coords="5,124,88,151"/>
-<area shape="rect" id="node6" href="i2c_8h.html" title="Header I2C module for communication. " alt="" coords="352,124,403,151"/>
+<area shape="rect" id="node5" href="ads1115_8h.html" title="Header for the ads1115 adc converter module. " alt="" coords="216,124,299,151"/>
+<area shape="rect" id="node6" href="i2c_8h.html" title="Header I2C module for communication. " alt="" coords="323,124,374,151"/>
+<area shape="rect" id="node7" href="config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="398,124,488,151"/>
 </map>
 </div>
 </div>
@@ -153,7 +155,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Gain value.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00118">118</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00138">138</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 </div>
 </div>
@@ -179,9 +181,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>See if a bitShift is need for noise and a conversion delay. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>See if a bitShift is need for noise and a conversion delay. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00088">88</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00109">109</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -230,7 +232,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Single read of 16 bits value.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00131">131</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00151">151</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -251,10 +253,13 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="ads1115_8c_a081733a06333455eeba1c38ef8a1c940_icgraph.png" border="0" usemap="#ads1115_8c_a081733a06333455eeba1c38ef8a1c940_icgraph" alt=""/></div>
 <map name="ads1115_8c_a081733a06333455eeba1c38ef8a1c940_icgraph" id="ads1115_8c_a081733a06333455eeba1c38ef8a1c940_icgraph">
 <area shape="rect" id="node2" href="adc_8h.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="268,5,396,32"/>
-<area shape="rect" id="node3" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="444,5,543,32"/>
-<area shape="rect" id="node4" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="591,5,737,32"/>
-<area shape="rect" id="node5" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="785,5,871,32"/>
-<area shape="rect" id="node6" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="919,5,969,32"/>
+<area shape="rect" id="node7" href="adc_8h.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="275,56,389,83"/>
+<area shape="rect" id="node8" href="adc_8h.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="271,107,393,133"/>
+<area shape="rect" id="node9" href="adc_8h.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="271,157,393,184"/>
+<area shape="rect" id="node3" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="444,81,543,108"/>
+<area shape="rect" id="node4" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="591,81,737,108"/>
+<area shape="rect" id="node5" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="785,81,871,108"/>
+<area shape="rect" id="node6" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="919,81,969,108"/>
 </map>
 </div>
 </p>
@@ -295,7 +300,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The I2C read value is swap to have a correct value. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00068">68</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00079">79</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -312,12 +317,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ads1115_8c_abda5e215e9bd6f83c17ee68f701bfe05_icgraph.png" border="0" usemap="#ads1115_8c_abda5e215e9bd6f83c17ee68f701bfe05_icgraph" alt=""/></div>
 <map name="ads1115_8c_abda5e215e9bd6f83c17ee68f701bfe05_icgraph" id="ads1115_8c_abda5e215e9bd6f83c17ee68f701bfe05_icgraph">
-<area shape="rect" id="node2" href="ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="211,5,425,32"/>
+<area shape="rect" id="node2" href="ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="211,81,425,108"/>
 <area shape="rect" id="node3" href="adc_8h.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="473,5,601,32"/>
-<area shape="rect" id="node4" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="649,5,748,32"/>
-<area shape="rect" id="node5" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="796,5,943,32"/>
-<area shape="rect" id="node6" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="991,5,1076,32"/>
-<area shape="rect" id="node7" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1124,5,1175,32"/>
+<area shape="rect" id="node8" href="adc_8h.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="481,56,594,83"/>
+<area shape="rect" id="node9" href="adc_8h.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="476,107,599,133"/>
+<area shape="rect" id="node10" href="adc_8h.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="476,157,599,184"/>
+<area shape="rect" id="node4" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="649,81,748,108"/>
+<area shape="rect" id="node5" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="796,81,943,108"/>
+<area shape="rect" id="node6" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="991,81,1076,108"/>
+<area shape="rect" id="node7" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1124,81,1175,108"/>
 </map>
 </div>
 </p>
@@ -347,7 +355,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00107">107</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00127">127</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 </div>
 </div>
@@ -393,7 +401,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00053">53</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
+<p>Definition at line <a class="el" href="ads1115_8c_source.html#l00058">58</a> of file <a class="el" href="ads1115_8c_source.html">ads1115.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -410,12 +418,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ads1115_8c_aba696fabe301566cbfeabc48d0c57129_icgraph.png" border="0" usemap="#ads1115_8c_aba696fabe301566cbfeabc48d0c57129_icgraph" alt=""/></div>
 <map name="ads1115_8c_aba696fabe301566cbfeabc48d0c57129_icgraph" id="ads1115_8c_aba696fabe301566cbfeabc48d0c57129_icgraph">
-<area shape="rect" id="node2" href="ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="212,5,427,32"/>
+<area shape="rect" id="node2" href="ads1115_8h.html#a081733a06333455eeba1c38ef8a1c940" title="ADS1115_readADC_singleEnded" alt="" coords="212,81,427,108"/>
 <area shape="rect" id="node3" href="adc_8h.html#af87956e636210aac459444d65d58f037" title="ADC_readPosition" alt="" coords="475,5,603,32"/>
-<area shape="rect" id="node4" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="651,5,749,32"/>
-<area shape="rect" id="node5" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="797,5,944,32"/>
-<area shape="rect" id="node6" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="992,5,1077,32"/>
-<area shape="rect" id="node7" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1125,5,1176,32"/>
+<area shape="rect" id="node8" href="adc_8h.html#ae0f748a0e263bafb18557d50790799b7" title="ADC_readTemp" alt="" coords="482,56,595,83"/>
+<area shape="rect" id="node9" href="adc_8h.html#aef61f5015e1d302a9d1ec4362f7a1a7d" title="ADC_readCurrent" alt="" coords="477,107,600,133"/>
+<area shape="rect" id="node10" href="adc_8h.html#ac6e1ada47395cd102f5427923326dab3" title="ADC_readBattery" alt="" coords="477,157,600,184"/>
+<area shape="rect" id="node4" href="adc_8h.html#ab978d52e6db48a9c44272a1a8369109f" title="ADC_handler" alt="" coords="651,81,749,108"/>
+<area shape="rect" id="node5" href="timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955" title="TIMER_signalHandler" alt="" coords="797,81,944,108"/>
+<area shape="rect" id="node6" href="timer_8h.html#a3332c4ca088be34086661be1c1f43878" title="TIMER_init" alt="" coords="992,81,1077,108"/>
+<area shape="rect" id="node7" href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1125,81,1176,108"/>
 </map>
 </div>
 </p>

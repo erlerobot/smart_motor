@@ -88,7 +88,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">pid.c File Reference</div>  </div>
@@ -97,55 +96,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>PID module implementation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="pid_8h_source.html">pid.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="registers_8h_source.html">registers.h</a>&quot;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">../../config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pid_8h_source.html">pid.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="registers_8h_source.html">registers.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for pid.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="pid_8c__incl.png" border="0" usemap="#_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pid_8c" alt=""/></div>
 <map name="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pid_8c" id="_d_1_2_mondragon_2_proyecto___e_r_l_e_2_c_xC3_xB3digo_2_repositorio_2smart__motor_2_r_p_i___smart_servo_2_framework_2modules_2pid_8c">
-<area shape="rect" id="node2" href="pid_8h.html" title="Header for PID module implementation. " alt="" coords="5,124,56,151"/>
-<area shape="rect" id="node4" href="registers_8h.html" title="Registers header. " alt="" coords="131,124,213,151"/>
+<area shape="rect" id="node4" href="config_8h.html" title="Configuration file for RPI_SmartServo. " alt="" coords="111,124,201,151"/>
+<area shape="rect" id="node5" href="pid_8h.html" title="Header for PID module implementation. " alt="" coords="225,124,276,151"/>
+<area shape="rect" id="node6" href="registers_8h.html" title="Registers header. " alt="" coords="300,124,383,151"/>
 </map>
 </div>
 </div>
 <p><a href="pid_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ae1933db0f5cd1f42ad9d70e345b5d5b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1933db0f5cd1f42ad9d70e345b5d5b6"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MIN_POSITION</b>&#160;&#160;&#160;(0)</td></tr>
-<tr class="separator:ae1933db0f5cd1f42ad9d70e345b5d5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850290a622822618b3cfb2fb46f8d269"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a850290a622822618b3cfb2fb46f8d269"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_POSITION</b>&#160;&#160;&#160;(1023)</td></tr>
-<tr class="separator:a850290a622822618b3cfb2fb46f8d269"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38afea15614bc71fe955c04b1a28a853"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38afea15614bc71fe955c04b1a28a853"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_OUTPUT</b>&#160;&#160;&#160;(255)</td></tr>
-<tr class="separator:a38afea15614bc71fe955c04b1a28a853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0779b886e07264f0779a80cab68e75b7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0779b886e07264f0779a80cab68e75b7"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>MIN_OUTPUT</b>&#160;&#160;&#160;(-MAX_OUTPUT)</td></tr>
-<tr class="separator:a0779b886e07264f0779a80cab68e75b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a189d6d59ec599a9ec53608cc3fd2b940"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a189d6d59ec599a9ec53608cc3fd2b940"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_PID_DEADBAND</b>&#160;&#160;&#160;0x01</td></tr>
-<tr class="separator:a189d6d59ec599a9ec53608cc3fd2b940"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3593dabed4b2eff8e9f7c73088853bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3593dabed4b2eff8e9f7c73088853bb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_PID_PGAIN</b>&#160;&#160;&#160;0x0600</td></tr>
-<tr class="separator:ab3593dabed4b2eff8e9f7c73088853bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf9cdf1f42b924088ad9bef906bfb7e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf9cdf1f42b924088ad9bef906bfb7e0"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_PID_DGAIN</b>&#160;&#160;&#160;0x0C00</td></tr>
-<tr class="separator:adf9cdf1f42b924088ad9bef906bfb7e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0459007ac30598963eb6fe596d4e534c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0459007ac30598963eb6fe596d4e534c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_PID_IGAIN</b>&#160;&#160;&#160;0x0000</td></tr>
-<tr class="separator:a0459007ac30598963eb6fe596d4e534c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af89d287dd6cd8931dd9544088a991b85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af89d287dd6cd8931dd9544088a991b85"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_MIN_SEEK</b>&#160;&#160;&#160;0x0060</td></tr>
-<tr class="separator:af89d287dd6cd8931dd9544088a991b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac12ca83366ee84e3e98c1c0e70abc2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ac12ca83366ee84e3e98c1c0e70abc2"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEFAULT_MAX_SEEK</b>&#160;&#160;&#160;0x03A0</td></tr>
-<tr class="separator:a3ac12ca83366ee84e3e98c1c0e70abc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a68a0014454759e057f960de252e23119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pid_8c.html#a68a0014454759e057f960de252e23119">PID_init</a> (void)</td></tr>
@@ -181,7 +149,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="pid_8c_source.html#l00057">57</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
+<p>Definition at line <a class="el" href="pid_8c_source.html#l00042">42</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -228,7 +196,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>pwm value (-255 to 255).</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>position (0-1024) </dd></dl>
 
-<p>Definition at line <a class="el" href="pid_8c_source.html#l00107">107</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
+<p>Definition at line <a class="el" href="pid_8c_source.html#l00092">92</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -259,7 +227,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>None.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>None. </dd></dl>
 
-<p>Definition at line <a class="el" href="pid_8c_source.html#l00076">76</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
+<p>Definition at line <a class="el" href="pid_8c_source.html#l00061">61</a> of file <a class="el" href="pid_8c_source.html">pid.c</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>

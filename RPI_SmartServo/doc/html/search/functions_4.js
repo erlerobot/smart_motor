@@ -1,8 +1,17 @@
 var searchData=
 [
-  ['timer_5fcreate',['TIMER_create',['../timer_8c.html#aa3c867a93de00dfe97b5393f635b9de7',1,'timer.c']]],
-  ['timer_5finit',['TIMER_init',['../timer_8c.html#a3332c4ca088be34086661be1c1f43878',1,'TIMER_init(long long freq_nanosecs):&#160;timer.c'],['../timer_8h.html#a3332c4ca088be34086661be1c1f43878',1,'TIMER_init(long long freq_nanosecs):&#160;timer.c']]],
-  ['timer_5fsignalblock',['TIMER_signalBlock',['../timer_8c.html#a9ee20e1b1c4608bca7f44fb9c382eb37',1,'timer.c']]],
-  ['timer_5fsignalhandler',['TIMER_signalHandler',['../timer_8c.html#a50a083c41dc57b0dbd91cf640b0ed955',1,'timer.c']]],
-  ['timer_5fsignalunblock',['TIMER_signalUnblock',['../timer_8c.html#a3377fa6877a42c5719b02ba3870a3de7',1,'timer.c']]]
+  ['rpiservo_5fgetbattery',['RPISERVO_getBattery',['../rpiservo_8c.html#a3182cf137d8d9f80f689440c3d73bd40',1,'RPISERVO_getBattery():&#160;rpiservo.c'],['../rpiservo_8h.html#a3182cf137d8d9f80f689440c3d73bd40',1,'RPISERVO_getBattery():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetccwlimit',['RPISERVO_getCCWLimit',['../rpiservo_8c.html#aebd7f81c9ad975179dd841d703bf44e4',1,'RPISERVO_getCCWLimit():&#160;rpiservo.c'],['../rpiservo_8h.html#aebd7f81c9ad975179dd841d703bf44e4',1,'RPISERVO_getCCWLimit():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetcurrent',['RPISERVO_getCurrent',['../rpiservo_8c.html#a1eb54a25ceae2b5dd364bb05ccd6ae24',1,'RPISERVO_getCurrent():&#160;rpiservo.c'],['../rpiservo_8h.html#a1eb54a25ceae2b5dd364bb05ccd6ae24',1,'RPISERVO_getCurrent():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetcwlimit',['RPISERVO_getCWLimit',['../rpiservo_8c.html#aa56ad669d89bb9f2ee030531dd91492e',1,'RPISERVO_getCWLimit():&#160;rpiservo.c'],['../rpiservo_8h.html#aa56ad669d89bb9f2ee030531dd91492e',1,'RPISERVO_getCWLimit():&#160;rpiservo.c']]],
+  ['rpiservo_5fgeterror',['RPISERVO_getError',['../rpiservo_8c.html#a0a999a3abd6791c5455b2abf7bf6449c',1,'RPISERVO_getError():&#160;rpiservo.c'],['../rpiservo_8h.html#a0a999a3abd6791c5455b2abf7bf6449c',1,'RPISERVO_getError():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetid',['RPISERVO_getID',['../rpiservo_8c.html#affa9aae6fde63a2d3b87f9a81e22103d',1,'RPISERVO_getID():&#160;rpiservo.c'],['../rpiservo_8h.html#affa9aae6fde63a2d3b87f9a81e22103d',1,'RPISERVO_getID():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetposition',['RPISERVO_getPosition',['../rpiservo_8c.html#a2b9d6fb919300207c08a592d667e3413',1,'RPISERVO_getPosition():&#160;rpiservo.c'],['../rpiservo_8h.html#a2b9d6fb919300207c08a592d667e3413',1,'RPISERVO_getPosition():&#160;rpiservo.c']]],
+  ['rpiservo_5fgettemp',['RPISERVO_getTemp',['../rpiservo_8c.html#ac5efcb4d3ddd8a3833a7f92340e0ff23',1,'RPISERVO_getTemp():&#160;rpiservo.c'],['../rpiservo_8h.html#ac5efcb4d3ddd8a3833a7f92340e0ff23',1,'RPISERVO_getTemp():&#160;rpiservo.c']]],
+  ['rpiservo_5fgetvelocity',['RPISERVO_getVelocity',['../rpiservo_8c.html#addc1bc322dec84eb5d5d3168e2a6b633',1,'RPISERVO_getVelocity():&#160;rpiservo.c'],['../rpiservo_8h.html#addc1bc322dec84eb5d5d3168e2a6b633',1,'RPISERVO_getVelocity():&#160;rpiservo.c']]],
+  ['rpiservo_5fsetccwlimit',['RPISERVO_setCCWLimit',['../rpiservo_8c.html#ac4047d7edd2595190420b661cf5b228d',1,'RPISERVO_setCCWLimit(int degrees):&#160;rpiservo.c'],['../rpiservo_8h.html#ac4047d7edd2595190420b661cf5b228d',1,'RPISERVO_setCCWLimit(int degrees):&#160;rpiservo.c']]],
+  ['rpiservo_5fsetcwlimit',['RPISERVO_setCWLimit',['../rpiservo_8c.html#ad7375b569a5080d2d633491852fd1545',1,'RPISERVO_setCWLimit(int degrees):&#160;rpiservo.c'],['../rpiservo_8h.html#ad7375b569a5080d2d633491852fd1545',1,'RPISERVO_setCWLimit(int degrees):&#160;rpiservo.c']]],
+  ['rpiservo_5fsetgoal',['RPISERVO_setGoal',['../rpiservo_8c.html#aec3989470f14b427ff00d54ea1f02f8f',1,'RPISERVO_setGoal(int degrees):&#160;rpiservo.c'],['../rpiservo_8h.html#aec3989470f14b427ff00d54ea1f02f8f',1,'RPISERVO_setGoal(int degrees):&#160;rpiservo.c']]],
+  ['rpiservo_5fsetid',['RPISERVO_setID',['../rpiservo_8c.html#aa63391435b7f3723a5490f125b0f8897',1,'RPISERVO_setID(int device_type):&#160;rpiservo.c'],['../rpiservo_8h.html#aa63391435b7f3723a5490f125b0f8897',1,'RPISERVO_setID(int device_type):&#160;rpiservo.c']]],
+  ['rpiservo_5fsetpidconf',['RPISERVO_setPIDconf',['../rpiservo_8c.html#a64e1847f28bf3025a5f894d4bbd011b4',1,'RPISERVO_setPIDconf(int pgain, int dgain):&#160;rpiservo.c'],['../rpiservo_8h.html#a64e1847f28bf3025a5f894d4bbd011b4',1,'RPISERVO_setPIDconf(int pgain, int dgain):&#160;rpiservo.c']]]
 ];

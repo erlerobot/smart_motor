@@ -3,5 +3,7 @@
 <area shape="rect" id="node3" href="$pid_8c.html" title="PID module implementation. " alt="" coords="228,124,427,195"/>
 <area shape="rect" id="node4" href="$pwm_8c.html" title="Implementation for pwm module. " alt="" coords="451,124,649,195"/>
 <area shape="rect" id="node5" href="$registers_8c.html" title="Registers implementation. " alt="" coords="674,124,882,195"/>
-<area shape="rect" id="node6" href="$main_8c.html" title="main file " alt="" coords="907,131,1148,187"/>
+<area shape="rect" id="node6" href="$rpiservo_8c.html" title="Implementation for rpiservo module, interface for communication. " alt="" coords="906,124,1109,195"/>
+<area shape="rect" id="node7" href="$service_8c.html" title="State machine for the Server communication. " alt="" coords="1133,124,1332,195"/>
+<area shape="rect" id="node8" href="$main_8c.html" title="main file " alt="" coords="1356,131,1597,187"/>
 </map>

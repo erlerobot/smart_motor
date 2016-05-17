@@ -1,0 +1,17 @@
+<map id="SERVER_init" name="SERVER_init">
+<area shape="rect" id="node2" href="$service_8c.html#aa798473b0740baa19c72190669f5ff6c" title="SERVICE_execute" alt="" coords="153,335,285,361"/>
+<area shape="rect" id="node3" href="$rpiservo_8c.html#affa9aae6fde63a2d3b87f9a81e22103d" title="RPISERVO_getID" alt="" coords="357,5,483,32"/>
+<area shape="rect" id="node4" href="$rpiservo_8c.html#a2b9d6fb919300207c08a592d667e3413" title="RPISERVO_getPosition" alt="" coords="339,56,501,83"/>
+<area shape="rect" id="node5" href="$rpiservo_8c.html#ac5efcb4d3ddd8a3833a7f92340e0ff23" title="RPISERVO_getTemp" alt="" coords="347,107,493,133"/>
+<area shape="rect" id="node6" href="$rpiservo_8c.html#a3182cf137d8d9f80f689440c3d73bd40" title="RPISERVO_getBattery" alt="" coords="342,157,498,184"/>
+<area shape="rect" id="node7" href="$rpiservo_8c.html#a1eb54a25ceae2b5dd364bb05ccd6ae24" title="RPISERVO_getCurrent" alt="" coords="342,208,498,235"/>
+<area shape="rect" id="node8" href="$rpiservo_8c.html#a0a999a3abd6791c5455b2abf7bf6449c" title="RPISERVO_getError" alt="" coords="349,259,491,285"/>
+<area shape="rect" id="node9" href="$rpiservo_8c.html#addc1bc322dec84eb5d5d3168e2a6b633" title="RPISERVO_getVelocity" alt="" coords="339,309,501,336"/>
+<area shape="rect" id="node10" href="$rpiservo_8c.html#aa56ad669d89bb9f2ee030531dd91492e" title="RPISERVO_getCWLimit" alt="" coords="338,360,502,387"/>
+<area shape="rect" id="node11" href="$rpiservo_8c.html#aebd7f81c9ad975179dd841d703bf44e4" title="RPISERVO_getCCWLimit" alt="" coords="333,411,507,437"/>
+<area shape="rect" id="node12" href="$rpiservo_8c.html#aa63391435b7f3723a5490f125b0f8897" title="RPISERVO_setID" alt="" coords="357,461,483,488"/>
+<area shape="rect" id="node13" href="$rpiservo_8c.html#aec3989470f14b427ff00d54ea1f02f8f" title="RPISERVO_setGoal" alt="" coords="349,512,491,539"/>
+<area shape="rect" id="node14" href="$rpiservo_8c.html#ad7375b569a5080d2d633491852fd1545" title="RPISERVO_setCWLimit" alt="" coords="338,563,502,589"/>
+<area shape="rect" id="node15" href="$rpiservo_8c.html#ac4047d7edd2595190420b661cf5b228d" title="RPISERVO_setCCWLimit" alt="" coords="333,613,507,640"/>
+<area shape="rect" id="node16" href="$rpiservo_8c.html#a64e1847f28bf3025a5f894d4bbd011b4" title="RPISERVO_setPIDconf" alt="" coords="341,664,499,691"/>
+</map>
