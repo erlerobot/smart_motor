@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS =-Wall -lwiringPi -lrt -lpthread
+RM := rm -rf
 
 OBJECTS = pwm.o pid.o adc.o registers.o main.o ads1115.o i2c.o timer.o service.o server.o rpiservo.o
 OUT = SmartServo
@@ -43,4 +44,5 @@ main.o: main.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm *o hello
+	-$(RM) *.o all
+.PHONY: all clean dependents
