@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.5.0">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5498,6 +5498,17 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <sheets>
 <sheet>
 <plain>
+<text x="172.72" y="157.48" size="1.778" layer="94">Vsense = Vin - Vload
+Vout = 0.01*Vsense*Rout
+VoutMax= 0.01*(2A*5Ohms)*Rout</text>
+<text x="27.94" y="48.26" size="1.778" layer="94">Thermistor,
+19.5mV/ºC
+Vout= Tc*Ta + V0ºc= 19.5mV/ºC*Ta + 400mV</text>
+<text x="81.28" y="27.94" size="1.778" layer="94">VOut=10K/24K * 12v = 5v</text>
+<text x="43.18" y="172.72" size="1.778" layer="94">Buck Converter 12v --&gt; 5v</text>
+<text x="93.98" y="157.48" size="1.778" layer="94">150uH, 2A, 
+100mOhm Maximum DC resistance</text>
+<text x="213.36" y="134.62" size="1.778" layer="94">Imax=2A</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -5530,7 +5541,10 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 <instance part="C5" gate="G$1" x="149.86" y="139.7"/>
 <instance part="GND9" gate="1" x="236.22" y="132.08"/>
 <instance part="C6" gate="G$1" x="22.86" y="38.1"/>
-<instance part="U$7" gate="G$1" x="170.18" y="99.06"/>
+<instance part="U$7" gate="G$1" x="170.18" y="99.06" smashed="yes">
+<attribute name="VALUE" x="176.53" y="93.98" size="1.778" layer="96"/>
+<attribute name="NAME" x="176.53" y="96.52" size="1.778" layer="95"/>
+</instance>
 <instance part="U$8" gate="G$1" x="254" y="99.06" rot="MR0"/>
 <instance part="C7" gate="G$1" x="33.02" y="157.48"/>
 <instance part="C8" gate="G$1" x="91.44" y="152.4"/>
@@ -6044,4 +6058,10 @@ diameter 2.54 mm, horizontal, grid 10.16 mm</description>
 </sheets>
 </schematic>
 </drawing>
+<compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
+</compatibility>
 </eagle>
