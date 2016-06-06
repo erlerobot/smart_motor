@@ -104,7 +104,9 @@ int16_t PID_position_to_pwm(int16_t current_position)
     static int32_t pwm_output;
     static uint16_t d_gain;
     static uint16_t p_gain;
-
+//IÑIGO
+    static uint16_t i_gain;
+    static int16_t i_component;
     // Filter the current position thru a digital low-pass filter.
     // Esto se puede quitar tiene un if 0 que lo comenta
     //filtered_position = filter_update(current_position);
@@ -146,9 +148,15 @@ int16_t PID_position_to_pwm(int16_t current_position)
     // The derivative component to the PID is the velocity.
     d_component = seek_velocity - current_velocity;
  
+//IÑIGO: I component sums up errors.
+    i_component += seek_position - current_position;
+
     // Get the proportional, derivative and integral gains.
     p_gain = get_pid_pgain();
     d_gain = get_pid_dgain();
+//IÑIGO
+    i_gain = get_pid_igain();
+//    printf ("p&i&d_gain are %d %d %d\n",p_gain,i_gain,d_gain);
     // Start with zero PWM output.
     pwm_output = 0;
 
@@ -162,6 +170,8 @@ int16_t PID_position_to_pwm(int16_t current_position)
     // Apply the derivative component of the PWM output.
     pwm_output += (int32_t) d_component * (int32_t) d_gain;
 
+//IÑIGO:ADD I part:
+    pwm_output += (int32_t) i_component * (int32_t) i_gain;
     // Shift by 8 to account for the multiply by the 8:8 fixed point gain values.
     pwm_output >>= 8;
 
@@ -188,8 +198,11 @@ int16_t PID_position_to_pwm(int16_t current_position)
     printf("PID_d_component: %d\n",d_component);
     printf("PID_p_gain: %d\n",p_gain);
     printf("PID_d_gain: %d\n",d_gain);
-    printf("PID pwm value is: %d \n", pwm_output);
+    printf("PID pwm value is: %d \n", pwm_output); 
+    printf("error I sum: %d\n",i_component);
 #endif
     // Return the PID output.
+    printf("error I sum: %d i gain is: %d\t",i_component, i_gain);
+    printf("PID pwm value is: %d \n", pwm_output); 
     return (int16_t) pwm_output;
 }
