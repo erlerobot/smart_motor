@@ -69,12 +69,15 @@ int main(void)
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
+//	printf ("| Time (secs)|\t pos value| \t PWM value|\t Elapsed (secs)\n");
+//	printf ("----------------------------------------------------------------\n");
 	for(;;)
 	{	
 		
 		static int i=0;
 		if(adc_position_value_is_ready())
-		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
+		{   //printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
+//		    printf("%f \t", (double)clock() /CLOCKS_PER_SEC);
 		    
 		    // Is position value ready?
             clock_t tic = clock();
@@ -90,12 +93,15 @@ int main(void)
 
 			// Update the servo movement as indicated by the PWM value.
 			PWM_update(position, pwm);
-                        printf("MAIN position value is: %d \n", position);
-			printf("MAIN pwm value is: %d \n", pwm);
-			printf("------------%i--------------\n",i);
+                        //printf("MAIN position value is: %d \n", position);
+			//printf("MAIN pwm value is: %d \n", pwm);
+			//printf("------------%i--------------\n",i);
+//                        printf("%d \t", position);
+//                        printf("%d \t", pwm);
 			i++;
 			clock_t toc = clock();
-		    printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+		    //printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+//                    printf("%f\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 		}
 		// Is a power value ready?
 
