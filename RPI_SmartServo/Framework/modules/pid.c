@@ -39,12 +39,12 @@ static int16_t previous_position;
 *   @note	      None.
 *
 */
-void PID_init(void)
+void PID_init(int16_t pos)
 {
 
     // Initialize preserved values.
-    previous_seek = 0;
-    previous_position = 0;
+    previous_seek = pos;
+    previous_position = pos;
     PID_registers_default();
 
 }

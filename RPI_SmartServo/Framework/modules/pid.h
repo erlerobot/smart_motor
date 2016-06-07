@@ -27,7 +27,7 @@
 #include<stdint.h>
 
 // Initialize the pid algorithm module.
-void PID_init(void);
+void PID_init(int16_t pos);
 
 // Initialize the pid related registers.
 void PID_registers_default(void);
