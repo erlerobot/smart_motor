@@ -41,6 +41,11 @@ void* serverThread(void*);
 
 int main(void)
 {
+	    // Is position value ready?
+    clock_t tic = clock();
+	int16_t pwm;
+	int16_t position;
+
 	printf("Smart Servo\n");
 // MODULE INITIALIZATION
 
@@ -50,17 +55,26 @@ int main(void)
 	wiringPiSetupGpio();
 	// Configure pins to the default states
 
-	// First, initialize registers that control servo operation
-	// Set the initial seek position and velocity
-	REGISTERS_init();
-	// Initialize the PWM module
-	PWM_init();
 	// Initialize ADC module
 	ADC_init();
-	// Initialize the PID algorithm module
-	PID_init();
 	// Initialize timer 10 ms.
 	TIMER_init(CONFIG_TIMER);
+
+	//Wait until first position value is read, 
+	//this will be the first SP of the control.
+	while (adc_position_value_is_ready()!=1);
+
+	//Take this position
+	position = adc_get_position_value();
+	// First, initialize registers that control servo operation
+	// Set the initial seek position to the position read
+	REGISTERS_init(position);
+	// Initialize the PWM module 
+	PWM_init();
+
+	// Initialize the PID algorithm module for the actual position read
+	PID_init(position);
+
 //MODULE INITIALIZATION END
 	
 	//Create Server thread for communication
@@ -76,10 +90,7 @@ int main(void)
 		if(adc_position_value_is_ready())
 		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
 		    
-		    // Is position value ready?
-            clock_t tic = clock();
-			int16_t pwm;
-			int16_t position;
+
 			
 			/** @todo */
 			// get position() better ??
