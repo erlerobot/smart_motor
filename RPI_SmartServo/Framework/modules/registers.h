@@ -25,7 +25,7 @@
 
 #include<stdint.h>
 
-void REGISTERS_init(void);
+void REGISTERS_init(int16_t position);
 void REGISTERS_default(void);
 
 //Setter methods

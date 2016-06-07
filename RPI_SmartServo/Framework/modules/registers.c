@@ -62,9 +62,9 @@ static uint16_t REG_max_seek;
 //Reverse Seek
 static uint8_t REG_reverse_seek; 
 
-void REGISTERS_init(void)
+void REGISTERS_init(int16_t position)
 {
-	set_seek_position(0);
+	set_seek_position(position);
 	set_seek_velocity(0);
 }
 
