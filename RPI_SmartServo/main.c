@@ -90,14 +90,13 @@ int main(void)
 		if(adc_position_value_is_ready())
 		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
 		    
-
-			
+			clock_t tac = clock();
 			/** @todo */
 			// get position() better ??
 			position = adc_get_position_value();
 
 			// Call the PID algorithm module to get a new PWM value. 
-			pwm = PID_position_to_pwm(position);
+			pwm = PID_position_to_pwm(position,Tsampling);
 
 			// Update the servo movement as indicated by the PWM value.
 			PWM_update(position, pwm);
@@ -107,6 +106,9 @@ int main(void)
 			i++;
 			clock_t toc = clock();
 		    printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+
+		    //IÑGIGO: get loop time
+		    double Tsampling = (double)(toc-tac) /CLOCKS_PER_SEC);
 		}
 		// Is a power value ready?
 

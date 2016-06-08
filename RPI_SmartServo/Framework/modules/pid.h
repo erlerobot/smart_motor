@@ -34,7 +34,7 @@ void PID_registers_default(void);
 
 // Take position as input(0-1024) and output assigned PWM 
 // to be applied to the servo motors.
-int16_t PID_position_to_pwm(int16_t current_position);
+int16_t PID_position_to_pwm(int16_t current_position, double Tsampling);
 
 
 #endif

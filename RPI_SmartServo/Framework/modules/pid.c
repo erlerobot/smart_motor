@@ -89,7 +89,7 @@ void PID_registers_default(void)
 *   @note     position (0-1024)
 *
 */
-int16_t PID_position_to_pwm(int16_t current_position)
+int16_t PID_position_to_pwm(int16_t current_position, double Tsampling)
 {
     // We declare these static to keep them off the stack.
     static int16_t deadband;
@@ -104,7 +104,10 @@ int16_t PID_position_to_pwm(int16_t current_position)
     static int32_t pwm_output;
     static uint16_t d_gain;
     static uint16_t p_gain;
-
+    //IÑIGO
+    static uint16_t i_gain;
+    static int16_t error_new, error_old;
+    static int16_t integral_old, integral_new;
     // Filter the current position thru a digital low-pass filter.
     // Esto se puede quitar tiene un if 0 que lo comenta
     //filtered_position = filter_update(current_position);
@@ -142,6 +145,8 @@ int16_t PID_position_to_pwm(int16_t current_position)
     if (seek_position > maximum_position) seek_position = maximum_position;
     // The proportional component to the PID is the position error.
     p_component = seek_position - current_position;
+    error_old=error_new;
+    error_new=p_component;
 
     // The derivative component to the PID is the velocity.
     d_component = seek_velocity - current_velocity;
@@ -152,6 +157,11 @@ int16_t PID_position_to_pwm(int16_t current_position)
     // Start with zero PWM output.
     pwm_output = 0;
 
+    //IÑIGO: add Integer part, formula:
+    //integral_new = integral_old + Ki*(error_new + error_old)*Tsampling/2 
+    i_gain = get_pid_igain();
+    //-----
+
     // Apply proportional component to the PWM output if outside the deadband.
     if ((p_component > deadband) || (p_component < -deadband))
     {
@@ -159,8 +169,17 @@ int16_t PID_position_to_pwm(int16_t current_position)
         pwm_output += (int32_t) p_component * (int32_t) p_gain;
     }
 
+    //IÑIGO: add I calculation
+    integral_old = integral_new;
+    integral_new = (int32_t) integral_old + (int32_t) i_gain*(error_new + error_old)*Tsampling/2;
+    //----------------------
+
     // Apply the derivative component of the PWM output.
     pwm_output += (int32_t) d_component * (int32_t) d_gain;
+
+    //IÑIGO:add I part
+    pwm_output+=integral_new;
+    //--------------
 
     // Shift by 8 to account for the multiply by the 8:8 fixed point gain values.
     pwm_output >>= 8;
