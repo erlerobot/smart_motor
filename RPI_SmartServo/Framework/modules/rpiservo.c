@@ -159,6 +159,9 @@ float RPISERVO_getTemp()
 *
 * Get RPI servo battery level.
 *
+* * We have a voltage divider to calculate the value.
+* If Vout = Vin * 10K / (10K + 14K) -> Vin = 2.4 * Vout
+* 
 * @return	None.
 *
 * @note		None.
@@ -167,7 +170,7 @@ float RPISERVO_getTemp()
 float RPISERVO_getBattery()
 {
 	float battery;
-	battery = get_battery()* 3.7 * ADC_RES_CONSTANT;//3V3 rescaled 5??
+	battery = get_battery()* 2.4 * ADC_RES_CONSTANT;//3V3 rescaled 5??
 	return battery;
 }
 /**
