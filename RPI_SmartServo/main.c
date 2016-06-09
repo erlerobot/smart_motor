@@ -83,6 +83,7 @@ int main(void)
 	// Main processing loop for the servo. It basically 
 	// looks for new position, power or TWI commands to 
 	// be processed.
+	double Tsampling;
 	for(;;)
 	{	
 		
@@ -108,7 +109,7 @@ int main(void)
 		    printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 
 		    //IÑGIGO: get loop time
-		    double Tsampling = (double)(toc-tac) /CLOCKS_PER_SEC);
+		 	 Tsampling =(double)((toc-tac)/CLOCKS_PER_SEC);
 		}
 		// Is a power value ready?
 
