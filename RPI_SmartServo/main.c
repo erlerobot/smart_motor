@@ -84,13 +84,15 @@ int main(void)
 	// looks for new position, power or TWI commands to 
 	// be processed.
 	double Tsampling;
+	printf ("| Time (secs)|\t pos value| \t PWM value|\t Elapsed (secs)\n");
+	printf ("----------------------------------------------------------------\n");
 	for(;;)
 	{	
 		
 		static int i=0;
 		if(adc_position_value_is_ready())
-		{   printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
-		    
+		{   //printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
+		    printf("%f seconds| \t", (double)clock() /CLOCKS_PER_SEC);
 			clock_t tac = clock();
 			/** @todo */
 			// get position() better ??
@@ -101,13 +103,15 @@ int main(void)
 
 			// Update the servo movement as indicated by the PWM value.
 			PWM_update(position, pwm);
-                        printf("MAIN position value is: %d \n", position);
-			printf("MAIN pwm value is: %d \n", pwm);
-			printf("------------%i--------------\n",i);
+            //printf("MAIN position value is: %d \n", position);
+			//printf("MAIN pwm value is: %d \n", pwm);
+			//printf("------------%i--------------\n",i);
+            printf("%d position|\t", position);
+            printf("%d PWM|\t", pwm);			
 			i++;
 			clock_t toc = clock();
-		    printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
-
+		    //printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+            printf("%f Elapsed seconds|\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 		    //IÑGIGO: get loop time
 		 	 Tsampling =(double)((toc-tac)/CLOCKS_PER_SEC);
 		}
