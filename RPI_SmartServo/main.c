@@ -92,7 +92,7 @@ int main(void)
 		static int i=0;
 		if(adc_position_value_is_ready())
 		{   //printf("Time: %f seconds\n", (double)clock() /CLOCKS_PER_SEC);
-		    printf("%f seconds| \t", (double)clock() /CLOCKS_PER_SEC);
+		    printf("%f seconds	| \t", (double)clock() /CLOCKS_PER_SEC);
 			clock_t tac = clock();
 			/** @todo */
 			// get position() better ??
@@ -106,12 +106,18 @@ int main(void)
             //printf("MAIN position value is: %d \n", position);
 			//printf("MAIN pwm value is: %d \n", pwm);
 			//printf("------------%i--------------\n",i);
-            printf("%d position|\t", position);
-            printf("%d PWM|\t", pwm);			
+            printf("%d position	|\t", position);
+            printf("%d PWM	|\t", pwm);
+            #if (ADC_RESOLUTION == BITS_10)
+            double ticks_per_degree=15.15;
+            printf("%f º	|\n", position/ticks_per_degree);
+            #endif
+
+
 			i++;
 			clock_t toc = clock();
 		    //printf("Elapsed: %f seconds\n", (double)(toc-tic) /CLOCKS_PER_SEC);
-            printf("%f Elapsed seconds|\n", (double)(toc-tic) /CLOCKS_PER_SEC);
+            //printf("%f Elapsed seconds|\n", (double)(toc-tic) /CLOCKS_PER_SEC);
 		    //IÑGIGO: get loop time
 		 	 Tsampling =(double)((toc-tac)/CLOCKS_PER_SEC);
 		}
